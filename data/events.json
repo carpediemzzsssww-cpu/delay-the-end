@@ -1,0 +1,551 @@
+[
+  {
+    "id": "event_001",
+    "title_en": "A Minor Anomaly",
+    "title_zh": "微小异常",
+    "text_en": "A stray miracle unfolded this morning: a blind cat regained sight and led its owner to a lost wedding ring buried under a paving stone in Soho. Heaven denies the act. Hell calls it \"disappointingly poetic.\"\n\nOn your desk, there is a cup of cocoa. Still warm. You don't remember ordering it.",
+    "text_zh": "今晨，一只失明的猫忽然重获视力，引导主人在苏豪区的一块铺路石下找回了遗失多年的婚戒。天界否认与此有关，地狱称其“浪漫得令人作呕”。\n\n你的办公桌上多了一杯可可。还是温热的。你不记得点过它。",
+    "choices": [
+      {
+        "id": "A",
+        "label_en": "File a miracle report to Heaven (and watch them pretend to care)",
+        "label_zh": "向天堂提交奇迹报告（然后看他们假装在乎）",
+        "effect": {
+          "heaven": 4,
+          "hell": -3,
+          "stability": -1,
+          "pressure": 1
+        },
+        "is_extreme": false
+      },
+      {
+        "id": "B",
+        "label_en": "Ignore it — a cat finding a ring isn't the end of the world",
+        "label_zh": "不处理——一只猫找到一枚戒指，又不是世界末日",
+        "effect": {
+          "heaven": 0,
+          "hell": 3,
+          "stability": 2,
+          "pressure": 0
+        },
+        "is_extreme": false
+      },
+      {
+        "id": "C",
+        "label_en": "Seal the archive and personally confiscate the ring",
+        "label_zh": "封存档案并亲自没收那枚戒指",
+        "effect": {
+          "heaven": 8,
+          "hell": 0,
+          "stability": 0,
+          "pressure": -3
+        },
+        "is_extreme": true
+      }
+    ],
+    "fixed_position": 1,
+    "is_fixed_start": true,
+    "is_fixed_end": false,
+    "is_dilemma": false,
+    "tags": [
+      "start",
+      "anomaly",
+      "cocoa"
+    ]
+  },
+  {
+    "id": "event_002",
+    "title_en": "Choir of Error",
+    "title_zh": "错音圣歌",
+    "text_en": "A celestial choir accidentally performed a new harmony — one not listed in the Divine Archives. The sound caused spontaneous weeping in three parliamentarians and a rain of frogs in North London.\n\nHeaven calls it a \"beautiful mishap.\" Hell remains suspiciously silent.\n\nYou realize: if you record this hymn, it becomes real. If you don't, it might happen again.",
+    "text_zh": "天界唱诗班无意中演奏了一段未被登记的全新和声，导致三位议员自发痛哭，北伦敦则下起了青蛙雨。\n\n天界称之为“美丽的失误”，地狱异常沉默。\n\n你意识到：如果你记录这首圣歌，它就变成了事实。如果不记录，它可能会再次发生。",
+    "choices": [
+      {
+        "id": "A",
+        "label_en": "Archive the hymn note-by-note — someone has to keep score",
+        "label_zh": "逐音符备案——总得有人记谱",
+        "effect": {
+          "heaven": 6,
+          "hell": -3,
+          "stability": -2,
+          "pressure": 1
+        },
+        "is_extreme": false
+      },
+      {
+        "id": "B",
+        "label_en": "File it as atmospheric interference (frogs happen)",
+        "label_zh": "归类为大气干扰（青蛙嘛，常有的事）",
+        "effect": {
+          "heaven": -3,
+          "hell": 4,
+          "stability": 3,
+          "pressure": 2
+        },
+        "is_extreme": false
+      },
+      {
+        "id": "C",
+        "label_en": "Teach the harmony to a street musician and see what unfolds",
+        "label_zh": "把和声教给一个街头艺人，看看会发生什么",
+        "effect": {
+          "heaven": 0,
+          "hell": 7,
+          "stability": -1,
+          "pressure": -3
+        },
+        "is_extreme": true
+      }
+    ],
+    "fixed_position": null,
+    "is_fixed_start": false,
+    "is_fixed_end": false,
+    "is_dilemma": true,
+    "tags": [
+      "heaven",
+      "miracle",
+      "music",
+      "dilemma"
+    ]
+  },
+  {
+    "id": "event_003",
+    "title_en": "Infernal Graffiti",
+    "title_zh": "地狱涂鸦",
+    "text_en": "An ancient demonic sigil has appeared in a school restroom in Hackney. The student who drew it insists it's a streetwear logo he saw on Instagram. It's now trending on TikTok with 2.3 million views. Local clergy are in full panic.\n\nThe sigil, you note, is misspelled. Which somehow makes it worse.",
+    "text_zh": "哈克尼区一所学校的洗手间墙上出现了古老的地狱符印。画它的学生坚称那是他在Instagram上看到的潮牌logo。现在已在TikTok上获得230万播放量，本地牧师集体陷入恐慌。\n\n你注意到，符印拼写有误。但不知怎的，这反而让事情更糟了。",
+    "choices": [
+      {
+        "id": "A",
+        "label_en": "Send angels to fight a bathroom wall (this is your job now)",
+        "label_zh": "派天使去跟一面厕所墙较劲（这就是你的工作）",
+        "effect": {
+          "heaven": 6,
+          "hell": -3,
+          "stability": -2,
+          "pressure": 2
+        },
+        "is_extreme": false
+      },
+      {
+        "id": "B",
+        "label_en": "Rebrand it as conceptual art — nobody questions art",
+        "label_zh": "重新包装成观念艺术——没人会质疑艺术",
+        "effect": {
+          "heaven": -3,
+          "hell": 5,
+          "stability": -1,
+          "pressure": 1
+        },
+        "is_extreme": false
+      },
+      {
+        "id": "C",
+        "label_en": "Silence the reporters, wipe the footage, pretend it's Tuesday",
+        "label_zh": "封口记者，抹除视频，假装今天是个普通的星期二",
+        "effect": {
+          "heaven": 0,
+          "hell": 6,
+          "stability": -2,
+          "pressure": -3
+        },
+        "is_extreme": true
+      }
+    ],
+    "fixed_position": null,
+    "is_fixed_start": false,
+    "is_fixed_end": false,
+    "is_dilemma": true,
+    "tags": [
+      "hell",
+      "human",
+      "art",
+      "public"
+    ]
+  },
+  {
+    "id": "event_004",
+    "title_en": "The Neutral Vicar",
+    "title_zh": "中立牧师",
+    "text_en": "A vicar in Tadfield delivered a sermon declaring that both angels and demons \"probably mean well, in their own way.\" He's now being denounced by Heaven, mocked by Hell, and trending on Twitter as #SwitzerlandVicar.\n\nHe also mentioned, quite casually, that someone leaves a cup of cocoa on the church steps every Sunday. \"I never see who,\" he said. \"But it's always the right temperature.\"",
+    "text_zh": "塔德菲尔德的一位牧师在布道中称，“天使与恶魔可能都各自有苦衷。”天界谴责他，地狱嘲笑他，而他正因 #瑞士牧师 标签在推特上爆红。\n\n他还随口提到，每个周日都有人在教堂台阶上放一杯可可。“我从没看见是谁，”他说，“但温度总是刚好。”",
+    "choices": [
+      {
+        "id": "A",
+        "label_en": "Have Heaven issue a formal correction (they love those)",
+        "label_zh": "让天堂发一份正式勘误声明（他们最爱这个）",
+        "effect": {
+          "heaven": 7,
+          "hell": -3,
+          "stability": -2,
+          "pressure": 2
+        },
+        "is_extreme": false
+      },
+      {
+        "id": "B",
+        "label_en": "Let Hell turn his neutrality into a recruitment pitch",
+        "label_zh": "让地狱把他的中立立场变成招募广告",
+        "effect": {
+          "heaven": -3,
+          "hell": 6,
+          "stability": -3,
+          "pressure": 1
+        },
+        "is_extreme": false
+      },
+      {
+        "id": "C",
+        "label_en": "Protect him — humans are allowed to be confused",
+        "label_zh": "保护他——人类有权感到困惑",
+        "effect": {
+          "heaven": -3,
+          "hell": -3,
+          "stability": 5,
+          "pressure": 2
+        },
+        "is_extreme": false
+      }
+    ],
+    "fixed_position": null,
+    "is_fixed_start": false,
+    "is_fixed_end": false,
+    "is_dilemma": true,
+    "tags": [
+      "human",
+      "religion",
+      "interpretation",
+      "dilemma",
+      "cocoa"
+    ]
+  },
+  {
+    "id": "event_005",
+    "title_en": "The Absent Angel",
+    "title_zh": "消失的天使",
+    "text_en": "An angel assigned to oversee traffic flow in central London has vanished. Heaven insists he's \"on a deep meditative retreat.\" Hell can barely contain its laughter. Humans, meanwhile, remain stuck in a gridlock stretching from Marble Arch to Tower Bridge.\n\nYou suspect he simply wandered into a bookshop and forgot to leave.",
+    "text_zh": "一位负责管理伦敦市中心交通的天使失踪了。天界坚称他正在“深度冥想静修”。地狱快笑出声。人类则困在从大理石拱门延伸到塔桥的大堵车里。\n\n你怀疑他只是走进了一家书店，然后忘了出来。",
+    "choices": [
+      {
+        "id": "A",
+        "label_en": "Pull a replacement from the reserves (they won't be happy)",
+        "label_zh": "从后备队抽调替补（他们不会高兴的）",
+        "effect": {
+          "heaven": 6,
+          "hell": -3,
+          "stability": -1,
+          "pressure": 1
+        },
+        "is_extreme": false
+      },
+      {
+        "id": "B",
+        "label_en": "Leak the story — chaos deserves a narrator",
+        "label_zh": "把消息透露给记者——混乱值得被记录",
+        "effect": {
+          "heaven": -3,
+          "hell": 5,
+          "stability": -2,
+          "pressure": 1
+        },
+        "is_extreme": false
+      },
+      {
+        "id": "C",
+        "label_en": "Step in yourself and redirect three buses (you'll regret this)",
+        "label_zh": "亲自上阵调度三条线路（你会后悔的）",
+        "effect": {
+          "heaven": 0,
+          "hell": 6,
+          "stability": -1,
+          "pressure": -3
+        },
+        "is_extreme": false
+      }
+    ],
+    "fixed_position": null,
+    "is_fixed_start": false,
+    "is_fixed_end": false,
+    "is_dilemma": false,
+    "tags": [
+      "heaven",
+      "angel",
+      "absence"
+    ]
+  },
+  {
+    "id": "event_006",
+    "title_en": "Threshold Night",
+    "title_zh": "临界之夜",
+    "text_en": "Sirens scream along the Thames. Pigeons form unsettling geometric patterns over St. Paul's. An angelic spear — half-materialized, shimmering with cold light — appears embedded in the pavement at Piccadilly Circus.\n\nBoth sides are stepping closer to open war. The city air tastes of iron and ozone.\n\nThe cocoa on your desk has gone cold. You can't remember the last time it was warm.",
+    "text_zh": "泰晤士河畔警笛长鸣。鸽群在圣保罗大教堂上空排列出令人不安的几何图案。一柄半凝形态的天界长矛——闪着冷光——刺入皮卡迪利广场的路面。\n\n双方正在逼近正面交锋。城市的空气尝起来有铁锈和臭氧的味道。\n\n你桌上的可可凉了。你想不起来它最后一次是温热的是什么时候。",
+    "choices": [
+      {
+        "id": "A",
+        "label_en": "Back the angels — someone needs to hold the line",
+        "label_zh": "支持天使——总得有人守住防线",
+        "effect": {
+          "heaven": 12,
+          "hell": -3,
+          "stability": -6,
+          "pressure": 3
+        },
+        "is_extreme": false
+      },
+      {
+        "id": "B",
+        "label_en": "Forget the factions — get the civilians out first",
+        "label_zh": "管他哪个阵营——先把平民撤出去",
+        "effect": {
+          "heaven": -3,
+          "hell": -3,
+          "stability": 12,
+          "pressure": 5
+        },
+        "is_extreme": false
+      },
+      {
+        "id": "C",
+        "label_en": "Trigger the forbidden shortcut (you know the cost)",
+        "label_zh": "启动禁忌捷径（你清楚代价）",
+        "effect": {
+          "heaven": -3,
+          "hell": 12,
+          "stability": -6,
+          "pressure": 3
+        },
+        "is_extreme": true
+      }
+    ],
+    "fixed_position": 6,
+    "is_fixed_start": false,
+    "is_fixed_end": true,
+    "is_dilemma": true,
+    "tags": [
+      "fixed_end",
+      "escalation",
+      "dilemma",
+      "cocoa"
+    ]
+  },
+  {
+    "id": "event_007",
+    "title_en": "Final Ledger",
+    "title_zh": "最终档案",
+    "text_en": "No declaration of war was ever issued. And yet: scorched feathers on consecrated ground, claw marks on a church door in Mayfair, and laughter — low, familiar — echoing from the sewers beneath a certain flat in Mayfair.\n\nAll eyes turn to your archive. The only record no faction can edit.\n\nYour pen hovers over the last page. There is a dry ring on the corner of your desk where a cup once stood.",
+    "text_zh": "没有人正式宣战。但圣地上散落着烧焦的羽毛，梅菲尔一座教堂门上有爪痕，某间梅菲尔公寓下方的下水道里回荡着低沉而熟悉的笑声。\n\n所有目光注视着你的档案——唯一无法被任何阵营篡改的记录。\n\n你的笔悬在最后一页上方。办公桌角落有一个干涸的杯环印记，那里曾经放过一只杯子。",
+    "choices": [
+      {
+        "id": "A",
+        "label_en": "Document the order — let Heaven's version stand as truth",
+        "label_zh": "记录秩序——让天堂的版本成为唯一的真相",
+        "effect": {
+          "heaven": 13,
+          "hell": -3,
+          "stability": -6,
+          "pressure": 4
+        },
+        "is_extreme": false
+      },
+      {
+        "id": "B",
+        "label_en": "Document the fracture — let the cracks show through",
+        "label_zh": "记录裂缝——让裂痕暴露在所有人面前",
+        "effect": {
+          "heaven": -3,
+          "hell": 13,
+          "stability": -6,
+          "pressure": 4
+        },
+        "is_extreme": false
+      },
+      {
+        "id": "C",
+        "label_en": "Seal the archive — some things are not for anyone to read",
+        "label_zh": "封存一切——有些事不该被任何人读到",
+        "effect": {
+          "heaven": 0,
+          "hell": 0,
+          "stability": 3,
+          "pressure": -8
+        },
+        "is_extreme": true
+      }
+    ],
+    "fixed_position": 7,
+    "is_fixed_start": false,
+    "is_fixed_end": true,
+    "is_dilemma": true,
+    "tags": [
+      "fixed_end",
+      "finale",
+      "dilemma",
+      "cocoa"
+    ]
+  },
+  {
+    "id": "event_008",
+    "title_en": "Memory Interference",
+    "title_zh": "记忆干扰",
+    "text_en": "A minor miracle was reported in Camden. Three eyewitnesses offer completely different accounts: one swears flowers bloomed from concrete, another saw a column of white fire, and the third remembers nothing — only a feeling of being forgiven.\n\nAll three versions are affecting reality. Simultaneously.\n\nYou pick up your pen and realize: whichever version you write down will become the only one that ever happened.",
+    "text_zh": "卡姆登区上报了一起小型奇迹。三位目击者各执一词：一人发誓水泥中绽放了鲜花，一人看到白色火柱冲天，第三人什么都不记得——只留下一种被原谅的感觉。\n\n三种版本正在同时影响现实。\n\n你拿起笔，忽然明白：你写下哪个版本，哪个就会成为唯一发生过的事实。",
+    "choices": [
+      {
+        "id": "A",
+        "label_en": "Archive all three — let reality sort itself out",
+        "label_zh": "三个版本全部记录——让现实自己理清",
+        "effect": {
+          "heaven": 5,
+          "hell": 0,
+          "stability": -3,
+          "pressure": 0
+        },
+        "is_extreme": false
+      },
+      {
+        "id": "B",
+        "label_en": "Pick the flowers. Suppress the fire and the forgiveness.",
+        "label_zh": "选择花朵。压制火焰和那份被原谅的感觉。",
+        "effect": {
+          "heaven": -3,
+          "hell": 6,
+          "stability": -1,
+          "pressure": 2
+        },
+        "is_extreme": false
+      },
+      {
+        "id": "C",
+        "label_en": "Declare all accounts invalid — punish them for seeing too much",
+        "label_zh": "宣布所有证词无效——惩罚那些看到太多的人",
+        "effect": {
+          "heaven": -2,
+          "hell": 7,
+          "stability": -1,
+          "pressure": -3
+        },
+        "is_extreme": true
+      }
+    ],
+    "fixed_position": null,
+    "is_fixed_start": false,
+    "is_fixed_end": false,
+    "is_dilemma": true,
+    "tags": [
+      "memory",
+      "surveillance",
+      "dilemma",
+      "truth"
+    ]
+  },
+  {
+    "id": "event_009",
+    "title_en": "The Laughing Mirror",
+    "title_zh": "嘲笑之镜",
+    "text_en": "A mirror in a Selfridges display window has started whispering shoppers' ugliest private thoughts — then making them laugh uncontrollably. By noon, the queue stretches around the block.\n\nOne boy, no older than eleven, stood before it and heard his own reflection say: \"I faked the miracle.\"\n\nHe hasn't stopped crying since. Nobody knows which miracle he means.",
+    "text_zh": "Selfridges橱窗里的一面镜子开始低声说出路人内心最恶毒的想法——然后让他们不可抑制地大笑。到了中午，队伍已绕过街区。\n\n一个不超过十一岁的男孩站在镜前，听见自己的倒影说：“那场奇迹，是我伪造的。”\n\n他从那之后一直在哭。没有人知道他说的是哪场奇迹。",
+    "choices": [
+      {
+        "id": "A",
+        "label_en": "Shatter it with a counter-miracle (fight absurdity with absurdity)",
+        "label_zh": "用反奇迹击碎它（以荒诞对抗荒诞）",
+        "effect": {
+          "heaven": 7,
+          "hell": -3,
+          "stability": -3,
+          "pressure": 2
+        },
+        "is_extreme": false
+      },
+      {
+        "id": "B",
+        "label_en": "Leave it — study who comes, and what truths the mirror tells",
+        "label_zh": "不动它——观察谁来了，镜子又说了什么真话",
+        "effect": {
+          "heaven": -3,
+          "hell": 3,
+          "stability": 0,
+          "pressure": 0
+        },
+        "is_extreme": false
+      },
+      {
+        "id": "C",
+        "label_en": "Move it to a children's play area (what could possibly go wrong?)",
+        "label_zh": "搬去儿童游乐区（能出什么事呢？）",
+        "effect": {
+          "heaven": -8,
+          "hell": 6,
+          "stability": -2,
+          "pressure": 2
+        },
+        "is_extreme": true
+      }
+    ],
+    "fixed_position": null,
+    "is_fixed_start": false,
+    "is_fixed_end": false,
+    "is_dilemma": true,
+    "tags": [
+      "hell",
+      "experimental",
+      "dilemma",
+      "technology"
+    ]
+  },
+  {
+    "id": "event_010",
+    "title_en": "Coffee at the Edge",
+    "title_zh": "边界咖啡馆",
+    "text_en": "An angel and a demon have been meeting weekly at a café wedged between two defunct cemeteries, where ley lines overlap like crossed fingers. No miracles performed. No schemes hatched. Just espresso and shared silence.\n\nHeaven has filed for tactical surveillance. Hell says, \"We've been watching for years. It's unbearably domestic.\"\n\nYou have the footage. Both of them look... happy.",
+    "text_zh": "一位天使和一位恶魔每周都在两座废弃墓园之间的咖啡馆碰面，那里的灵脉交叠如十指相扣。没有施展奇迹，没有密谋。只有浓缩咖啡和共享的沉默。\n\n天堂已申请战术监控。地狱说，“我们盯了好多年了。无聊得令人发指。”\n\n你手里有监控录像。他们两个看起来……很开心。",
+    "choices": [
+      {
+        "id": "A",
+        "label_en": "Leak the footage to both sides — let them burn together",
+        "label_zh": "把录像匿名发给双方——让他们一起完蛋",
+        "effect": {
+          "heaven": 8,
+          "hell": 8,
+          "stability": -4,
+          "pressure": 1
+        },
+        "is_extreme": true
+      },
+      {
+        "id": "B",
+        "label_en": "Encrypt the footage, mark it as noise — protect what they have",
+        "label_zh": "加密录像，标记为噪声——保护他们拥有的东西",
+        "effect": {
+          "heaven": -2,
+          "hell": -2,
+          "stability": 2,
+          "pressure": 0
+        },
+        "is_extreme": false
+      },
+      {
+        "id": "C",
+        "label_en": "Walk in and deliver their coffee yourself",
+        "label_zh": "走进去，亲手为他们送上咖啡",
+        "effect": {
+          "heaven": 0,
+          "hell": 6,
+          "stability": -2,
+          "pressure": 1
+        },
+        "is_extreme": false
+      }
+    ],
+    "fixed_position": null,
+    "is_fixed_start": false,
+    "is_fixed_end": false,
+    "is_dilemma": false,
+    "tags": [
+      "agents",
+      "surveillance",
+      "cross-faction",
+      "cocoa"
+    ]
+  }
+]

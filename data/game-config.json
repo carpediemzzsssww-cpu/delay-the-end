@@ -1,0 +1,34 @@
+{
+  "rounds": 7,
+  "pressure_growth": [3, 4, 5, 6, 8, 10, 12],
+  "initial": {
+    "heaven": 50,
+    "hell": 50,
+    "stability": 50,
+    "pressure": 0
+  },
+  "record": {
+    "truth_streak_target": 3,
+    "truth_stability_bonus": 3,
+    "polish_heaven_bonus": 2,
+    "blur_hell_bonus": 2,
+    "seal_pressure_delta": -2,
+    "seal_penalty_chance": 0.2,
+    "seal_penalty": {
+      "stability": -5,
+      "heaven": 3
+    }
+  },
+  "rebellion": {
+    "balance_diff_max": 10,
+    "stability_min": 55,
+    "consecutive_required": 2,
+    "max_extreme_choices": 2
+  },
+  "endings": {
+    "stability_collapse_lt": 20,
+    "heaven_dominance_gte": 90,
+    "hell_dominance_gte": 90,
+    "rebellion_pressure_lt": 85
+  }
+}

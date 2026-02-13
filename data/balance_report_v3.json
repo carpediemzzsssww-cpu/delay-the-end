@@ -1,0 +1,25 @@
+{
+  "n_runs": 10000,
+  "ending_probabilities": {
+    "False Peace": 0.69,
+    "Heaven Dominance": 0.0839,
+    "Hell Dominance": 0.1332,
+    "Human Rebellion": 0.0815,
+    "Human Collapse": 0.0114
+  },
+  "extreme_count_distribution": {
+    "0": 0.097,
+    "1": 0.2719,
+    "2": 0.3245,
+    "3": 0.2041,
+    "4": 0.0819,
+    "5": 0.0181,
+    "6": 0.0025
+  },
+  "avg_extreme_count": 1.9663,
+  "avg_final_heaven": 65.0782,
+  "avg_final_hell": 69.3984,
+  "avg_final_stability": 41.7694,
+  "avg_final_pressure": 51.2405,
+  "rebellion_flag_rate_before_final_check": 0.0835
+}

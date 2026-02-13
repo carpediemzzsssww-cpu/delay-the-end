@@ -1,0 +1,53 @@
+{
+  "meta": {
+    "theme": "Delay, not salvation",
+    "language_support": [
+      "zh",
+      "en"
+    ]
+  },
+  "endings": [
+    {
+      "id": "heaven_dominance",
+      "title_en": "Heaven Dominance",
+      "title_zh": "天界主导",
+      "text_en": "Law outlives life. The sky never changes, and neither can you.\n\nLondon is quiet now — not peaceful, but obedient. The pigeons fly in approved formations. The vicar has been reassigned. The boy who cried at the mirror has been enrolled in a celestial correction programme where they teach him that doubt is a kind of sin.\n\nYour archive sits in a glass case in Heaven's atrium. They call it \"The Definitive Record.\" Every page is perfectly typeset. None of it is true.\n\nThe cup on your desk has been replaced with a regulation chalice. It is always full, always the correct temperature, and it tastes of nothing at all.",
+      "text_zh": "律法比生命更长久。天空永不改变，你也不能。\n\n伦敦安静了——不是和平，而是顺从。鸽子按照批准的编队飞行。那位牧师已被调任。在镜子前哭泣的男孩被送进了天界矫正项目，在那里他们教他：怀疑是一种罪。\n\n你的档案被陈列在天堂中庭的玻璃柜里，他们称之为“权威记录”。每一页都排版完美。没有一个字是真的。\n\n你桌上的杯子被换成了标准配给的圣杯。永远是满的，永远是恰当的温度，但喝起来什么味道都没有。"
+    },
+    {
+      "id": "hell_dominance",
+      "title_en": "Hell Dominance",
+      "title_zh": "地狱主导",
+      "text_en": "Chaos wins the night; what remains is heat and appetite.\n\nThe streets hum with a low, delighted energy. Every mirror in London has started laughing. The TikTok sigil is now the logo of three multinational corporations, and nobody remembers why they're uncomfortable looking at it.\n\nYour archive was not destroyed — that would give it too much dignity. Instead, it was opened to the public as an interactive exhibit. Visitors doodle in the margins. Children use the prophecy pages as colouring sheets.\n\nSomewhere in the wreckage, a café between two cemeteries still serves espresso to an empty table. The cups are never cleared.",
+      "text_zh": "混乱赢得了长夜，残留的只有灼热与欲望。\n\n街道嗡嗡作响，带着一种低沉而愉悦的能量。伦敦所有的镜子都开始笑了。TikTok上的那个符印现在是三家跨国公司的logo，没有人记得自己为什么看着它就会不舒服。\n\n你的档案没有被销毁——那样太有尊严了。取而代之的是，它被公开作为互动展览。参观者在页边涂鸦，小孩子把预言的页面当涂色本用。\n\n在废墟的某个角落，两座墓园之间的咖啡馆仍在为一张空桌子供应浓缩咖啡。杯子从来没人收走。"
+    },
+    {
+      "id": "human_collapse",
+      "title_en": "Human Collapse",
+      "title_zh": "人类崩溃",
+      "text_en": "The factions wrote their names in ash. The streets forget what morning feels like.\n\nIt didn't end with trumpets or fire. It ended with exhaustion. People stopped going to work, then stopped going outside, then stopped going. The vicar's church is empty. The school in Hackney is closed. The mirror in Selfridges shows nothing now — not because it's broken, but because no one is left to stand before it.\n\nYour archive lies open on your desk. The pages are blank. Not erased — they were never written. You had the pen in your hand the whole time, and you couldn't decide what was true.\n\nThe cup is still there. The cocoa dried into a dark ring long ago. You trace it with your finger and wonder if it was ever really warm.",
+      "text_zh": "各方阵营用灰烬写下了自己的名字。街道忘记了清晨是什么感觉。\n\n结局不是号角，也不是烈火。而是疲惫。人们先是不再上班，然后不再出门，最后不再移动。牧师的教堂空了。哈克尼区的学校关了。Selfridges的镜子什么都不再显示——不是坏了，而是没人再站到它面前。\n\n你的档案摊开在桌上。纸页空白。不是被擦去了——而是从未写过。你手里一直握着笔，但你无法决定什么是真的。\n\n杯子还在那里。可可早已干涸成一圈深色的印记。你用手指描着它，想着它是否真的温热过。"
+    },
+    {
+      "id": "human_rebellion",
+      "title_en": "Human Rebellion",
+      "title_zh": "人类觉醒",
+      "text_en": "They chose hesitation over obedience, and doubt over prophecy — and that hesitation became freedom.\n\nIt wasn't the angels who saved them, nor the demons who freed them. It was a vicar who refused to pick a side. A boy who told the truth to a mirror. A record-keeper who wrote down what actually happened, instead of what was supposed to.\n\nThe prophecy is not cancelled. It still breathes between the pages. But the pages are yours now, and you have chosen not to turn them.\n\nOn your desk, the cup is empty. But this morning — for the first time in weeks — it was warm again. You still don't know who leaves it.\n\nYou're starting to think it doesn't matter.",
+      "text_zh": "他们选择了犹豫而非服从，选择了质疑而非预言——而那犹豫本身成为了自由。\n\n拯救他们的不是天使，解放他们的也不是恶魔。而是一位拒绝站队的牧师，一个对镜子说出真话的男孩，一位如实记录了所发生之事——而非应该发生之事——的记录者。\n\n预言并未被取消。它仍在书页之间呼吸。但书页现在属于你，而你选择了不去翻开它们。\n\n你桌上的杯子是空的。但今天早上——数周以来第一次——它又是温热的了。你仍然不知道是谁放的。\n\n你开始觉得，也许这并不重要。"
+    },
+    {
+      "id": "false_peace",
+      "title_en": "False Peace",
+      "title_zh": "伪和平",
+      "text_en": "Time bends but does not break. The prophecy breathes between pages you refused to open.\n\nLondon's fog lifts and settles, lifts and settles. The vicar resumes his sermons; the TikTok sigil is buried under new trends; the pigeons go back to being ordinary nuisances. Everything looks the way it did before — except you know it isn't.\n\nYour archive is thick and heavy. Complete, in a sense. But there are gaps where you chose silence, and margins where the ink is a shade too careful. Future archivists will study it and find it impeccable. They will not find it honest.\n\nThe cup is on your desk. Lukewarm. Not cold enough to discard, not warm enough to comfort. Somewhere between two cemeteries, someone is still pouring espresso for a table that may or may not be empty.\n\nYou delayed the end. Whether that was enough is not yours to know.",
+      "text_zh": "时间被扭曲，但未被打破。预言仍在你拒绝翻开的书页间呼吸。\n\n伦敦的雾散了又聚，聚了又散。牧师恢复了布道；TikTok上的符印被新的热搜掩盖；鸽子重新变成了普通的麻烦。一切看起来和从前一样——除了你知道它不一样。\n\n你的档案厚重而完整。某种意义上。但在你选择沉默的地方留有空白，在页边处墨迹的颜色过于谨慎。未来的档案管理员会研究它，觉得无可挑剔。他们不会发现它诚实。\n\n杯子在桌上。微温。没有冷到可以倒掉，也没有热到足以安慰。在两座墓园之间的某个地方，有人仍在为一张不知是否空着的桌子倒浓缩咖啡。\n\n你延缓了终局。这是否足够，不由你来知晓。"
+    }
+  ],
+  "priority": [
+    "human_collapse",
+    "heaven_dominance",
+    "hell_dominance",
+    "human_rebellion",
+    "false_peace"
+  ]
+}
