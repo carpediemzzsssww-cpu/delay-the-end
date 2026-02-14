@@ -47,12 +47,6 @@ html { font-size: 16px; -webkit-font-smoothing: antialiased; }
 
 body {
   background: var(--bg-deep);
-  background-image:
-    linear-gradient(rgba(13, 13, 26, 0.78), rgba(13, 13, 26, 0.9)),
-    url("./assets/bg/IrisZhou_dark_atmospheric_London_street_illustration_fog_vint_60d8b786-7b09-4b1b-9b2b-364226ea47bd_2.png");
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
   color: var(--parchment);
   font-family: var(--font-body);
   min-height: 100vh;
@@ -68,9 +62,16 @@ body::before {
   position: fixed;
   inset: 0;
   background:
+    linear-gradient(rgba(13, 13, 26, 0.78), rgba(13, 13, 26, 0.9)),
+    url("./assets/bg/IrisZhou_dark_atmospheric_London_street_illustration_fog_vint_60d8b786-7b09-4b1b-9b2b-364226ea47bd_2.png"),
     radial-gradient(ellipse at 20% 50%, rgba(110, 140, 168, 0.03) 0%, transparent 60%),
     radial-gradient(ellipse at 80% 50%, rgba(196, 106, 50, 0.03) 0%, transparent 60%),
     radial-gradient(ellipse at 50% 100%, rgba(139, 46, 46, 0.05) 0%, transparent 50%);
+  background-size: auto, cover, auto, auto, auto;
+  background-position: center center;
+  background-repeat: no-repeat;
+  transform: translateZ(0);
+  will-change: transform;
   pointer-events: none;
   z-index: 0;
 }
@@ -139,7 +140,10 @@ body::after {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: clamp(1rem, 4vh, 2.5rem) 1rem;
+  padding:
+    max(env(safe-area-inset-top), clamp(1rem, 4vh, 2.5rem))
+    1rem
+    max(env(safe-area-inset-bottom), 1.2rem);
   overflow-y: auto;
   overscroll-behavior: contain;
   z-index: 100;
@@ -242,7 +246,10 @@ body::after {
 
 /* CTA Button */
 .cta-btn {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7em;
   font-family: var(--font-display);
   font-size: 1rem;
   letter-spacing: 0.2em;
@@ -256,6 +263,17 @@ body::after {
   overflow: hidden;
   opacity: 0;
   transition: all 0.4s ease;
+  white-space: nowrap;
+}
+
+.cta-en,
+.cta-zh {
+  display: inline-block;
+}
+
+.cta-sep {
+  opacity: 0.8;
+  letter-spacing: 0;
 }
 
 .cta-btn.show {
@@ -591,7 +609,10 @@ body::after {
   align-items: center;
   justify-content: center;
   overflow-y: auto;
-  padding: clamp(1.2rem, 4vh, var(--space-lg));
+  padding:
+    max(env(safe-area-inset-top), clamp(1.2rem, 4vh, var(--space-lg)))
+    clamp(1rem, 4vw, var(--space-lg))
+    max(env(safe-area-inset-bottom), 2.2rem);
   text-align: center;
 }
 
@@ -616,7 +637,10 @@ body::after {
   white-space: pre-line;
   overflow-wrap: anywhere;
   color: var(--parchment-dim);
-  max-width: 560px;
+  max-width: min(92vw, 680px);
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
   margin-bottom: var(--space-lg);
 }
 
@@ -698,8 +722,33 @@ body::after {
   .event-card { padding: var(--space-sm); }
   .game-container { padding: var(--space-sm); }
   .top-bar { flex-wrap: wrap; }
+  .landing-title h1 {
+    letter-spacing: 0.11em;
+    font-size: clamp(2rem, 12vw, 3.2rem);
+  }
   .landing-title .subtitle {
     max-width: 92vw;
+    line-height: 1.7;
+  }
+  .cta-btn {
+    width: min(92vw, 500px);
+    letter-spacing: 0.14em;
+    font-size: 0.95rem;
+    padding: 0.95em 1.2em;
+  }
+  .cta-en {
+    letter-spacing: 0.12em;
+  }
+  .cta-zh {
+    letter-spacing: 0.1em;
+  }
+  .ending-title {
+    letter-spacing: 0.05em;
+  }
+  .ending-text {
+    max-width: 88vw;
+    font-size: 1rem;
+    line-height: 1.9;
   }
   .decor-item { opacity: 0.12; width: clamp(60px, 18vw, 100px); }
   .decor-item.book,
@@ -716,8 +765,19 @@ body::after {
 }
 
 @media (hover: none) and (pointer: coarse) {
-  body {
-    background-attachment: scroll;
+  body::before {
+    background-size: auto, cover, auto, auto, auto;
+  }
+}
+
+@media (max-width: 420px) {
+  .cta-btn {
+    flex-direction: column;
+    gap: 0.35em;
+    letter-spacing: 0.1em;
+  }
+  .cta-sep {
+    display: none;
   }
 }
 </style>
@@ -840,7 +900,9 @@ body::after {
   <!-- Phase 3: CTA -->
   <div class="landing-cta">
     <button class="cta-btn" id="cta-btn" onclick="startGame()">
-      Begin Your Record &nbsp;/&nbsp; 开始记录
+      <span class="cta-en">Begin Your Record</span>
+      <span class="cta-sep">/</span>
+      <span class="cta-zh">开始记录</span>
     </button>
   </div>
 </div>
