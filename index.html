@@ -572,6 +572,61 @@ body::after {
   border-color: var(--gold-dim);
 }
 
+/* ---- Tutorial Overlay ---- */
+.tutorial-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 260;
+  display: none;
+  pointer-events: auto;
+}
+
+.tutorial-overlay.active {
+  display: block;
+}
+
+.tutorial-highlight {
+  position: fixed;
+  border: 1px solid var(--gold);
+  box-shadow:
+    0 0 0 9999px rgba(13, 13, 26, 0.72),
+    0 0 24px rgba(201, 168, 76, 0.2);
+  border-radius: 6px;
+  pointer-events: none;
+}
+
+.tutorial-bubble {
+  position: fixed;
+  width: min(92vw, 460px);
+  background: rgba(20, 20, 34, 0.98);
+  border: 1px solid var(--gold-dim);
+  padding: 0.95rem 1rem;
+  color: var(--parchment-dim);
+  line-height: 1.65;
+  font-size: 0.9rem;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.45);
+}
+
+.tutorial-text {
+  margin-bottom: 0.8rem;
+}
+
+.tutorial-next {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--parchment);
+  background: transparent;
+  border: 1px solid var(--ghost);
+  padding: 0.5em 1.1em;
+  cursor: pointer;
+}
+
+.tutorial-next:hover {
+  border-color: var(--gold-dim);
+}
+
 /* ---- Feedback Toast ---- */
 .feedback {
   position: fixed;
@@ -749,6 +804,10 @@ body::after {
     max-width: 88vw;
     font-size: 1rem;
     line-height: 1.9;
+  }
+  .tutorial-bubble {
+    font-size: 0.86rem;
+    line-height: 1.6;
   }
   .decor-item { opacity: 0.12; width: clamp(60px, 18vw, 100px); }
   .decor-item.book,
@@ -1008,6 +1067,16 @@ body::after {
   <button class="replay-btn" onclick="location.reload()">Play Again / 重新开始</button>
 </div>
 
+<div class="tutorial-overlay" id="tutorial-overlay" aria-live="polite">
+  <div class="tutorial-highlight" id="tutorial-highlight"></div>
+  <div class="tutorial-bubble" id="tutorial-bubble">
+    <div class="tutorial-text" id="tutorial-text"></div>
+    <button class="tutorial-next" id="tutorial-next" type="button" onclick="advanceTutorialStep()">
+      Continue
+    </button>
+  </div>
+</div>
+
 <!-- ==========================================
      Landing Page Animation Script
      ========================================== -->
@@ -1105,6 +1174,28 @@ const TEXTS = {
   retry: {
     en: "Retry",
     zh: "重试"
+  },
+  tutorial: {
+    stats: {
+      en: "These four forces shape the world. Heaven and Hell compete for influence. Stability reflects human society. Pressure is the countdown.",
+      zh: "这是你需要关注的四股力量。天堂与地狱在争夺影响力，稳定度代表人类社会的状态，压力是末日逼近的倒计时。"
+    },
+    choices: {
+      en: "Each choice shifts the balance. Red-bordered options are extreme — powerful, but costly.",
+      zh: "每个选择都会改变力量平衡。红色边框的选项是极端干预——强力但有代价。"
+    },
+    record: {
+      en: "As the Archivist, you choose how to record events. Truthful records build trust over time. Other methods have their own uses.",
+      zh: "作为记录者，你可以选择如何记录发生的事。如实记录能积累信任，但其他方式各有用途。"
+    },
+    next: {
+      en: "Continue",
+      zh: "继续"
+    },
+    close: {
+      en: "Got it",
+      zh: "明白了"
+    }
   }
 };
 
@@ -1235,7 +1326,8 @@ function createInitialGameState() {
     events: [],
     history: [],
     language: "zh",
-    phase: "event"
+    phase: "event",
+    tutorialStep: "stats"
   };
 }
 
@@ -1260,6 +1352,17 @@ document.addEventListener("DOMContentLoaded", () => {
     ctaBtn.classList.add("show");
     corners.forEach((c) => c.classList.add("show"));
   }, 6800);
+
+  window.addEventListener("resize", () => {
+    if (gameState && gameState.round === 1) {
+      maybeShowTutorial();
+    }
+  });
+  window.addEventListener("orientationchange", () => {
+    if (gameState && gameState.round === 1) {
+      setTimeout(() => maybeShowTutorial(), 50);
+    }
+  });
 });
 
 function startGame() {
@@ -1293,6 +1396,7 @@ async function initGame() {
 }
 
 function showLoadingState() {
+  hideTutorialOverlay();
   const lang = document.documentElement.lang === "en" ? "en" : "zh";
   document.getElementById("event-title").textContent = TEXTS.loading[lang];
   document.getElementById("event-text").textContent = "";
@@ -1301,6 +1405,7 @@ function showLoadingState() {
 }
 
 function showInitError(error) {
+  hideTutorialOverlay();
   const lang = document.documentElement.lang === "en" ? "en" : "zh";
   document.getElementById("event-title").textContent = TEXTS.initErrorTitle[lang];
   document.getElementById("event-text").textContent = `${TEXTS.initErrorBody[lang]} (${String(error.message || error)})`;
@@ -1360,6 +1465,7 @@ function renderRound() {
   renderRecordPanel();
   updateRoundIndicator();
   updateStatsUI();
+  maybeShowTutorial();
 }
 
 function getCurrentEvent() {
@@ -1440,6 +1546,9 @@ function handleChoice(choiceId) {
   });
 
   gameState.phase = "record";
+  if (gameState.round === 1 && gameState.tutorialStep === "wait_record") {
+    gameState.tutorialStep = "record";
+  }
   renderRound();
   showFeedback(`${TEXTS.effectPrefix[gameState.language]}: ${formatEffect(choice.effect)}`, 1800);
 }
@@ -1533,6 +1642,8 @@ function completeRound() {
   updateStatsUI();
 
   if (gameState.round === TOTAL_ROUNDS) {
+    gameState.tutorialStep = "done";
+    hideTutorialOverlay();
     const rbCfg = GAME_CONFIG.rebellion;
     gameState.rebellionFlag =
       gameState.rebellion.consecutiveBalanceCount >= Number(rbCfg.consecutive_required || 3) &&
@@ -1541,6 +1652,10 @@ function completeRound() {
     return;
   }
 
+  if (gameState.round >= 1) {
+    gameState.tutorialStep = "done";
+    hideTutorialOverlay();
+  }
   gameState.round += 1;
   gameState.phase = "event";
   renderRound();
@@ -1587,6 +1702,8 @@ function showEnding(endingId) {
 
   activeEndingId = endingId;
   gameState.phase = "ending";
+  gameState.tutorialStep = "done";
+  hideTutorialOverlay();
 
   document.getElementById("ending-title").textContent = ending[`title_${gameState.language}`];
   document.getElementById("ending-text").textContent = ending[`text_${gameState.language}`];
@@ -1641,6 +1758,7 @@ function toggleLanguage() {
   gameState.language = gameState.language === "zh" ? "en" : "zh";
   document.documentElement.lang = gameState.language;
   updateLanguageControls();
+  maybeShowTutorial();
 
   if (gameState.phase === "ending" && activeEndingId) {
     const ending = ENDINGS_DATA.endings.find((item) => item.id === activeEndingId);
@@ -1652,6 +1770,111 @@ function toggleLanguage() {
   }
 
   renderRound();
+}
+
+function maybeShowTutorial() {
+  if (!gameState) return;
+  if (gameState.round !== 1) {
+    gameState.tutorialStep = "done";
+    hideTutorialOverlay();
+    return;
+  }
+
+  if (gameState.tutorialStep === "stats") {
+    const target = document.querySelector(".stat-bars");
+    if (target) {
+      showTutorialOverlay(target, TEXTS.tutorial.stats[gameState.language], false);
+    }
+    return;
+  }
+
+  if (gameState.tutorialStep === "choices" && gameState.phase === "event") {
+    const target = document.getElementById("choices-container");
+    if (target) {
+      showTutorialOverlay(target, TEXTS.tutorial.choices[gameState.language], false);
+    }
+    return;
+  }
+
+  if (gameState.tutorialStep === "record" && gameState.phase === "record") {
+    const target = document.getElementById("record-phase");
+    if (target) {
+      showTutorialOverlay(target, TEXTS.tutorial.record[gameState.language], true);
+    }
+    return;
+  }
+
+  hideTutorialOverlay();
+}
+
+function showTutorialOverlay(targetEl, text, isFinalStep) {
+  const overlay = document.getElementById("tutorial-overlay");
+  const highlight = document.getElementById("tutorial-highlight");
+  const bubble = document.getElementById("tutorial-bubble");
+  const textEl = document.getElementById("tutorial-text");
+  const nextBtn = document.getElementById("tutorial-next");
+  const rect = targetEl.getBoundingClientRect();
+  const pad = 8;
+
+  textEl.textContent = text;
+  nextBtn.textContent = isFinalStep
+    ? TEXTS.tutorial.close[gameState.language]
+    : TEXTS.tutorial.next[gameState.language];
+
+  highlight.style.left = `${Math.max(8, rect.left - pad)}px`;
+  highlight.style.top = `${Math.max(8, rect.top - pad)}px`;
+  highlight.style.width = `${Math.max(20, Math.min(window.innerWidth - 16, rect.width + pad * 2))}px`;
+  highlight.style.height = `${Math.max(20, rect.height + pad * 2)}px`;
+
+  overlay.classList.add("active");
+  bubble.style.visibility = "hidden";
+  bubble.style.left = "12px";
+  bubble.style.top = "12px";
+
+  requestAnimationFrame(() => {
+    const bubbleRect = bubble.getBoundingClientRect();
+    const preferBottom = rect.bottom + 16 + bubbleRect.height < window.innerHeight - 8;
+    const top = preferBottom
+      ? rect.bottom + 16
+      : Math.max(8, rect.top - bubbleRect.height - 16);
+    const left = Math.min(
+      window.innerWidth - bubbleRect.width - 8,
+      Math.max(8, rect.left + rect.width / 2 - bubbleRect.width / 2)
+    );
+    bubble.style.left = `${left}px`;
+    bubble.style.top = `${top}px`;
+    bubble.style.visibility = "visible";
+  });
+}
+
+function hideTutorialOverlay() {
+  const overlay = document.getElementById("tutorial-overlay");
+  if (!overlay) return;
+  overlay.classList.remove("active");
+}
+
+function advanceTutorialStep() {
+  if (!gameState || gameState.round !== 1) {
+    hideTutorialOverlay();
+    return;
+  }
+
+  if (gameState.tutorialStep === "stats") {
+    gameState.tutorialStep = "choices";
+    maybeShowTutorial();
+    return;
+  }
+
+  if (gameState.tutorialStep === "choices") {
+    gameState.tutorialStep = "wait_record";
+    hideTutorialOverlay();
+    return;
+  }
+
+  if (gameState.tutorialStep === "record") {
+    gameState.tutorialStep = "done";
+    hideTutorialOverlay();
+  }
 }
 
 function updateLanguageControls() {
