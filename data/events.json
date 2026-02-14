@@ -4,7 +4,7 @@
     "title_en": "A Minor Anomaly",
     "title_zh": "微小异常",
     "text_en": "A stray miracle unfolded this morning: a blind cat regained sight and led its owner to a lost wedding ring buried under a paving stone in Soho. Heaven denies the act. Hell calls it \"disappointingly poetic.\"\n\nOn your desk, there is a cup of cocoa. Still warm. You don't remember ordering it.",
-    "text_zh": "今晨，一只失明的猫忽然重获视力，引导主人在苏豪区的一块铺路石下找回了遗失多年的婚戒。天界否认与此有关，地狱称其“浪漫得令人作呕”。\n\n你的办公桌上多了一杯可可。还是温热的。你不记得点过它。",
+    "text_zh": "今晨，一只失明的猫忽然重获视力，引导主人在苏豪区的一块铺路石下找回了遗失多年的婚戒。天堂否认与此有关，地狱称其“浪漫得令人作呕”。\n\n你的办公桌上多了一杯可可，还是温热的，你不记得点过它。",
     "choices": [
       {
         "id": "A",
@@ -21,7 +21,7 @@
       {
         "id": "B",
         "label_en": "Ignore it — a cat finding a ring isn't the end of the world",
-        "label_zh": "不处理——一只猫找到一枚戒指，又不是世界末日",
+        "label_zh": "不处理——不过一只猫找到一枚戒指，又不是世界末日",
         "effect": {
           "heaven": 0,
           "hell": 3,
@@ -63,7 +63,7 @@
       {
         "id": "A",
         "label_en": "Archive the hymn note-by-note — someone has to keep score",
-        "label_zh": "逐音符备案——总得有人记谱",
+        "label_zh": "逐个音符留存下档案——总得有人记谱",
         "effect": {
           "heaven": 6,
           "hell": -3,
@@ -113,7 +113,7 @@
     "title_en": "Infernal Graffiti",
     "title_zh": "地狱涂鸦",
     "text_en": "An ancient demonic sigil has appeared in a school restroom in Hackney. The student who drew it insists it's a streetwear logo he saw on Instagram. It's now trending on TikTok with 2.3 million views. Local clergy are in full panic.\n\nThe sigil, you note, is misspelled. Which somehow makes it worse.",
-    "text_zh": "哈克尼区一所学校的洗手间墙上出现了古老的地狱符印。画它的学生坚称那是他在Instagram上看到的潮牌logo。现在已在TikTok上获得230万播放量，本地牧师集体陷入恐慌。\n\n你注意到，符印拼写有误。但不知怎的，这反而让事情更糟了。",
+    "text_zh": "哈克尼区一所学校的洗手间墙上出现了古老的地狱符印。画它的学生坚称那是他在Instagram上看到的潮牌logo，相关帖子已在TikTok上获得230万播放量，本地牧师集体陷入恐慌。\n\n你注意到，符印拼写有误。但不知怎的，这反而让事情更糟了。",
     "choices": [
       {
         "id": "A",
@@ -224,7 +224,7 @@
     "title_en": "The Absent Angel",
     "title_zh": "消失的天使",
     "text_en": "An angel assigned to oversee traffic flow in central London has vanished. Heaven insists he's \"on a deep meditative retreat.\" Hell can barely contain its laughter. Humans, meanwhile, remain stuck in a gridlock stretching from Marble Arch to Tower Bridge.\n\nYou suspect he simply wandered into a bookshop and forgot to leave.",
-    "text_zh": "一位负责管理伦敦市中心交通的天使失踪了。天界坚称他正在“深度冥想静修”。地狱快笑出声。人类则困在从大理石拱门延伸到塔桥的大堵车里。\n\n你怀疑他只是走进了一家书店，然后忘了出来。",
+    "text_zh": "一位负责管理伦敦市中心交通的天使失踪了。天界坚称他正在“深度冥想静修”，地狱快笑出声。人类却因此困在堵车的长队里，从大理石拱门一直延伸到塔桥的。\n\n你怀疑他只是走进了一家书店，然后忘了出来。",
     "choices": [
       {
         "id": "A",
@@ -278,7 +278,7 @@
     "title_en": "Threshold Night",
     "title_zh": "临界之夜",
     "text_en": "Sirens scream along the Thames. Pigeons form unsettling geometric patterns over St. Paul's. An angelic spear — half-materialized, shimmering with cold light — appears embedded in the pavement at Piccadilly Circus.\n\nBoth sides are stepping closer to open war. The city air tastes of iron and ozone.\n\nThe cocoa on your desk has gone cold. You can't remember the last time it was warm.",
-    "text_zh": "泰晤士河畔警笛长鸣。鸽群在圣保罗大教堂上空排列出令人不安的几何图案。一柄半凝形态的天界长矛——闪着冷光——刺入皮卡迪利广场的路面。\n\n双方正在逼近正面交锋。城市的空气尝起来有铁锈和臭氧的味道。\n\n你桌上的可可凉了。你想不起来它最后一次是温热的是什么时候。",
+    "text_zh": "泰晤士河畔警笛长鸣。鸽群在圣保罗大教堂上空排列出令人不安的几何图案。一柄半凝形态的天界长矛，闪着冷光，刺入皮卡迪利广场的路面。\n\n双方正在逼近正面交锋，城市的空气尝起来有铁锈和臭氧的味道。\n\n你桌上的可可凉了，你想不起来它最后一次是有温度是什么时候。",
     "choices": [
       {
         "id": "A",
@@ -333,7 +333,7 @@
     "title_en": "Final Ledger",
     "title_zh": "最终档案",
     "text_en": "No declaration of war was ever issued. And yet: scorched feathers on consecrated ground, claw marks on a church door in Mayfair, and laughter — low, familiar — echoing from the sewers beneath a certain flat in Mayfair.\n\nAll eyes turn to your archive. The only record no faction can edit.\n\nYour pen hovers over the last page. There is a dry ring on the corner of your desk where a cup once stood.",
-    "text_zh": "没有人正式宣战。但圣地上散落着烧焦的羽毛，梅菲尔一座教堂门上有爪痕，某间梅菲尔公寓下方的下水道里回荡着低沉而熟悉的笑声。\n\n所有目光注视着你的档案——唯一无法被任何阵营篡改的记录。\n\n你的笔悬在最后一页上方。办公桌角落有一个干涸的杯环印记，那里曾经放过一只杯子。",
+    "text_zh": "没有人正式宣战。但圣地上散落着烧焦的羽毛，梅菲尔一座教堂门上有爪痕，某间梅菲尔公寓下方的下水道里回荡着低沉的笑声。\n\n所有目光注视着你的档案——这是唯一无法被任何阵营篡改的记录。\n\n你的笔悬在最后一页上方。办公桌角落有一个干涸的杯环印记，那里曾经放过一只杯子。",
     "choices": [
       {
         "id": "A",
@@ -388,7 +388,7 @@
     "title_en": "Memory Interference",
     "title_zh": "记忆干扰",
     "text_en": "A minor miracle was reported in Camden. Three eyewitnesses offer completely different accounts: one swears flowers bloomed from concrete, another saw a column of white fire, and the third remembers nothing — only a feeling of being forgiven.\n\nAll three versions are affecting reality. Simultaneously.\n\nYou pick up your pen and realize: whichever version you write down will become the only one that ever happened.",
-    "text_zh": "卡姆登区上报了一起小型奇迹。三位目击者各执一词：一人发誓水泥中绽放了鲜花，一人看到白色火柱冲天，第三人什么都不记得——只留下一种被原谅的感觉。\n\n三种版本正在同时影响现实。\n\n你拿起笔，忽然明白：你写下哪个版本，哪个就会成为唯一发生过的事实。",
+    "text_zh": "卡姆登区上报了一起小型奇迹。三位目击者各执一词：一人发誓水泥中绽放了鲜花，一人看到白色火柱冲天，第三人什么都不记得。\n\n三种版本正在同时影响现实。\n\n你拿起笔突然想到：你写下哪个版本，哪个就会成为唯一发生过的事实。",
     "choices": [
       {
         "id": "A",
@@ -405,7 +405,7 @@
       {
         "id": "B",
         "label_en": "Pick the flowers. Suppress the fire and the forgiveness.",
-        "label_zh": "选择花朵。压制火焰和那份被原谅的感觉。",
+        "label_zh": "选择其中之一，需要唯一的真相。",
         "effect": {
           "heaven": -3,
           "hell": 6,
@@ -443,12 +443,12 @@
     "title_en": "The Laughing Mirror",
     "title_zh": "嘲笑之镜",
     "text_en": "A mirror in a Selfridges display window has started whispering shoppers' ugliest private thoughts — then making them laugh uncontrollably. By noon, the queue stretches around the block.\n\nOne boy, no older than eleven, stood before it and heard his own reflection say: \"I faked the miracle.\"\n\nHe hasn't stopped crying since. Nobody knows which miracle he means.",
-    "text_zh": "Selfridges橱窗里的一面镜子开始低声说出路人内心最恶毒的想法——然后让他们不可抑制地大笑。到了中午，队伍已绕过街区。\n\n一个不超过十一岁的男孩站在镜前，听见自己的倒影说：“那场奇迹，是我伪造的。”\n\n他从那之后一直在哭。没有人知道他说的是哪场奇迹。",
+    "text_zh": "Selfridges橱窗里的一面镜子开始低声说出路人内心最恶毒的想法，然后让他们不可抑制地大笑。到了中午，排队的人已绕过街区。\n\n一个不超过十一岁的男孩站在镜前，听见自己的倒影说：“那场奇迹，是我伪造的。”\n\n他从那之后一直在哭，没有人知道他说的是哪场奇迹。",
     "choices": [
       {
         "id": "A",
         "label_en": "Shatter it with a counter-miracle (fight absurdity with absurdity)",
-        "label_zh": "用反奇迹击碎它（以荒诞对抗荒诞）",
+        "label_zh": "用奇迹击碎这面镜子",
         "effect": {
           "heaven": 7,
           "hell": -3,
@@ -498,7 +498,7 @@
     "title_en": "Coffee at the Edge",
     "title_zh": "边界咖啡馆",
     "text_en": "An angel and a demon have been meeting weekly at a café wedged between two defunct cemeteries, where ley lines overlap like crossed fingers. No miracles performed. No schemes hatched. Just espresso and shared silence.\n\nHeaven has filed for tactical surveillance. Hell says, \"We've been watching for years. It's unbearably domestic.\"\n\nYou have the footage. Both of them look... happy.",
-    "text_zh": "一位天使和一位恶魔每周都在两座废弃墓园之间的咖啡馆碰面，那里的灵脉交叠如十指相扣。没有施展奇迹，没有密谋。只有浓缩咖啡和共享的沉默。\n\n天堂已申请战术监控。地狱说，“我们盯了好多年了。无聊得令人发指。”\n\n你手里有监控录像。他们两个看起来……很开心。",
+    "text_zh": "一位天使和一位恶魔每周都在两座废弃墓园之间的咖啡馆碰面，那里的聚集着许多魂灵。那里没有施展奇迹或者密谋，只有浓缩咖啡和共享的沉默。\n\n天堂已申请战术监控。地狱说，“我们盯了好多年了。无聊得令人发指。”\n\n你手里有监控录像。他们两个看起来……很开心。",
     "choices": [
       {
         "id": "A",
