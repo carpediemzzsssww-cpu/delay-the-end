@@ -20,15 +20,15 @@
     }
   },
   "rebellion": {
-    "balance_diff_max": 10,
-    "stability_min": 55,
+    "balance_diff_max": 12,
+    "stability_min": 48,
     "consecutive_required": 2,
-    "max_extreme_choices": 2
+    "max_extreme_choices": 4
   },
   "endings": {
-    "stability_collapse_lt": 20,
-    "heaven_dominance_gte": 90,
-    "hell_dominance_gte": 90,
-    "rebellion_pressure_lt": 85
+    "stability_collapse_lt": 29,
+    "heaven_dominance_gte": 84,
+    "hell_dominance_gte": 84,
+    "rebellion_pressure_lt": 88
   }
 }

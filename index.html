@@ -493,33 +493,67 @@ body::after {
 }
 
 .choice-btn {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
-  text-align: left;
+  text-align: center;
   font-family: var(--font-body);
   font-size: 0.9rem;
   color: var(--parchment);
   background: rgba(244, 232, 193, 0.04);
   border: 1px solid rgba(244, 232, 193, 0.1);
-  padding: 1em 1.4em;
   cursor: pointer;
   transition: all 0.3s ease;
   position: relative;
   line-height: 1.5;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: normal;
+  line-break: loose;
+  min-height: 84px;
+  padding: 0.95em 1.2em;
 }
 
 .choice-btn:hover {
   background: rgba(244, 232, 193, 0.08);
   border-color: var(--gold-dim);
-  padding-left: 1.8em;
+  transform: translateY(-1px);
 }
 
 .choice-btn .choice-id {
   font-family: var(--font-display);
   font-weight: 700;
   color: var(--gold);
-  margin-right: 0.6em;
   font-size: 0.85em;
+  line-height: 1;
+  position: absolute;
+  left: 1.2em;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2.2em;
+  text-align: left;
+  pointer-events: none;
+}
+
+.choice-btn .choice-text {
+  display: inline-block;
+  max-width: calc(100% - 4.8em);
+  margin: 0 auto;
+  line-height: 1.58;
+  text-align: center;
+}
+
+.choice-btn.selected-consequence {
+  background: rgba(201, 168, 76, 0.08);
+  border-color: var(--gold-dim);
+  color: var(--parchment-dim);
+  line-height: 1.6;
+  white-space: normal;
+}
+
+.choice-btn.selected-consequence .choice-id {
+  color: var(--gold);
 }
 
 .choice-btn.extreme {
@@ -804,6 +838,19 @@ body::after {
     max-width: 88vw;
     font-size: 1rem;
     line-height: 1.9;
+  }
+  .choice-btn {
+    min-height: 78px;
+    font-size: 0.88rem;
+    padding: 0.9em 1.05em;
+  }
+  .choice-btn .choice-id {
+    left: 0.95em;
+    width: 2em;
+  }
+  .choice-btn .choice-text {
+    max-width: calc(100% - 4.1em);
+    line-height: 1.55;
   }
   .tutorial-bubble {
     font-size: 0.86rem;
@@ -1178,11 +1225,11 @@ const TEXTS = {
   tutorial: {
     stats: {
       en: "These four forces shape the world. Heaven and Hell compete for influence. Stability reflects human society. Pressure is the countdown.",
-      zh: "这是你需要关注的四股力量。天堂与地狱在争夺影响力，稳定度代表人类社会的状态，压力是末日逼近的倒计时。"
+      zh: "这是你需要关注的四股力量。天堂与地狱正在争夺影响力，稳定程度代表人类社会的状态，压力是末日逼近的倒计时。"
     },
     choices: {
       en: "Each choice shifts the balance. Red-bordered options are extreme — powerful, but costly.",
-      zh: "每个选择都会改变力量平衡。红色边框的选项是极端干预——强力但有代价。"
+      zh: "每个选择都会影响力量的平衡。红色边框的选项是极端干预——强力但有代价。"
     },
     record: {
       en: "As the Archivist, you choose how to record events. Truthful records build trust over time. Other methods have their own uses.",
@@ -1209,7 +1256,7 @@ const STAT_LABELS = {
   zh: {
     heaven: "天堂",
     hell: "地狱",
-    stability: "稳定度",
+    stability: "稳定程度",
     pressure: "压力"
   }
 };
@@ -1323,6 +1370,7 @@ function createInitialGameState() {
       consecutiveBalanceCount: 0,
       extremeChoiceCount: 0
     },
+    choiceOrderByRound: {},
     events: [],
     history: [],
     language: "zh",
@@ -1477,6 +1525,26 @@ function getRoundHistory(round) {
   return gameState.history.find((item) => item.round === round) || null;
 }
 
+function getRoundChoicesInDisplayOrder(event) {
+  if (!gameState || !event || !Array.isArray(event.choices)) return [];
+
+  const roundKey = String(gameState.round);
+  if (!gameState.choiceOrderByRound[roundKey]) {
+    gameState.choiceOrderByRound[roundKey] = shuffle(event.choices.map((c) => c.id));
+  }
+
+  const orderedIds = gameState.choiceOrderByRound[roundKey];
+  const choiceMap = new Map(event.choices.map((choice) => [choice.id, choice]));
+  const orderedChoices = orderedIds.map((id) => choiceMap.get(id)).filter(Boolean);
+
+  if (orderedChoices.length < event.choices.length) {
+    const missingChoices = event.choices.filter((choice) => !orderedIds.includes(choice.id));
+    return [...orderedChoices, ...missingChoices];
+  }
+
+  return orderedChoices;
+}
+
 function applyEffect(effect) {
   if (!effect) return;
   gameState.heaven += Number(effect.heaven) || 0;
@@ -1494,26 +1562,29 @@ function renderChoices(event) {
   const selectedChoiceId = roundHistory ? roundHistory.choiceId : null;
   const locked = gameState.phase !== "event";
   const labelKey = gameState.language === "zh" ? "label_zh" : "label_en";
+  const consequenceKey = gameState.language === "zh" ? "consequence_zh" : "consequence_en";
+  const displayChoices = getRoundChoicesInDisplayOrder(event);
 
-  event.choices.forEach((choice) => {
+  displayChoices.forEach((choice) => {
     const btn = document.createElement("button");
-    btn.className = `choice-btn${choice.is_extreme ? " extreme" : ""}`;
+    const isSelected = locked && selectedChoiceId === choice.id;
+    btn.className = `choice-btn${choice.is_extreme ? " extreme" : ""}${isSelected ? " selected-consequence" : ""}`;
     btn.type = "button";
     btn.disabled = locked;
 
     if (!locked) {
       btn.addEventListener("click", () => handleChoice(choice.id));
-    } else if (selectedChoiceId !== choice.id) {
+    } else if (!isSelected) {
       btn.style.opacity = "0.6";
     }
-
-    const selectedTag = locked && selectedChoiceId === choice.id
-      ? ` (${TEXTS.selected[gameState.language]})`
-      : "";
+    const displayText = isSelected
+      ? (choice[consequenceKey] || choice[labelKey] || "")
+      : (choice[labelKey] || "");
+    btn.title = displayText;
 
     btn.innerHTML = `
       <span class="choice-id">${choice.id}</span>
-      ${choice[labelKey]}${selectedTag}
+      <span class="choice-text">${escapeHtml(displayText)}</span>
     `;
 
     container.appendChild(btn);
@@ -1550,7 +1621,15 @@ function handleChoice(choiceId) {
     gameState.tutorialStep = "record";
   }
   renderRound();
-  showFeedback(`${TEXTS.effectPrefix[gameState.language]}: ${formatEffect(choice.effect)}`, 1800);
+  const detailText = formatEffect(choice.effect);
+  if (!shouldSuppressFeedback()) {
+    showFeedback(`${TEXTS.effectPrefix[gameState.language]}: ${detailText}`, 1800);
+  }
+}
+
+function shouldSuppressFeedback() {
+  if (!gameState) return false;
+  return gameState.round === 1 && gameState.tutorialStep !== "done";
 }
 
 function renderRecordPanel() {
@@ -1907,12 +1986,25 @@ function clampAllStats() {
   gameState.pressure = clamp(gameState.pressure);
 }
 
-function showFeedback(text, duration = 2500) {
+function escapeHtml(value) {
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/\"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+function showFeedback(content, duration = 2500, asHtml = false) {
   const fb = document.getElementById("feedback");
   if (feedbackTimer) {
     clearTimeout(feedbackTimer);
   }
-  fb.textContent = text;
+  if (asHtml) {
+    fb.innerHTML = content;
+  } else {
+    fb.textContent = content;
+  }
   fb.classList.add("visible");
   feedbackTimer = setTimeout(() => {
     fb.classList.remove("visible");

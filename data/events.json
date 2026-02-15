@@ -16,7 +16,9 @@
           "stability": -1,
           "pressure": 1
         },
-        "is_extreme": false
+        "is_extreme": false,
+        "consequence_zh": "天堂奇迹管理部发来一份礼貌的确认函，迟到了三周，地址写错了部门，还盖着“无需进一步处理”的印章。那只猫后来被追封为一位小圣徒。",
+        "consequence_en": "Heaven’s Miracles Division sent a polite acknowledgment. It arrived three weeks late, addressed to the wrong department, and stamped ‘NO FURTHER ACTION REQUIRED.’ The cat has since been promoted to a minor saint."
       },
       {
         "id": "B",
@@ -28,7 +30,9 @@
           "stability": 2,
           "pressure": 0
         },
-        "is_extreme": false
+        "is_extreme": false,
+        "consequence_zh": "猫主人把故事发到了Reddit上。十二个赞和一条评论：“假的。”",
+        "consequence_en": "The cat’s owner posted the story on Reddit. Twelve upvotes and one comment: ‘fake.’"
       },
       {
         "id": "C",
@@ -40,7 +44,9 @@
           "stability": 0,
           "pressure": -3
         },
-        "is_extreme": true
+        "is_extreme": true,
+        "consequence_zh": "戒指放在第七号档案库里，夹在一瓶1782年的喷嚏和一只会指向北方的指南针之间。天堂提交了一份嘉奖令，你收获了一份头痛。",
+        "consequence_en": "The ring now sits in Archive Vault 7, between a bottled sneeze from 1782 and a compass that only points to regret. Heaven filed a commendation. You filed a headache."
       }
     ],
     "fixed_position": 1,
@@ -70,7 +76,9 @@
           "stability": -2,
           "pressure": 1
         },
-        "is_extreme": false
+        "is_extreme": false,
+        "consequence_zh": "这首圣歌正式编入天界乐谱目录，编号6,020,207。那三位议员还是会听到升C调就流泪。至于青蛙雨，没人给出过解释。",
+        "consequence_en": "The hymn is now officially catalogued as Celestial Composition #6,020,207. The three parliamentarians still cry whenever they hear a C-sharp. Nobody has explained the frogs."
       },
       {
         "id": "B",
@@ -82,7 +90,9 @@
           "stability": 3,
           "pressure": 2
         },
-        "is_extreme": false
+        "is_extreme": false,
+        "consequence_zh": "青蛙和哭声都消失了，北伦敦恢复日常。你的报告被归入“天气：异常但无需处置”类目。",
+        "consequence_en": "The frogs dispersed. The weeping stopped. North London returned to its usual state of mild, secular disappointment. Your report was filed under ‘Weather: Unusual but Non-Actionable.’"
       },
       {
         "id": "C",
@@ -94,7 +104,9 @@
           "stability": -1,
           "pressure": -3
         },
-        "is_extreme": true
+        "is_extreme": true,
+        "consequence_zh": "那个街头艺人在国王十字车站外演奏了这段和声。两只鸽子当场爆炸，一位女士的咖啡变成了红酒。他收获了47.5英鎊的打赏，以及天堂和地狱分别发来的一份正式警告。",
+        "consequence_en": "The busker played the harmony outside King’s Cross. Two pigeons exploded. A woman’s coffee turned to wine. He earned £47.50 in tips and a formal warning from both Heaven and Hell."
       }
     ],
     "fixed_position": null,
@@ -125,7 +137,9 @@
           "stability": -2,
           "pressure": 2
         },
-        "is_extreme": false
+        "is_extreme": false,
+        "consequence_zh": "两位六翼天使花了四十分钟净化一面瓷砖墙，他们拒绝在事后报告中提及此事。那个学生被罚了禁闭，同时收到一份来历不明的奖学金通知。",
+        "consequence_en": "Two seraphim spent forty minutes purifying a tile wall. They refused to mention it in their after-action report. The student received a detention and a mysterious scholarship offer."
       },
       {
         "id": "B",
@@ -137,7 +151,9 @@
           "stability": -1,
           "pressure": 1
         },
-        "is_extreme": false
+        "is_extreme": false,
+        "consequence_zh": "一周后，这个符印出现在泰特现代美术馆的展览邀请函上，策展人称之为“后讽刺超验主义”。三个恶魔参加了开幕夜，他们觉得自己被人类理解了。",
+        "consequence_en": "A week later, the sigil appeared on an invitation to Tate Modern. The curator called it ‘post-ironic transcendentalism.’ Three demons attended the opening night. They felt seen."
       },
       {
         "id": "C",
@@ -149,7 +165,9 @@
           "stability": -2,
           "pressure": -3
         },
-        "is_extreme": true
+        "is_extreme": true,
+        "consequence_zh": "视频消失了，记者们也都忘记了。符印还在那里，有人在上面贴了张写着“故障中”的贴纸。",
+        "consequence_en": "The footage vanished. The reporters forgot. The sigil is still there — someone covered it with a sticker that reads ‘OUT OF ORDER.’"
       }
     ],
     "fixed_position": null,
@@ -180,7 +198,9 @@
           "stability": -2,
           "pressure": 2
         },
-        "is_extreme": false
+        "is_extreme": false,
+        "consequence_zh": "天堂的勘误声明长达十四页，用了一种没人看得懂的字体。牧师把它钉在教堂布告栏上，紧挨着一份柠檬糖霜蛋糕的食谱。教堂出席率翻了一倍。",
+        "consequence_en": "Heaven’s correction ran to 14 pages in a font nobody could read. The vicar pinned it to the church noticeboard next to a recipe for lemon drizzle cake. Attendance doubled."
       },
       {
         "id": "B",
@@ -192,7 +212,9 @@
           "stability": -3,
           "pressure": 1
         },
-        "is_extreme": false
+        "is_extreme": false,
+        "consequence_zh": "地狱的招募手册把牧师的话断章取义地引用了，效果好得令人不安。",
+        "consequence_en": "Hell’s recruitment pamphlet quoted the vicar entirely out of context. It worked disturbingly well."
       },
       {
         "id": "C",
@@ -204,7 +226,9 @@
           "stability": 5,
           "pressure": 2
         },
-        "is_extreme": false
+        "is_extreme": false,
+        "consequence_zh": "牧师继续布道。周日，可可照常出现在教堂台阶上。",
+        "consequence_en": "The vicar continued his sermons. On Sunday, the cup of cocoa appeared on the church steps as usual. This time, there were two."
       }
     ],
     "fixed_position": null,
@@ -236,7 +260,9 @@
           "stability": -1,
           "pressure": 1
         },
-        "is_extreme": false
+        "is_extreme": false,
+        "consequence_zh": "替补的天使带着明显的不情愿和一个文件夹到场了。九分钟内交通恢复。他在下班前提交了一份关于“恶劣工作环境”的投诉。",
+        "consequence_en": "The replacement angel arrived with visible reluctance and a clipboard. Traffic cleared in nine minutes. He filed a complaint about ‘hostile working conditions’ before his shift ended."
       },
       {
         "id": "B",
@@ -248,7 +274,9 @@
           "stability": -2,
           "pressure": 1
         },
-        "is_extreme": false
+        "is_extreme": false,
+        "consequence_zh": "《伦敦标准晚报》的头条：“天使擅离职守——交通全面瘫痪。”评论区怪罪市长、移民和一只无辜的的鸽子。那位天使始终没被找到。",
+        "consequence_en": "The Evening Standard ran the headline: ‘ANGEL GOES AWOL.’ The comments blamed the mayor, immigrants, and one very specific pigeon. The angel was not found."
       },
       {
         "id": "C",
@@ -260,7 +288,9 @@
           "stability": -1,
           "pressure": -3
         },
-        "is_extreme": false
+        "is_extreme": false,
+        "consequence_zh": "你重新调度了三条公交线路，和两个司机吵了架，差点被一个骑自行车的快递员撞到。天使在书店里被找到了，但他没有道歉。",
+        "consequence_en": "You redirected three bus routes, argued with two drivers, and nearly got hit by a bicycle courier. The angel was found in the bookshop. He did not apologise."
       }
     ],
     "fixed_position": null,
@@ -290,7 +320,9 @@
           "stability": -6,
           "pressure": 3
         },
-        "is_extreme": false
+        "is_extreme": false,
+        "consequence_zh": "长矛在黎明时消散。但鸽子们记住了那些几何图案，每天清晨它们仍在圣保罗大教堂上空描画",
+        "consequence_en": "The spear dissolved at dawn. But the pigeons remember the geometry, and they still trace it every morning over St. Paul’s."
       },
       {
         "id": "B",
@@ -302,7 +334,9 @@
           "stability": 12,
           "pressure": 5
         },
-        "is_extreme": false
+        "is_extreme": false,
+        "consequence_zh": "三千名市民在一小时内撤离，没人被告知原因。沙夫茨伯里大道上一个女孩问你世界是不是要毁灭了，你说不是，这是你说过的最重要的谎言。",
+        "consequence_en": "Three thousand civilians evacuated in under an hour. No one was told why. A girl on Shaftesbury Avenue asked if the world was ending. You said no. It was the most important lie you ever told."
       },
       {
         "id": "C",
@@ -314,7 +348,9 @@
           "stability": -6,
           "pressure": 3
         },
-        "is_extreme": true
+        "is_extreme": true,
+        "consequence_zh": "捷径生效了。代价是一段你的记忆，你再也想不起可可是什么味道了，你也不确定以前自己是否知道。",
+        "consequence_en": "The shortcut worked. The cost was a memory — yours. You can no longer remember what the cocoa tasted like. You’re not sure you ever could."
       }
     ],
     "fixed_position": 6,
@@ -345,7 +381,9 @@
           "stability": -6,
           "pressure": 4
         },
-        "is_extreme": false
+        "is_extreme": false,
+        "consequence_zh": "天堂的版本现在被收录在地球上的每一座档案馆里。干净、完整、无人质疑。最后一页读起来像经文，感觉像一扇上了锁的门。",
+        "consequence_en": "Heaven’s version now stands in every archive on Earth. Clean. Complete. Unquestioned. The last page reads like scripture. It feels like a locked door."
       },
       {
         "id": "B",
@@ -357,7 +395,9 @@
           "stability": -6,
           "pressure": 4
         },
-        "is_extreme": false
+        "is_extreme": false,
+        "consequence_zh": "裂缝暴露了，所有人都看得见。地狱欢欣雀跃，天堂怒不可遏，人类则第一次开始关注到这些，这种关注会变成理解还是恐慌，已经不由你决定。",
+        "consequence_en": "The cracks are visible now. Everyone can see them. Hell is delighted; Heaven is furious; humans are, for the first time, paying attention. Whether that attention becomes understanding or panic is no longer up to you."
       },
       {
         "id": "C",
@@ -369,7 +409,9 @@
           "stability": 3,
           "pressure": -8
         },
-        "is_extreme": true
+        "is_extreme": true,
+        "consequence_zh": "档案被封存了，封蜡在你指腹下还是热的。某个很远的地方，你听到了一声也许是松了口气的叹息——又或许是一口屏住的呼吸。",
+        "consequence_en": "The archive is sealed. The wax is still warm under your thumb. Somewhere, very far away, you hear what might be a sigh of relief — or a held breath. You choose not to decide which."
       }
     ],
     "fixed_position": 7,
@@ -393,14 +435,16 @@
       {
         "id": "A",
         "label_en": "Archive all three — let reality sort itself out",
-        "label_zh": "三个版本全部记录——让现实自己理清",
+        "label_zh": "三个版本全部记录——让现实发生吧",
         "effect": {
           "heaven": 5,
           "hell": 0,
           "stability": -3,
           "pressure": 0
         },
-        "is_extreme": false
+        "is_extreme": false,
+        "consequence_zh": "现实接受了全部三个版本，卡姆登区现在有了会燃烧的花朵。当地居民适应得出奇地好。房租涨了。",
+        "consequence_en": "Reality accepted all three versions. Camden now has flowers that burn. The locals have adjusted surprisingly well. Rents went up."
       },
       {
         "id": "B",
@@ -412,7 +456,9 @@
           "stability": -1,
           "pressure": 2
         },
-        "is_extreme": false
+        "is_extreme": false,
+        "consequence_zh": "你选了花朵。火焰和失忆像无人记录的梦一样消散了。",
+        "consequence_en": "You chose the flowers. The fire and the forgiveness faded like dreams nobody wrote down."
       },
       {
         "id": "C",
@@ -424,7 +470,9 @@
           "stability": -1,
           "pressure": -3
         },
-        "is_extreme": true
+        "is_extreme": true,
+        "consequence_zh": "这场奇迹因无人记录而消失了——只在一面水泥墙上留下淡淡的茉莉花香。",
+        "consequence_en": "The miracle, unrecorded, simply unhappened — leaving only a faint smell of jasmine on a concrete wall."
       }
     ],
     "fixed_position": null,
@@ -455,7 +503,9 @@
           "stability": -3,
           "pressure": 2
         },
-        "is_extreme": false
+        "is_extreme": false,
+        "consequence_zh": "镜子碎成了恰好77片。每一块碎片仍在低语，但一次只对一个人说。",
+        "consequence_en": "The mirror shattered into 77 pieces. Each shard still whispers, but only to one person at a time."
       },
       {
         "id": "B",
@@ -467,7 +517,9 @@
           "stability": 0,
           "pressure": 0
         },
-        "is_extreme": false
+        "is_extreme": false,
+        "consequence_zh": "到了傍晚，847人来看了镜子。你现在拥有有史以来最全面的人类忏悔调查档案。地狱想要一份副本，天堂想把它烧了。那个男孩来了两次。第二次，镜子什么都没说。",
+        "consequence_en": "By evening, 847 people had visited. You now own the most comprehensive survey of human guilt ever assembled. Hell wants a copy. Heaven wants it burned. The boy came back twice. The second time, the mirror said nothing."
       },
       {
         "id": "C",
@@ -479,7 +531,9 @@
           "stability": -2,
           "pressure": 2
         },
-        "is_extreme": true
+        "is_extreme": true,
+        "consequence_zh": "儿童游乐区里的笑声持续了十一分钟。",
+        "consequence_en": "Children’s laughter filled the play area for eleven minutes."
       }
     ],
     "fixed_position": null,
@@ -503,14 +557,16 @@
       {
         "id": "A",
         "label_en": "Leak the footage to both sides — let them burn together",
-        "label_zh": "把录像匿名发给双方——让他们一起完蛋",
+        "label_zh": "把录像匿名发给天当和地狱的高层——让他们一起完蛋",
         "effect": {
           "heaven": 8,
           "hell": 8,
           "stability": -4,
           "pressure": 1
         },
-        "is_extreme": true
+        "is_extreme": true,
+        "consequence_zh": "两个阵营在一小时内分别召回了各自的特工。命令传来时，天使和恶魔正坐在他们常坐的位子上。两人都没有动。浓缩咖啡凉了，咖啡馆当晚关门，再也没有重新开业。",
+        "consequence_en": "Both factions recalled their agents within the hour. The angel and the demon were sitting at their usual table when the orders came in. Neither moved. The espresso went cold. The café closed that evening and never reopened."
       },
       {
         "id": "B",
@@ -522,7 +578,9 @@
           "stability": 2,
           "pressure": 0
         },
-        "is_extreme": false
+        "is_extreme": false,
+        "consequence_zh": "在所有重要的数据库里，录像现在显示“信号噪声——无内容”。天使和恶魔在下一个周四回来了。",
+        "consequence_en": "The footage now reads ‘SIGNAL NOISE — NO CONTENT’ in every database that matters. The angel and the demon returned the following Thursday."
       },
       {
         "id": "C",
@@ -534,7 +592,9 @@
           "stability": -2,
           "pressure": 1
         },
-        "is_extreme": false
+        "is_extreme": false,
+        "consequence_zh": "你在他们桌上放了两杯咖啡。天使看了看恶魔，恶魔看了看你，没人说话。你在他们道谢之前离开了。走出门时，你觉得闻到了可可的味道，但这家店明明只卖浓缩咖啡。",
+        "consequence_en": "You set two cups on their table. The angel looked at the demon. The demon looked at you. Nobody spoke. You left before either could say thank you. On your way out, you thought you smelled cocoa — but the café only serves espresso."
       }
     ],
     "fixed_position": null,
