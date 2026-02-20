@@ -1564,8 +1564,9 @@ function renderChoices(event) {
   const labelKey = gameState.language === "zh" ? "label_zh" : "label_en";
   const consequenceKey = gameState.language === "zh" ? "consequence_zh" : "consequence_en";
   const displayChoices = getRoundChoicesInDisplayOrder(event);
+  const slotLabel = (index) => String.fromCharCode(65 + index);
 
-  displayChoices.forEach((choice) => {
+  displayChoices.forEach((choice, index) => {
     const btn = document.createElement("button");
     const isSelected = locked && selectedChoiceId === choice.id;
     btn.className = `choice-btn${choice.is_extreme ? " extreme" : ""}${isSelected ? " selected-consequence" : ""}`;
@@ -1583,7 +1584,7 @@ function renderChoices(event) {
     btn.title = displayText;
 
     btn.innerHTML = `
-      <span class="choice-id">${choice.id}</span>
+      <span class="choice-id">${slotLabel(index)}</span>
       <span class="choice-text">${escapeHtml(displayText)}</span>
     `;
 
