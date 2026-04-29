@@ -30,5 +30,37 @@
     "heaven_dominance_gte": 84,
     "hell_dominance_gte": 84,
     "rebellion_pressure_lt": 88
-  }
+  },
+  "imbalance": {
+    "threshold_diff": 30,
+    "stability_penalty": -2
+  },
+  "cocoa": {
+    "uses": 1
+  },
+  "resurface": {
+    "rounds": [5, 6, 7],
+    "chance": 0.4,
+    "effect": { "stability": -4, "heaven": 2, "pressure": 2 },
+    "template_zh": "你 {n} 回合前封存的【{title}】被翻了出来——{consequence}",
+    "template_en": "Your sealed record from {n} rounds ago — {title} — has resurfaced: {consequence}"
+  },
+  "pressure_thresholds": [
+    {
+      "at": 30,
+      "title_zh": "四骑士发来日程通知",
+      "title_en": "The Four Horsemen Send Their Calendar",
+      "text_zh": "饥荒希望确认下午茶座位是否朝南。瘟疫附了一份过敏原清单。战争抱歉迟回邮件——他正在「调研」。死亡保持沉默，他的字体是 Comic Sans。",
+      "text_en": "Famine asks whether the afternoon-tea seats face south. Pestilence attached an allergens list. War apologized for the late reply — he's been 'researching.' Death said nothing. His font is Comic Sans.",
+      "effect": { "stability": -3, "heaven": 2, "hell": 2 }
+    },
+    {
+      "at": 60,
+      "title_zh": "一份共识备忘录",
+      "title_en": "A Memorandum of Mutual Understanding",
+      "text_zh": "天堂与地狱二十个世纪以来第一次签署同一份文件——主题是你拖得太久了。备忘录边角有一杯印迹，看起来像可可。",
+      "text_en": "For the first time in twenty centuries, Heaven and Hell co-signed a single document. Its subject: you have delayed too long. A round stain in one corner looks faintly like cocoa.",
+      "effect": { "heaven": 4, "hell": 4, "stability": -4 }
+    }
+  ]
 }

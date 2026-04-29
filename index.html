@@ -593,17 +593,238 @@ body::after {
   color: var(--parchment-dim);
   background: rgba(201, 168, 76, 0.04);
   border: 1px solid rgba(201, 168, 76, 0.12);
+  border-left-width: 3px;
   padding: 0.8em 1em;
   cursor: pointer;
   transition: all 0.3s ease;
   text-align: center;
   line-height: 1.4;
+  position: relative;
 }
 
 .record-btn:hover {
   color: var(--parchment);
   background: rgba(201, 168, 76, 0.08);
   border-color: var(--gold-dim);
+}
+
+.record-btn--truth   { border-left-color: var(--parchment-dim); }
+.record-btn--polish  { border-left-color: var(--heaven-blue); }
+.record-btn--blur    { border-left-color: var(--hell-amber); }
+.record-btn--seal    { border-left-color: var(--blood); }
+
+.record-btn[data-tooltip-zh]::after {
+  content: attr(data-tooltip-zh);
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  width: max-content;
+  max-width: min(86vw, 320px);
+  padding: 0.55em 0.85em;
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 0.78rem;
+  line-height: 1.55;
+  color: var(--parchment);
+  background: rgba(20, 20, 34, 0.98);
+  border: 1px solid var(--gold-dim);
+  white-space: normal;
+  text-align: left;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  z-index: 50;
+}
+
+html[lang="en"] .record-btn[data-tooltip-en]::after {
+  content: attr(data-tooltip-en);
+}
+
+.record-btn:hover::after,
+.record-btn:focus-visible::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ---- Top-bar Cocoa Button ---- */
+.top-bar-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.cocoa-btn {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--parchment-dim);
+  background: none;
+  border: 1px solid var(--ghost);
+  padding: 0.3em 0.7em;
+  cursor: pointer;
+  letter-spacing: 0.05em;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.cocoa-btn:hover:not(.spent) {
+  border-color: var(--gold-dim);
+  color: var(--parchment);
+}
+
+.cocoa-btn .cocoa-icon {
+  display: inline-block;
+  font-size: 1em;
+  line-height: 1;
+  transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+.cocoa-btn:hover:not(.spent) .cocoa-icon {
+  transform: translateY(-1px);
+  filter: drop-shadow(0 0 4px rgba(201, 168, 76, 0.5));
+}
+
+.cocoa-btn.spent {
+  opacity: 0.35;
+  cursor: default;
+  border-color: var(--ghost);
+}
+
+.cocoa-btn[data-tooltip-zh]::after {
+  content: attr(data-tooltip-zh);
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  width: max-content;
+  max-width: min(80vw, 280px);
+  padding: 0.5em 0.8em;
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 0.76rem;
+  line-height: 1.55;
+  color: var(--parchment);
+  background: rgba(20, 20, 34, 0.98);
+  border: 1px solid var(--gold-dim);
+  white-space: normal;
+  text-align: left;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  z-index: 50;
+}
+
+html[lang="en"] .cocoa-btn[data-tooltip-en]::after {
+  content: attr(data-tooltip-en);
+}
+
+.cocoa-btn:not(.spent):hover::after,
+.cocoa-btn:not(.spent):focus-visible::after {
+  opacity: 1;
+}
+
+/* ---- Imbalance Warning ---- */
+.balance-warning {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 0.82rem;
+  color: var(--blood);
+  letter-spacing: 0.04em;
+  margin: -1.6rem 0 var(--space-md);
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.6s ease;
+}
+
+.balance-warning.visible {
+  opacity: 0.85;
+}
+
+/* ---- Interstitial Marker (resurface / pressure threshold) ---- */
+.interstitial-marker {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--blood);
+  margin-bottom: 0.6rem;
+}
+
+.event-card.is-interstitial::before {
+  background: linear-gradient(180deg, var(--blood-glow), transparent);
+}
+
+/* ---- Run Archive (end of game review) ---- */
+.run-archive {
+  width: min(92vw, 680px);
+  margin: 0 auto var(--space-lg);
+  max-height: 60vh;
+  overflow-y: auto;
+  padding: var(--space-sm) var(--space-md);
+  border-top: 1px solid var(--ghost);
+  border-bottom: 1px solid var(--ghost);
+  text-align: left;
+}
+
+.run-archive:empty {
+  display: none;
+}
+
+.run-archive-title {
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: var(--space-sm);
+  text-align: center;
+}
+
+.archive-entry {
+  padding: 0.85rem 0;
+  border-bottom: 1px dashed rgba(244, 232, 193, 0.08);
+}
+
+.archive-entry:last-child {
+  border-bottom: none;
+}
+
+.archive-entry-head {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  color: var(--gold);
+  letter-spacing: 0.04em;
+  margin-bottom: 0.3em;
+}
+
+.archive-entry-round {
+  color: var(--parchment-dim);
+  margin-right: 0.6em;
+  letter-spacing: 0.12em;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+}
+
+.archive-entry-choice {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 0.88rem;
+  color: var(--parchment-dim);
+  margin-bottom: 0.4em;
+  padding-left: 0.8em;
+  border-left: 2px solid var(--gold-dim);
+}
+
+.archive-entry-consequence {
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  line-height: 1.75;
+  color: var(--parchment);
+  white-space: pre-line;
+  overflow-wrap: anywhere;
 }
 
 /* ---- Tutorial Overlay ---- */
@@ -1020,7 +1241,15 @@ body::after {
   <!-- Top bar -->
   <div class="top-bar">
     <div class="round-indicator" id="round-indicator">Round 1 / 7</div>
-    <button class="lang-toggle" id="lang-toggle" onclick="toggleLanguage()">EN / 中</button>
+    <div class="top-bar-actions">
+      <button class="cocoa-btn" id="cocoa-btn" type="button" onclick="useCocoa()"
+        data-tooltip-zh="喝一口可可。这一回合的末日稍稍延后。"
+        data-tooltip-en="A sip of cocoa. The end of the world will wait one round.">
+        <span class="cocoa-icon" aria-hidden="true">☕</span>
+        <span class="cocoa-count" id="cocoa-count">×1</span>
+      </button>
+      <button class="lang-toggle" id="lang-toggle" onclick="toggleLanguage()">EN / 中</button>
+    </div>
   </div>
 
   <!-- Stat bars -->
@@ -1075,6 +1304,11 @@ body::after {
     </div>
   </div>
 
+  <!-- Imbalance warning (hidden until triggered) -->
+  <div class="balance-warning" id="balance-warning" aria-live="polite">
+    <span data-en="The scales are tipping." data-zh="天平正在倾斜。">天平正在倾斜。</span>
+  </div>
+
   <!-- Event card (populated by JS) -->
   <div class="event-card" id="event-card">
     <div class="event-title" id="event-title">—</div>
@@ -1086,16 +1320,24 @@ body::after {
   <div class="record-phase" id="record-phase" style="display: none;">
     <div class="record-title" id="record-title">Archive Phase — 记录阶段</div>
     <div class="record-choices">
-      <button class="record-btn" onclick="handleRecord('truth')">
+      <button class="record-btn record-btn--truth" onclick="handleRecord('truth')"
+        data-tooltip-zh="如实誊写。三百年后某位档案员会因此松一口气。"
+        data-tooltip-en="Transcribe it as it happened. Some archivist three centuries from now will exhale.">
         <span data-en="Record Truthfully" data-zh="如实记录">如实记录</span>
       </button>
-      <button class="record-btn" onclick="handleRecord('polish')">
+      <button class="record-btn record-btn--polish" onclick="handleRecord('polish')"
+        data-tooltip-zh="替它穿上一件圣袍——尺码也许稍微宽松了一点。"
+        data-tooltip-en="Dress it in vestments — a size too generous, perhaps.">
         <span data-en="Embellish for Heaven" data-zh="美化记录">美化记录</span>
       </button>
-      <button class="record-btn" onclick="handleRecord('blur')">
+      <button class="record-btn record-btn--blur" onclick="handleRecord('blur')"
+        data-tooltip-zh="把不便的句子挪去脚注，再把脚注挪去角落。"
+        data-tooltip-en="Move the inconvenient sentences to a footnote. Then move the footnote elsewhere.">
         <span data-en="Obscure for Hell" data-zh="模糊记录">模糊记录</span>
       </button>
-      <button class="record-btn" onclick="handleRecord('seal')">
+      <button class="record-btn record-btn--seal" onclick="handleRecord('seal')"
+        data-tooltip-zh="投入第七号档案库。门后偶尔传来翻页声。"
+        data-tooltip-en="File it in Vault Seven. Pages have been heard turning, on occasion.">
         <span data-en="Seal the Archive" data-zh="封存档案">封存档案</span>
       </button>
     </div>
@@ -1111,6 +1353,7 @@ body::after {
   <div class="ending-title" id="ending-title"></div>
   <div class="ending-text" id="ending-text"></div>
   <div class="ending-stats" id="ending-stats"></div>
+  <section class="run-archive" id="run-archive" aria-label="Run Archive"></section>
   <button class="replay-btn" onclick="location.reload()">Play Again / 重新开始</button>
 </div>
 
@@ -1166,7 +1409,22 @@ const DEFAULT_GAME_CONFIG = {
     heaven_dominance_gte: 90,
     hell_dominance_gte: 90,
     rebellion_pressure_lt: 85
-  }
+  },
+  imbalance: {
+    threshold_diff: 30,
+    stability_penalty: -2
+  },
+  cocoa: {
+    uses: 1
+  },
+  resurface: {
+    rounds: [5, 6, 7],
+    chance: 0.4,
+    effect: { stability: -4, heaven: 2, pressure: 2 },
+    template_zh: "你 {n} 回合前封存的【{title}】被翻了出来——{consequence}",
+    template_en: "Your sealed record from {n} rounds ago — {title} — has resurfaced: {consequence}"
+  },
+  pressure_thresholds: []
 };
 
 let GAME_CONFIG = cloneDeep(DEFAULT_GAME_CONFIG);
@@ -1313,7 +1571,29 @@ function normalizeGameConfig(raw) {
     endings: {
       ...DEFAULT_GAME_CONFIG.endings,
       ...(config.endings || {})
-    }
+    },
+    imbalance: {
+      ...DEFAULT_GAME_CONFIG.imbalance,
+      ...(config.imbalance || {})
+    },
+    cocoa: {
+      ...DEFAULT_GAME_CONFIG.cocoa,
+      ...(config.cocoa || {})
+    },
+    resurface: {
+      ...DEFAULT_GAME_CONFIG.resurface,
+      ...(config.resurface || {}),
+      effect: {
+        ...DEFAULT_GAME_CONFIG.resurface.effect,
+        ...((config.resurface && config.resurface.effect) || {})
+      },
+      rounds: Array.isArray(config.resurface && config.resurface.rounds)
+        ? config.resurface.rounds.map((n) => Number(n)).filter((n) => Number.isFinite(n))
+        : [...DEFAULT_GAME_CONFIG.resurface.rounds]
+    },
+    pressure_thresholds: Array.isArray(config.pressure_thresholds)
+      ? config.pressure_thresholds
+      : [...DEFAULT_GAME_CONFIG.pressure_thresholds]
   };
 }
 
@@ -1357,6 +1637,7 @@ async function loadGameData() {
 
 function createInitialGameState() {
   const initial = GAME_CONFIG.initial;
+  const cocoaUses = Math.max(0, Number((GAME_CONFIG.cocoa || {}).uses) || 0);
   return {
     round: 1,
     heaven: Number(initial.heaven) || 50,
@@ -1373,6 +1654,14 @@ function createInitialGameState() {
     choiceOrderByRound: {},
     events: [],
     history: [],
+    sealedRecords: [],
+    pressureThresholdsFired: [],
+    interstitialQueue: [],
+    activeInterstitial: null,
+    resurfaceFiredThisRound: false,
+    cocoaUses,
+    cocoaActiveThisRound: false,
+    lastImbalanceTriggered: false,
     language: "zh",
     phase: "event",
     tutorialStep: "stats"
@@ -1501,9 +1790,26 @@ function renderRound() {
   if (!gameState || gameState.phase === "ending") return;
 
   applySealPenaltyAtRoundStartIfNeeded();
+
+  if (!gameState.activeInterstitial && gameState.phase === "event") {
+    maybeQueueResurface();
+  }
+  if (!gameState.activeInterstitial && gameState.interstitialQueue.length > 0) {
+    gameState.activeInterstitial = gameState.interstitialQueue.shift();
+    gameState.phase = "interstitial";
+  }
+  if (gameState.activeInterstitial) {
+    renderInterstitial(gameState.activeInterstitial);
+    renderRecordPanel();
+    updateRoundIndicator();
+    updateStatsUI();
+    return;
+  }
+
   const currentEvent = getCurrentEvent();
   if (!currentEvent) return;
 
+  document.getElementById("event-card").classList.remove("is-interstitial");
   const titleKey = gameState.language === "zh" ? "title_zh" : "title_en";
   const textKey = gameState.language === "zh" ? "text_zh" : "text_en";
   document.getElementById("event-title").textContent = currentEvent[titleKey];
@@ -1514,6 +1820,62 @@ function renderRound() {
   updateRoundIndicator();
   updateStatsUI();
   maybeShowTutorial();
+}
+
+function renderInterstitial(item) {
+  hideTutorialOverlay();
+  const lang = gameState.language;
+  const card = document.getElementById("event-card");
+  card.classList.add("is-interstitial");
+  const title = item[`title_${lang}`] || item.title_en || "";
+  const text = item[`text_${lang}`] || item.text_en || "";
+  const markerLabel = lang === "zh"
+    ? (item.kind === "resurface" ? "档案残响" : "压力警报")
+    : (item.kind === "resurface" ? "Vault Echo" : "Pressure Alert");
+  const continueLabel = lang === "zh" ? "继续" : "Continue";
+
+  document.getElementById("event-title").innerHTML =
+    `<div class="interstitial-marker">${escapeHtml(markerLabel)}</div>${escapeHtml(title)}`;
+  document.getElementById("event-text").textContent = text;
+
+  const container = document.getElementById("choices-container");
+  container.innerHTML = "";
+  const btn = document.createElement("button");
+  btn.className = "choice-btn";
+  btn.type = "button";
+  btn.innerHTML = `<span class="choice-text">${escapeHtml(continueLabel)}</span>`;
+  btn.addEventListener("click", dismissInterstitial);
+  container.appendChild(btn);
+}
+
+function dismissInterstitial() {
+  if (!gameState || !gameState.activeInterstitial) return;
+  const item = gameState.activeInterstitial;
+  const effect = item.effect || {};
+  applyEffect(effect);
+  gameState.activeInterstitial = null;
+  gameState.phase = "event";
+  if (Object.values(effect).some((v) => Number(v) !== 0)) {
+    showFeedback(`${TEXTS.effectPrefix[gameState.language]}: ${formatEffect(effect)}`, 1800);
+  }
+  renderRound();
+}
+
+function useCocoa() {
+  if (!gameState) return;
+  if (gameState.cocoaUses <= 0) return;
+  if (gameState.cocoaActiveThisRound) return;
+  if (gameState.phase !== "event" && gameState.phase !== "record") return;
+
+  gameState.cocoaUses -= 1;
+  gameState.cocoaActiveThisRound = true;
+  updateCocoaButton();
+  showFeedback(
+    gameState.language === "zh"
+      ? "你喝了一口可可。这一回合的末日稍稍延后。"
+      : "You take a sip of cocoa. The end of the world will wait one round.",
+    2200
+  );
 }
 
 function getCurrentEvent() {
@@ -1682,6 +2044,15 @@ function handleRecord(action) {
     if (Math.random() < Number(recordConfig.seal_penalty_chance || 0.2)) {
       gameState.sealPenaltyNextRound = true;
     }
+    const sealedEvent = getCurrentEvent();
+    const sealedHistory = getRoundHistory(gameState.round);
+    if (sealedEvent && sealedHistory) {
+      gameState.sealedRecords.push({
+        round: gameState.round,
+        eventId: sealedEvent.id,
+        choiceId: sealedHistory.choiceId
+      });
+    }
   }
 
   clampAllStats();
@@ -1703,11 +2074,17 @@ function handleRecord(action) {
 
 function completeRound() {
   updateRebellionTracker();
+  applyImbalanceErosion();
 
-  const growth = PRESSURE_GROWTH[gameState.round - 1] || 0;
-  gameState.pressure += growth;
+  const pressureBefore = gameState.pressure;
+  if (!gameState.cocoaActiveThisRound) {
+    const growth = PRESSURE_GROWTH[gameState.round - 1] || 0;
+    gameState.pressure += growth;
+  }
+  gameState.cocoaActiveThisRound = false;
 
   clampAllStats();
+  queuePressureThresholdInterstitials(pressureBefore, gameState.pressure);
 
   const roundHistory = getRoundHistory(gameState.round);
   if (roundHistory) {
@@ -1738,7 +2115,72 @@ function completeRound() {
   }
   gameState.round += 1;
   gameState.phase = "event";
+  gameState.resurfaceFiredThisRound = false;
   renderRound();
+}
+
+function applyImbalanceErosion() {
+  const cfg = GAME_CONFIG.imbalance || { threshold_diff: 30, stability_penalty: -2 };
+  const diff = Math.abs(gameState.heaven - gameState.hell);
+  const threshold = Number(cfg.threshold_diff) || 30;
+  if (diff > threshold) {
+    gameState.stability += Number(cfg.stability_penalty) || 0;
+    gameState.lastImbalanceTriggered = true;
+  } else {
+    gameState.lastImbalanceTriggered = false;
+  }
+}
+
+function queuePressureThresholdInterstitials(before, after) {
+  const list = Array.isArray(GAME_CONFIG.pressure_thresholds) ? GAME_CONFIG.pressure_thresholds : [];
+  list.forEach((entry) => {
+    const at = Number(entry && entry.at);
+    if (!Number.isFinite(at)) return;
+    if (gameState.pressureThresholdsFired.includes(at)) return;
+    if (before < at && after >= at) {
+      gameState.pressureThresholdsFired.push(at);
+      gameState.interstitialQueue.push({
+        kind: "threshold",
+        title_zh: entry.title_zh || "",
+        title_en: entry.title_en || "",
+        text_zh: entry.text_zh || "",
+        text_en: entry.text_en || "",
+        effect: entry.effect || {}
+      });
+    }
+  });
+}
+
+function maybeQueueResurface() {
+  if (gameState.resurfaceFiredThisRound) return;
+  const cfg = GAME_CONFIG.resurface || {};
+  const rounds = Array.isArray(cfg.rounds) ? cfg.rounds : [];
+  if (!rounds.includes(gameState.round)) return;
+  if (!Array.isArray(gameState.sealedRecords) || gameState.sealedRecords.length === 0) return;
+  if (Math.random() >= Number(cfg.chance || 0)) return;
+
+  const sealed = gameState.sealedRecords.shift();
+  const sourceEvent = (gameState.events || []).find((e) => e.id === sealed.eventId);
+  if (!sourceEvent) return;
+  const choice = (sourceEvent.choices || []).find((c) => c.id === sealed.choiceId);
+  if (!choice) return;
+
+  const n = gameState.round - sealed.round;
+  const fill = (template, lang) =>
+    String(template || "")
+      .replace("{n}", String(n))
+      .replace("{title}", sourceEvent[`title_${lang}`] || "")
+      .replace("{consequence}", choice[`consequence_${lang}`] || choice[`label_${lang}`] || "");
+
+  gameState.resurfaceFiredThisRound = true;
+  gameState.interstitialQueue.push({
+    kind: "resurface",
+    title_zh: "档案残响",
+    title_en: "Echo from the Vault",
+    text_zh: fill(cfg.template_zh, "zh"),
+    text_en: fill(cfg.template_en, "en"),
+    effect: cfg.effect || {}
+  });
 }
 
 function updateRebellionTracker() {
@@ -1805,7 +2247,47 @@ function showEnding(endingId) {
       <div class="ending-stat-value">${gameState.pressure}</div>
     </div>
   `;
+  renderRunArchive();
   document.getElementById("ending-screen").classList.add("active");
+}
+
+function renderRunArchive() {
+  const container = document.getElementById("run-archive");
+  if (!container || !gameState) return;
+  const lang = gameState.language;
+  const titleKey = `title_${lang}`;
+  const labelKey = `label_${lang}`;
+  const consequenceKey = `consequence_${lang}`;
+  const heading = lang === "zh" ? "你留下的档案" : "The Archive You Leave Behind";
+
+  const entries = (gameState.history || [])
+    .slice()
+    .sort((a, b) => a.round - b.round)
+    .map((entry) => {
+      const event = (gameState.events || []).find((e) => e.id === entry.eventId);
+      if (!event) return "";
+      const choice = (event.choices || []).find((c) => c.id === entry.choiceId);
+      const title = event[titleKey] || event.title_en || "";
+      const choiceLabel = choice ? (choice[labelKey] || choice.label_en || "") : "";
+      const consequence = choice ? (choice[consequenceKey] || choice.consequence_en || "") : "";
+      const roundLabel = lang === "zh" ? `第 ${entry.round} 回合` : `Round ${entry.round}`;
+      return `
+        <article class="archive-entry">
+          <div class="archive-entry-head">
+            <span class="archive-entry-round">${escapeHtml(roundLabel)}</span>
+            ${escapeHtml(title)}
+          </div>
+          <div class="archive-entry-choice">${escapeHtml(choiceLabel)}</div>
+          <div class="archive-entry-consequence">${escapeHtml(consequence)}</div>
+        </article>
+      `;
+    })
+    .filter(Boolean)
+    .join("");
+
+  container.innerHTML = entries
+    ? `<div class="run-archive-title">${escapeHtml(heading)}</div>${entries}`
+    : "";
 }
 
 function updateRoundIndicator() {
@@ -1831,6 +2313,23 @@ function updateStatsUI() {
     document.getElementById(`stat-${key}-val`).textContent = String(value);
     document.getElementById(`stat-${key}-bar`).style.width = `${value}%`;
   });
+
+  const warnEl = document.getElementById("balance-warning");
+  if (warnEl) {
+    warnEl.classList.toggle("visible", !!gameState.lastImbalanceTriggered);
+  }
+  updateCocoaButton();
+}
+
+function updateCocoaButton() {
+  const btn = document.getElementById("cocoa-btn");
+  const count = document.getElementById("cocoa-count");
+  if (!btn || !count) return;
+  const remaining = gameState ? Math.max(0, gameState.cocoaUses) : 0;
+  const spent = remaining <= 0 || (gameState && gameState.cocoaActiveThisRound);
+  count.textContent = `×${remaining}`;
+  btn.classList.toggle("spent", !!spent);
+  btn.disabled = !!spent;
 }
 
 function toggleLanguage() {
@@ -1846,6 +2345,7 @@ function toggleLanguage() {
       document.getElementById("ending-title").textContent = ending[`title_${gameState.language}`];
       document.getElementById("ending-text").textContent = ending[`text_${gameState.language}`];
     }
+    renderRunArchive();
     return;
   }
 
