@@ -1,0 +1,288 @@
+{
+  "meta": {
+    "version": 3,
+    "rounds": 10,
+    "premise_zh": "世界已经被重写，但十份旧报告正在伦敦重新成真。你要找出原因，并决定天堂与地狱能不能回来。",
+    "premise_en": "The world was rewritten, but ten old reports are coming true again across London. Find out why, then decide whether Heaven and Hell may return.",
+    "acts": {
+      "1": {
+        "rounds": [1, 2, 3],
+        "roman": "I",
+        "title_zh": "异常从哪里来",
+        "title_en": "Where the Anomalies Begin",
+        "note_zh": "三份旧报告先后成真，而且都绕过了原本的管理者。",
+        "note_en": "Three old reports come true, all without their former authorities."
+      },
+      "2": {
+        "rounds": [4, 5, 6, 7],
+        "roman": "II",
+        "title_zh": "谁让它们成真",
+        "title_en": "Who Is Making Them Real",
+        "note_zh": "温热的可可再次出现，记忆与现实开始互相改写。",
+        "note_en": "The warm cocoa returns. Memory and reality begin rewriting one another."
+      },
+      "3": {
+        "rounds": [8, 9, 10],
+        "roman": "III",
+        "title_zh": "最后一页写什么",
+        "title_en": "What Goes on the Last Page",
+        "note_zh": "零散异常汇成冲突。最后一份记录将决定旧世界是否留下。",
+        "note_en": "Scattered anomalies become a conflict. The final report decides whether the old world remains."
+      }
+    }
+  },
+  "sequence": [
+    "event_001",
+    "event_002",
+    "event_003",
+    "event_004",
+    "event_005",
+    "event_008",
+    "event_009",
+    "event_006",
+    "event_010",
+    "event_007"
+  ],
+  "events": {
+    "event_001": {
+      "act": 1,
+      "recap_zh": "世界被重写了，但第一份旧报告开始在伦敦成真。",
+      "recap_en": "The world was rewritten, but the first old report is coming true in London.",
+      "goal_zh": "先决定：这件小事值得写进新世界吗？",
+      "goal_en": "First decide: does this small event belong in the new world?",
+      "crossref_zh": "杯环与另一份旧记录完全重合：这杯可可不是第一次出现。",
+      "crossref_en": "The cup ring exactly matches another old record. This is not the cocoa's first appearance.",
+      "callback_zh": "第 1 回的婚戒再次出现，内圈多了一行陌生日期。",
+      "callback_en": "The ring from Round 1 appears again, now engraved with an unfamiliar date.",
+      "followup": {
+        "speaker_zh": "杯托背面的字",
+        "speaker_en": "Writing beneath the saucer",
+        "question_zh": "如果这不是奇迹，你会把它算作什么？",
+        "question_en": "If this is not a miracle, what would you call it?",
+        "answers": [
+          {
+            "id": "kindness",
+            "label_zh": "一次普通的好心。",
+            "label_en": "An ordinary act of kindness.",
+            "response_zh": "阿齐拉斐尔的笔迹在旁边画了一个小勾。",
+            "response_en": "Aziraphale's handwriting adds a small tick beside your answer.",
+            "relations": {"bond": 1, "memory": 0, "trust": 2},
+            "set_flags": ["answered_with_kindness"]
+          },
+          {
+            "id": "clue",
+            "label_zh": "一条需要继续追查的线索。",
+            "label_en": "A clue that needs following.",
+            "response_zh": "克劳利在下面补了一句：终于有人抓到重点。",
+            "response_en": "Crowley adds below it: finally, someone gets the point.",
+            "relations": {"bond": 0, "memory": 1, "trust": 1},
+            "evidence": 1,
+            "set_flags": ["followed_cocoa_clue"]
+          }
+        ]
+      }
+    },
+    "event_002": {
+      "act": 1,
+      "recap_zh": "你处理了第一份报告；第二份报告也开始变成事实。",
+      "recap_en": "You dealt with the first report. Now a second report is becoming fact.",
+      "goal_zh": "确认你的记录是否正在帮助异常成真。",
+      "goal_en": "Find out whether your own record is helping the anomaly become real.",
+      "crossref_zh": "这段错音与第一份报告出现的时间只差七分钟。",
+      "crossref_en": "The wrong note began only seven minutes after the first report.",
+      "callback_zh": "第 2 回的和声在地铁里再次响起；这次没有人在演奏。",
+      "callback_en": "The harmony from Round 2 returns in the Underground. No one is performing it."
+    },
+    "event_003": {
+      "act": 1,
+      "recap_zh": "异常不再只出现在奇迹里，它开始借人类传播。",
+      "recap_en": "The anomalies no longer stay inside miracles. They are spreading through people.",
+      "goal_zh": "阻止错误扩散，或观察它想把伦敦变成什么。",
+      "goal_en": "Stop the error spreading, or watch what it wants London to become.",
+      "crossref_zh": "符印的拼写错误，正好对应上一份圣歌里的错音。",
+      "crossref_en": "The sigil's misspelling matches the wrong note in the previous hymn.",
+      "callback_zh": "第 3 回的符印出现在另一面墙上，而且这次拼对了。",
+      "callback_en": "The sigil from Round 3 appears on another wall, correctly spelled this time."
+    },
+    "event_004": {
+      "act": 2,
+      "recap_zh": "可可再次出现。十份报告显然由同一条线索串在一起。",
+      "recap_en": "The cocoa returns. One clue is clearly tying all ten reports together.",
+      "goal_zh": "找到留下杯子的人，也弄清他为什么希望你继续记录。",
+      "goal_en": "Find who leaves the cups, and why they want you to keep recording.",
+      "crossref_zh": "教堂台阶上的可可，和你桌上那杯保持着同样的温度。",
+      "crossref_en": "The cocoa on the church steps holds exactly the same temperature as yours.",
+      "callback_zh": "第 4 回的牧师又打来电话：杯子旁多了一副深色眼镜。",
+      "callback_en": "The priest from Round 4 calls again: dark glasses now sit beside the cup.",
+      "followup": {
+        "speaker_zh": "阿齐拉斐尔",
+        "speaker_en": "Aziraphale",
+        "question_zh": "如果双方都反对一个人，他就一定做对了吗？",
+        "question_en": "If both sides oppose someone, does that make him right?",
+        "answers": [
+          {
+            "id": "let_him_speak",
+            "label_zh": "不一定。但他应该能继续说。",
+            "label_en": "Not necessarily. But he should be allowed to speak.",
+            "response_zh": "他点点头，把“正确”二字划掉，换成了“选择”。",
+            "response_en": "He nods, crosses out 'right', and writes 'choice' instead.",
+            "relations": {"bond": 1, "memory": 0, "trust": 2},
+            "set_flags": ["protected_question"]
+          },
+          {
+            "id": "ask_him",
+            "label_zh": "先问问他本人。",
+            "label_en": "Ask the man himself first.",
+            "response_zh": "克劳利从页边探出一句：这才像个调查。",
+            "response_en": "Crowley adds from the margin: now that sounds like an investigation.",
+            "relations": {"bond": 0, "memory": 1, "trust": 2},
+            "evidence": 1,
+            "set_flags": ["asked_the_witness"]
+          }
+        ]
+      }
+    },
+    "event_005": {
+      "act": 2,
+      "recap_zh": "旧世界的角色开始回来，但有人不愿回到原来的位置。",
+      "recap_en": "Old roles are returning, but someone does not want his old place back.",
+      "goal_zh": "先让伦敦继续运转，再判断失踪是不是一种选择。",
+      "goal_en": "Keep London moving, then decide whether disappearing can be a choice.",
+      "crossref_zh": "失踪路线终点附近有一家书店，门口留下了同样的杯环。",
+      "crossref_en": "The route ends near a bookshop. The same cup ring marks its doorstep.",
+      "callback_zh": "第 5 回失踪的天使寄回一张明信片：没有地址，只有一间书店。",
+      "callback_en": "The angel missing since Round 5 sends a postcard: no address, only a bookshop."
+    },
+    "event_008": {
+      "act": 2,
+      "recap_zh": "现在连人们记得什么，也会改变现实。",
+      "recap_en": "Now even what people remember can change reality.",
+      "goal_zh": "决定由谁保留真相：记录、目击者，还是任何人都不该。",
+      "goal_en": "Decide who keeps the truth: the record, the witnesses, or no one.",
+      "crossref_zh": "三份证词都提到一只空杯，随后又同时忘了它。",
+      "crossref_en": "All three accounts mention an empty cup, then forget it at the same moment.",
+      "callback_zh": "第 6 回被删去的证词自己回到纸上，只写了两个名字。",
+      "callback_en": "The testimony removed in Round 6 writes itself back, containing only two names."
+    },
+    "event_009": {
+      "act": 2,
+      "recap_zh": "一个孩子承认伪造奇迹。异常已经学会借人类开口。",
+      "recap_en": "A child claims he faked a miracle. The anomaly has learned to speak through people.",
+      "goal_zh": "查明他说的是哪场奇迹，同时别让一面镜子替他定罪。",
+      "goal_en": "Find which miracle he means without letting a mirror judge him.",
+      "crossref_zh": "男孩说出的时间，正好是第一只可可杯变凉的那一分钟。",
+      "crossref_en": "The boy gives the exact minute when the first cup of cocoa went cold.",
+      "callback_zh": "第 7 回的镜子又开口了：它说孩子只撒了一半的谎。",
+      "callback_en": "The mirror from Round 7 speaks again: the child told only half a lie."
+    },
+    "event_006": {
+      "act": 3,
+      "recap_zh": "所有小异常汇成一次真正的冲突。",
+      "recap_en": "Every small anomaly has gathered into a real conflict.",
+      "goal_zh": "先让伦敦活过今晚，再谈谁赢。",
+      "goal_en": "Get London through the night before deciding who wins.",
+      "crossref_zh": "长矛上的刻痕与第 3 回的错误符印完全一致。",
+      "crossref_en": "The spear bears the same flawed sigil found in Round 3.",
+      "callback_zh": "第 8 回撤离的人群开始讲述同一个梦：两个人在咖啡馆里等雨停。",
+      "callback_en": "The evacuees from Round 8 share one dream: two people waiting out the rain in a café.",
+      "followup": {
+        "speaker_zh": "克劳利",
+        "speaker_en": "Crowley",
+        "question_zh": "如果只能救一个版本的伦敦，你先救谁？",
+        "question_en": "If only one version of London can survive, who do you save first?",
+        "answers": [
+          {
+            "id": "people_here",
+            "label_zh": "现在就在街上的人。",
+            "label_en": "The people standing in its streets now.",
+            "response_zh": "他没有开玩笑，只说：行。那就先救他们。",
+            "response_en": "He does not joke. 'Right,' he says. 'Them first.'",
+            "relations": {"bond": 1, "memory": 0, "trust": 2},
+            "set_flags": ["people_first", "chose_human"]
+          },
+          {
+            "id": "future_people",
+            "label_zh": "还没来得及出现的人。",
+            "label_en": "The people who have not had the chance to exist yet.",
+            "response_zh": "他看了很久，最后把车钥匙放到你手边。",
+            "response_en": "He studies you for a long time, then leaves his car keys beside your hand.",
+            "relations": {"bond": 1, "memory": 1, "trust": 1},
+            "set_flags": ["future_kept_open"]
+          }
+        ]
+      }
+    },
+    "event_010": {
+      "act": 3,
+      "recap_zh": "冲突之外，仍有人选择见面、喝咖啡，并且不再站队。",
+      "recap_en": "Outside the conflict, some still choose to meet, drink coffee, and refuse a side.",
+      "goal_zh": "决定这段普通生活是证据、威胁，还是该被保护的答案。",
+      "goal_en": "Decide whether this ordinary life is evidence, a threat, or an answer worth protecting.",
+      "crossref_zh": "监控角落里放着与你桌上相同的可可杯。",
+      "crossref_en": "The same cocoa cup from your desk sits in the corner of the footage.",
+      "callback_zh": "第 9 回的录像多出最后十秒：两个人同时看向了镜头。",
+      "callback_en": "Ten new seconds appear on the Round 9 footage: both people look directly at the camera.",
+      "followup": {
+        "speaker_zh": "录像里的天使",
+        "speaker_en": "The angel in the footage",
+        "question_zh": "如果没人命令你，你明天还会来吗？",
+        "question_en": "If no one ordered you, would you still come tomorrow?",
+        "answers": [
+          {
+            "id": "still_choose",
+            "label_zh": "会。因为这一次是选择。",
+            "label_en": "Yes. Because this time it is a choice.",
+            "response_zh": "恶魔把咖啡推过去一点。他们没有再看镜头。",
+            "response_en": "The demon nudges the coffee closer. Neither of them looks at the camera again.",
+            "relations": {"bond": 3, "memory": 0, "trust": 2},
+            "set_flags": ["protected_pair", "choice_remembered"]
+          },
+          {
+            "id": "habit_is_not_freedom",
+            "label_zh": "不知道。习惯不一定是自由。",
+            "label_en": "I don't know. Habit is not always freedom.",
+            "response_zh": "天使想了一会儿，然后问：那明天再决定一次？",
+            "response_en": "The angel thinks, then asks: shall we decide again tomorrow?",
+            "relations": {"bond": 2, "memory": 1, "trust": 1},
+            "set_flags": ["choice_remembered"]
+          }
+        ]
+      }
+    },
+    "event_007": {
+      "act": 3,
+      "recap_zh": "十份报告指向同一件事：你写下的版本会成为历史。",
+      "recap_en": "All ten reports point to one fact: the version you write will become history.",
+      "goal_zh": "在最后一页决定：恢复旧秩序、放任裂缝，还是把选择留在人间。",
+      "goal_en": "On the final page, restore the old order, expose the fracture, or leave the choice to humanity.",
+      "crossref_zh": "最后一页的杯环与第一回完全重合。留下它的人一直在等你的答案。",
+      "crossref_en": "The cup ring on the last page exactly matches Round 1. Whoever left it has been waiting for your answer.",
+      "followup": {
+        "speaker_zh": "最后一页",
+        "speaker_en": "The final page",
+        "question_zh": "谁应该拥有这个故事？",
+        "question_en": "Who should own this story?",
+        "answers": [
+          {
+            "id": "people_who_lived_it",
+            "label_zh": "经历它的人。",
+            "label_en": "The people who lived it.",
+            "response_zh": "页面没有自动改正你。伦敦在窗外继续发出普通的声音。",
+            "response_en": "The page does not correct you. Outside, London continues making ordinary noise.",
+            "relations": {"bond": 1, "memory": 0, "trust": 2},
+            "set_flags": ["margins_promoted", "final_margin"]
+          },
+          {
+            "id": "people_who_remember",
+            "label_zh": "记得它的人。",
+            "label_en": "The people who remember it.",
+            "response_zh": "两种笔迹在页边靠近，却没有覆盖彼此。",
+            "response_en": "Two handwritings meet in the margin without covering each other.",
+            "relations": {"bond": 2, "memory": 2, "trust": 0},
+            "set_flags": ["memory_restored", "final_margin"]
+          }
+        ]
+      }
+    }
+  }
+}

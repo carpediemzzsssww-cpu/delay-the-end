@@ -1,0 +1,538 @@
+{
+  "runs_per_strategy": 5000,
+  "seed": 20260831,
+  "strategies": {
+    "random": {
+      "endings": {
+        "appendix_sealed": 0.955,
+        "chaos_rewrite": 0.016,
+        "double_invasion": 0.0178,
+        "human_blank": 0.006,
+        "order_rewrite": 0.0042,
+        "ordinary_miracle": 0.001
+      },
+      "mean_final_stats": {
+        "heaven": 31.82,
+        "hell": 40.81,
+        "human": 48.28,
+        "pressure": 56.0
+      }
+    },
+    "heaven": {
+      "endings": {
+        "appendix_sealed": 0.2956,
+        "double_invasion": 0.0006,
+        "order_rewrite": 0.7038
+      },
+      "mean_final_stats": {
+        "heaven": 74.95,
+        "hell": 8.7,
+        "human": 44.97,
+        "pressure": 60.79
+      }
+    },
+    "hell": {
+      "endings": {
+        "appendix_sealed": 0.1702,
+        "chaos_rewrite": 0.8298
+      },
+      "mean_final_stats": {
+        "heaven": 5.1,
+        "hell": 80.59,
+        "human": 45.01,
+        "pressure": 51.95
+      }
+    },
+    "human": {
+      "endings": {
+        "appendix_sealed": 0.9896,
+        "chaos_rewrite": 0.0004,
+        "ordinary_miracle": 0.01
+      },
+      "mean_final_stats": {
+        "heaven": 9.34,
+        "hell": 39.32,
+        "human": 76.6,
+        "pressure": 44.0
+      }
+    },
+    "relation": {
+      "endings": {
+        "appendix_sealed": 0.898,
+        "ordinary_miracle": 0.102
+      },
+      "mean_final_stats": {
+        "heaven": 15.55,
+        "hell": 36.89,
+        "human": 77.41,
+        "pressure": 43.45
+      }
+    }
+  },
+  "reachable_endings": [
+    "appendix_sealed",
+    "chaos_rewrite",
+    "double_invasion",
+    "human_blank",
+    "order_rewrite",
+    "ordinary_miracle"
+  ],
+  "example_seeds": {
+    "appendix_sealed": {
+      "strategy": "random",
+      "seed": 20260831,
+      "history": [
+        {
+          "round": 1,
+          "eventId": "event_001",
+          "choiceId": "B",
+          "followupAnswerId": "clue",
+          "stampId": "crossref"
+        },
+        {
+          "round": 2,
+          "eventId": "event_002",
+          "choiceId": "B",
+          "followupAnswerId": null,
+          "stampId": null
+        },
+        {
+          "round": 3,
+          "eventId": "event_003",
+          "choiceId": "B",
+          "followupAnswerId": null,
+          "stampId": "crossref"
+        },
+        {
+          "round": 4,
+          "eventId": "event_004",
+          "choiceId": "B",
+          "followupAnswerId": "ask_him",
+          "stampId": "redact"
+        },
+        {
+          "round": 5,
+          "eventId": "event_005",
+          "choiceId": "B",
+          "followupAnswerId": null,
+          "stampId": "redact"
+        },
+        {
+          "round": 6,
+          "eventId": "event_008",
+          "choiceId": "C",
+          "followupAnswerId": null,
+          "stampId": null
+        },
+        {
+          "round": 7,
+          "eventId": "event_009",
+          "choiceId": "C",
+          "followupAnswerId": null,
+          "stampId": "seal"
+        },
+        {
+          "round": 8,
+          "eventId": "event_006",
+          "choiceId": "B",
+          "followupAnswerId": "future_people",
+          "stampId": null
+        },
+        {
+          "round": 9,
+          "eventId": "event_010",
+          "choiceId": "C",
+          "followupAnswerId": null,
+          "stampId": null
+        },
+        {
+          "round": 10,
+          "eventId": "event_007",
+          "choiceId": "B",
+          "followupAnswerId": "people_who_remember",
+          "stampId": null
+        }
+      ]
+    },
+    "double_invasion": {
+      "strategy": "random",
+      "seed": 20260866,
+      "history": [
+        {
+          "round": 1,
+          "eventId": "event_001",
+          "choiceId": "C",
+          "followupAnswerId": "clue",
+          "stampId": "crossref"
+        },
+        {
+          "round": 2,
+          "eventId": "event_002",
+          "choiceId": "B",
+          "followupAnswerId": null,
+          "stampId": null
+        },
+        {
+          "round": 3,
+          "eventId": "event_003",
+          "choiceId": "C",
+          "followupAnswerId": null,
+          "stampId": null
+        },
+        {
+          "round": 4,
+          "eventId": "event_004",
+          "choiceId": "B",
+          "followupAnswerId": "ask_him",
+          "stampId": "crossref"
+        },
+        {
+          "round": 5,
+          "eventId": "event_005",
+          "choiceId": "A",
+          "followupAnswerId": null,
+          "stampId": "truth"
+        },
+        {
+          "round": 6,
+          "eventId": "event_008",
+          "choiceId": "B",
+          "followupAnswerId": null,
+          "stampId": null
+        },
+        {
+          "round": 7,
+          "eventId": "event_009",
+          "choiceId": "C",
+          "followupAnswerId": null,
+          "stampId": null
+        },
+        {
+          "round": 8,
+          "eventId": "event_006",
+          "choiceId": "A",
+          "followupAnswerId": null,
+          "stampId": null
+        },
+        {
+          "round": 9,
+          "eventId": "event_010",
+          "choiceId": "A",
+          "followupAnswerId": "still_choose",
+          "stampId": null
+        },
+        {
+          "round": 10,
+          "eventId": "event_007",
+          "choiceId": "A",
+          "followupAnswerId": null,
+          "stampId": null
+        }
+      ]
+    },
+    "human_blank": {
+      "strategy": "random",
+      "seed": 20260976,
+      "history": [
+        {
+          "round": 1,
+          "eventId": "event_001",
+          "choiceId": "C",
+          "followupAnswerId": null,
+          "stampId": null
+        },
+        {
+          "round": 2,
+          "eventId": "event_002",
+          "choiceId": "A",
+          "followupAnswerId": null,
+          "stampId": null
+        },
+        {
+          "round": 3,
+          "eventId": "event_003",
+          "choiceId": "B",
+          "followupAnswerId": null,
+          "stampId": null
+        },
+        {
+          "round": 4,
+          "eventId": "event_004",
+          "choiceId": "B",
+          "followupAnswerId": "ask_him",
+          "stampId": null
+        },
+        {
+          "round": 5,
+          "eventId": "event_005",
+          "choiceId": "C",
+          "followupAnswerId": null,
+          "stampId": null
+        },
+        {
+          "round": 6,
+          "eventId": "event_008",
+          "choiceId": "A",
+          "followupAnswerId": null,
+          "stampId": "misfile"
+        },
+        {
+          "round": 7,
+          "eventId": "event_009",
+          "choiceId": "C",
+          "followupAnswerId": null,
+          "stampId": null
+        },
+        {
+          "round": 8,
+          "eventId": "event_006",
+          "choiceId": "C",
+          "followupAnswerId": "people_here",
+          "stampId": "redact"
+        },
+        {
+          "round": 9,
+          "eventId": "event_010",
+          "choiceId": "A",
+          "followupAnswerId": "habit_is_not_freedom",
+          "stampId": "redact"
+        },
+        {
+          "round": 10,
+          "eventId": "event_007",
+          "choiceId": "B",
+          "followupAnswerId": null,
+          "stampId": null
+        }
+      ]
+    },
+    "chaos_rewrite": {
+      "strategy": "random",
+      "seed": 20261028,
+      "history": [
+        {
+          "round": 1,
+          "eventId": "event_001",
+          "choiceId": "A",
+          "followupAnswerId": "kindness",
+          "stampId": null
+        },
+        {
+          "round": 2,
+          "eventId": "event_002",
+          "choiceId": "A",
+          "followupAnswerId": null,
+          "stampId": null
+        },
+        {
+          "round": 3,
+          "eventId": "event_003",
+          "choiceId": "B",
+          "followupAnswerId": null,
+          "stampId": null
+        },
+        {
+          "round": 4,
+          "eventId": "event_004",
+          "choiceId": "B",
+          "followupAnswerId": "ask_him",
+          "stampId": null
+        },
+        {
+          "round": 5,
+          "eventId": "event_005",
+          "choiceId": "C",
+          "followupAnswerId": null,
+          "stampId": "truth"
+        },
+        {
+          "round": 6,
+          "eventId": "event_008",
+          "choiceId": "C",
+          "followupAnswerId": null,
+          "stampId": null
+        },
+        {
+          "round": 7,
+          "eventId": "event_009",
+          "choiceId": "C",
+          "followupAnswerId": null,
+          "stampId": null
+        },
+        {
+          "round": 8,
+          "eventId": "event_006",
+          "choiceId": "C",
+          "followupAnswerId": "future_people",
+          "stampId": null
+        },
+        {
+          "round": 9,
+          "eventId": "event_010",
+          "choiceId": "A",
+          "followupAnswerId": null,
+          "stampId": null
+        },
+        {
+          "round": 10,
+          "eventId": "event_007",
+          "choiceId": "B",
+          "followupAnswerId": "people_who_remember",
+          "stampId": "redact"
+        }
+      ]
+    },
+    "ordinary_miracle": {
+      "strategy": "random",
+      "seed": 20261158,
+      "history": [
+        {
+          "round": 1,
+          "eventId": "event_001",
+          "choiceId": "C",
+          "followupAnswerId": "clue",
+          "stampId": null
+        },
+        {
+          "round": 2,
+          "eventId": "event_002",
+          "choiceId": "B",
+          "followupAnswerId": null,
+          "stampId": "crossref"
+        },
+        {
+          "round": 3,
+          "eventId": "event_003",
+          "choiceId": "B",
+          "followupAnswerId": null,
+          "stampId": "crossref"
+        },
+        {
+          "round": 4,
+          "eventId": "event_004",
+          "choiceId": "C",
+          "followupAnswerId": null,
+          "stampId": null
+        },
+        {
+          "round": 5,
+          "eventId": "event_005",
+          "choiceId": "C",
+          "followupAnswerId": null,
+          "stampId": "truth"
+        },
+        {
+          "round": 6,
+          "eventId": "event_008",
+          "choiceId": "C",
+          "followupAnswerId": null,
+          "stampId": null
+        },
+        {
+          "round": 7,
+          "eventId": "event_009",
+          "choiceId": "A",
+          "followupAnswerId": null,
+          "stampId": "truth"
+        },
+        {
+          "round": 8,
+          "eventId": "event_006",
+          "choiceId": "B",
+          "followupAnswerId": "future_people",
+          "stampId": null
+        },
+        {
+          "round": 9,
+          "eventId": "event_010",
+          "choiceId": "B",
+          "followupAnswerId": "still_choose",
+          "stampId": "truth"
+        },
+        {
+          "round": 10,
+          "eventId": "event_007",
+          "choiceId": "C",
+          "followupAnswerId": "people_who_lived_it",
+          "stampId": null
+        }
+      ]
+    },
+    "order_rewrite": {
+      "strategy": "random",
+      "seed": 20261192,
+      "history": [
+        {
+          "round": 1,
+          "eventId": "event_001",
+          "choiceId": "C",
+          "followupAnswerId": null,
+          "stampId": "crossref"
+        },
+        {
+          "round": 2,
+          "eventId": "event_002",
+          "choiceId": "C",
+          "followupAnswerId": null,
+          "stampId": "crossref"
+        },
+        {
+          "round": 3,
+          "eventId": "event_003",
+          "choiceId": "A",
+          "followupAnswerId": null,
+          "stampId": null
+        },
+        {
+          "round": 4,
+          "eventId": "event_004",
+          "choiceId": "C",
+          "followupAnswerId": "ask_him",
+          "stampId": "redact"
+        },
+        {
+          "round": 5,
+          "eventId": "event_005",
+          "choiceId": "A",
+          "followupAnswerId": null,
+          "stampId": null
+        },
+        {
+          "round": 6,
+          "eventId": "event_008",
+          "choiceId": "C",
+          "followupAnswerId": null,
+          "stampId": null
+        },
+        {
+          "round": 7,
+          "eventId": "event_009",
+          "choiceId": "A",
+          "followupAnswerId": null,
+          "stampId": null
+        },
+        {
+          "round": 8,
+          "eventId": "event_006",
+          "choiceId": "A",
+          "followupAnswerId": "future_people",
+          "stampId": "redact"
+        },
+        {
+          "round": 9,
+          "eventId": "event_010",
+          "choiceId": "A",
+          "followupAnswerId": "habit_is_not_freedom",
+          "stampId": null
+        },
+        {
+          "round": 10,
+          "eventId": "event_007",
+          "choiceId": "A",
+          "followupAnswerId": "people_who_remember",
+          "stampId": null
+        }
+      ]
+    }
+  }
+}

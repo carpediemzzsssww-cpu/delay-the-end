@@ -1,0 +1,482 @@
+{
+  "runs_per_strategy": 10000,
+  "seed": 20260831,
+  "strategies": {
+    "random": {
+      "endings": {
+        "appendix_sealed": 0.8158,
+        "chaos_rewrite": 0.0348,
+        "double_invasion": 0.0428,
+        "human_blank": 0.0712,
+        "order_rewrite": 0.0351,
+        "ordinary_miracle": 0.0003
+      },
+      "mean_final_stats": {
+        "heaven": 37.04,
+        "hell": 36.4,
+        "human": 60.21,
+        "pressure": 95.54
+      }
+    },
+    "heaven": {
+      "endings": {
+        "appendix_sealed": 0.2094,
+        "chaos_rewrite": 0.0002,
+        "double_invasion": 0.0266,
+        "human_blank": 0.0024,
+        "order_rewrite": 0.7614
+      },
+      "mean_final_stats": {
+        "heaven": 81.02,
+        "hell": 17.87,
+        "human": 45.53,
+        "pressure": 99.92
+      }
+    },
+    "hell": {
+      "endings": {
+        "appendix_sealed": 0.1436,
+        "chaos_rewrite": 0.8472,
+        "double_invasion": 0.0082,
+        "human_blank": 0.001
+      },
+      "mean_final_stats": {
+        "heaven": 10.81,
+        "hell": 85.03,
+        "human": 48.86,
+        "pressure": 99.93
+      }
+    },
+    "human": {
+      "endings": {
+        "appendix_sealed": 0.87,
+        "chaos_rewrite": 0.0001,
+        "ordinary_miracle": 0.1299
+      },
+      "mean_final_stats": {
+        "heaven": 4.23,
+        "hell": 3.44,
+        "human": 98.24,
+        "pressure": 82.91
+      }
+    },
+    "relation": {
+      "endings": {
+        "appendix_sealed": 0.8949,
+        "ordinary_miracle": 0.1051
+      },
+      "mean_final_stats": {
+        "heaven": 4.06,
+        "hell": 3.45,
+        "human": 97.92,
+        "pressure": 83.56
+      }
+    }
+  },
+  "reachable_endings": [
+    "appendix_sealed",
+    "chaos_rewrite",
+    "double_invasion",
+    "human_blank",
+    "order_rewrite",
+    "ordinary_miracle"
+  ],
+  "example_seeds": {
+    "appendix_sealed": {
+      "strategy": "random",
+      "seed": 20260831,
+      "history": [
+        {
+          "round": 1,
+          "eventId": "appendix_awakens",
+          "choiceId": "protect_the_ordinary",
+          "stampId": "crossref"
+        },
+        {
+          "round": 2,
+          "eventId": "two_unclaimed_cups",
+          "choiceId": "test_for_halo",
+          "stampId": "crossref"
+        },
+        {
+          "round": 3,
+          "eventId": "child_draws_halo",
+          "choiceId": "give_fox_horns",
+          "stampId": "redact"
+        },
+        {
+          "round": 4,
+          "eventId": "compliance_returns",
+          "choiceId": "approve_appetite",
+          "stampId": "redact"
+        },
+        {
+          "round": 5,
+          "eventId": "sin_without_hell",
+          "choiceId": "restore_tempters",
+          "stampId": null
+        },
+        {
+          "round": 6,
+          "eventId": "coffee_between_graves",
+          "choiceId": "send_bill_to_echoes",
+          "stampId": null
+        },
+        {
+          "round": 7,
+          "eventId": "saint_without_heaven",
+          "choiceId": "honour_refusal",
+          "stampId": null
+        },
+        {
+          "round": 8,
+          "eventId": "archive_breach",
+          "choiceId": "give_chaos_access",
+          "stampId": null
+        },
+        {
+          "round": 9,
+          "eventId": "dual_audit",
+          "choiceId": "declare_third_policy",
+          "stampId": null
+        },
+        {
+          "round": 10,
+          "eventId": "second_draft",
+          "choiceId": "write_order",
+          "stampId": null
+        }
+      ]
+    },
+    "double_invasion": {
+      "strategy": "random",
+      "seed": 20260836,
+      "history": [
+        {
+          "round": 1,
+          "eventId": "appendix_awakens",
+          "choiceId": "protect_the_ordinary",
+          "stampId": "misfile"
+        },
+        {
+          "round": 2,
+          "eventId": "two_unclaimed_cups",
+          "choiceId": "deliver_them",
+          "stampId": null
+        },
+        {
+          "round": 3,
+          "eventId": "missing_bookshop",
+          "choiceId": "open_for_one_minute",
+          "stampId": "misfile"
+        },
+        {
+          "round": 4,
+          "eventId": "compliance_returns",
+          "choiceId": "approve_appetite",
+          "stampId": null
+        },
+        {
+          "round": 5,
+          "eventId": "sin_without_hell",
+          "choiceId": "sell_absolution",
+          "stampId": null
+        },
+        {
+          "round": 6,
+          "eventId": "coffee_between_graves",
+          "choiceId": "send_bill_to_echoes",
+          "stampId": null
+        },
+        {
+          "round": 7,
+          "eventId": "temptation_market",
+          "choiceId": "license_the_market",
+          "stampId": null
+        },
+        {
+          "round": 8,
+          "eventId": "archive_breach",
+          "choiceId": "give_order_access",
+          "stampId": null
+        },
+        {
+          "round": 9,
+          "eventId": "dual_audit",
+          "choiceId": "pass_both_audits",
+          "stampId": null
+        },
+        {
+          "round": 10,
+          "eventId": "second_draft",
+          "choiceId": "write_order",
+          "stampId": "truth"
+        }
+      ]
+    },
+    "order_rewrite": {
+      "strategy": "random",
+      "seed": 20260839,
+      "history": [
+        {
+          "round": 1,
+          "eventId": "appendix_awakens",
+          "choiceId": "classify_as_error",
+          "stampId": null
+        },
+        {
+          "round": 2,
+          "eventId": "two_unclaimed_cups",
+          "choiceId": "test_for_halo",
+          "stampId": null
+        },
+        {
+          "round": 3,
+          "eventId": "missing_bookshop",
+          "choiceId": "open_for_one_minute",
+          "stampId": null
+        },
+        {
+          "round": 4,
+          "eventId": "compliance_returns",
+          "choiceId": "approve_order",
+          "stampId": null
+        },
+        {
+          "round": 5,
+          "eventId": "temptation_market",
+          "choiceId": "buy_everything",
+          "stampId": "redact"
+        },
+        {
+          "round": 6,
+          "eventId": "bentley_remembers",
+          "choiceId": "let_car_choose",
+          "stampId": null
+        },
+        {
+          "round": 7,
+          "eventId": "perfection_committee",
+          "choiceId": "publish_rejections",
+          "stampId": "redact"
+        },
+        {
+          "round": 8,
+          "eventId": "archive_breach",
+          "choiceId": "give_order_access",
+          "stampId": "crossref"
+        },
+        {
+          "round": 9,
+          "eventId": "dual_audit",
+          "choiceId": "audit_the_auditors",
+          "stampId": null
+        },
+        {
+          "round": 10,
+          "eventId": "second_draft",
+          "choiceId": "write_order",
+          "stampId": "crossref"
+        }
+      ]
+    },
+    "human_blank": {
+      "strategy": "random",
+      "seed": 20260843,
+      "history": [
+        {
+          "round": 1,
+          "eventId": "appendix_awakens",
+          "choiceId": "classify_as_error",
+          "stampId": null
+        },
+        {
+          "round": 2,
+          "eventId": "child_draws_halo",
+          "choiceId": "give_fox_horns",
+          "stampId": null
+        },
+        {
+          "round": 3,
+          "eventId": "weather_without_author",
+          "choiceId": "sell_apologies",
+          "stampId": null
+        },
+        {
+          "round": 4,
+          "eventId": "compliance_returns",
+          "choiceId": "approve_order",
+          "stampId": null
+        },
+        {
+          "round": 5,
+          "eventId": "bentley_remembers",
+          "choiceId": "give_him_keys",
+          "stampId": "misfile"
+        },
+        {
+          "round": 6,
+          "eventId": "temptation_market",
+          "choiceId": "buy_everything",
+          "stampId": "misfile"
+        },
+        {
+          "round": 7,
+          "eventId": "sin_without_hell",
+          "choiceId": "sell_absolution",
+          "stampId": "truth"
+        },
+        {
+          "round": 8,
+          "eventId": "archive_breach",
+          "choiceId": "give_order_access",
+          "stampId": null
+        },
+        {
+          "round": 9,
+          "eventId": "memory_offer",
+          "choiceId": "archive_memory",
+          "stampId": "truth"
+        },
+        {
+          "round": 10,
+          "eventId": "second_draft",
+          "choiceId": "write_order",
+          "stampId": "truth"
+        }
+      ]
+    },
+    "chaos_rewrite": {
+      "strategy": "random",
+      "seed": 20260846,
+      "history": [
+        {
+          "round": 1,
+          "eventId": "appendix_awakens",
+          "choiceId": "name_the_truth",
+          "stampId": null
+        },
+        {
+          "round": 2,
+          "eventId": "two_unclaimed_cups",
+          "choiceId": "test_for_halo",
+          "stampId": "misfile"
+        },
+        {
+          "round": 3,
+          "eventId": "missing_bookshop",
+          "choiceId": "open_for_one_minute",
+          "stampId": "crossref"
+        },
+        {
+          "round": 4,
+          "eventId": "compliance_returns",
+          "choiceId": "approve_appetite",
+          "stampId": null
+        },
+        {
+          "round": 5,
+          "eventId": "temptation_market",
+          "choiceId": "buy_everything",
+          "stampId": null
+        },
+        {
+          "round": 6,
+          "eventId": "perfection_committee",
+          "choiceId": "sell_flaws",
+          "stampId": "misfile"
+        },
+        {
+          "round": 7,
+          "eventId": "bentley_remembers",
+          "choiceId": "give_him_keys",
+          "stampId": "crossref"
+        },
+        {
+          "round": 8,
+          "eventId": "archive_breach",
+          "choiceId": "give_chaos_access",
+          "stampId": null
+        },
+        {
+          "round": 9,
+          "eventId": "memory_offer",
+          "choiceId": "archive_memory",
+          "stampId": null
+        },
+        {
+          "round": 10,
+          "eventId": "second_draft",
+          "choiceId": "write_appetite",
+          "stampId": null
+        }
+      ]
+    },
+    "ordinary_miracle": {
+      "strategy": "random",
+      "seed": 20263859,
+      "history": [
+        {
+          "round": 1,
+          "eventId": "appendix_awakens",
+          "choiceId": "protect_the_ordinary",
+          "stampId": "misfile"
+        },
+        {
+          "round": 2,
+          "eventId": "two_unclaimed_cups",
+          "choiceId": "let_them_sour",
+          "stampId": "misfile"
+        },
+        {
+          "round": 3,
+          "eventId": "child_draws_halo",
+          "choiceId": "give_fox_horns",
+          "stampId": "truth"
+        },
+        {
+          "round": 4,
+          "eventId": "compliance_returns",
+          "choiceId": "approve_order",
+          "stampId": "seal"
+        },
+        {
+          "round": 5,
+          "eventId": "sin_without_hell",
+          "choiceId": "record_responsibility",
+          "stampId": null
+        },
+        {
+          "round": 6,
+          "eventId": "saint_without_heaven",
+          "choiceId": "honour_refusal",
+          "stampId": "truth"
+        },
+        {
+          "round": 7,
+          "eventId": "perfection_committee",
+          "choiceId": "publish_rejections",
+          "stampId": null
+        },
+        {
+          "round": 8,
+          "eventId": "archive_breach",
+          "choiceId": "let_humans_read",
+          "stampId": null
+        },
+        {
+          "round": 9,
+          "eventId": "ordinary_date",
+          "choiceId": "leave_to_save_world",
+          "stampId": "truth"
+        },
+        {
+          "round": 10,
+          "eventId": "second_draft",
+          "choiceId": "leave_human_margin",
+          "stampId": null
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "version": 2,
+  "rounds": 10,
+  "pressure_growth": [2, 2, 3, 3, 4, 4, 5, 5, 5, 6],
+  "initial": {
+    "heaven": 18,
+    "hell": 18,
+    "human": 58,
+    "pressure": 8
+  },
+  "stamps": [
+    {
+      "id": "truth",
+      "name_zh": "真本",
+      "name_en": "True Copy",
+      "short_zh": "保留证词：人间自由 +2，证据 +1，压力 +1",
+      "short_en": "Preserve testimony: Human +2, Evidence +1, Pressure +1",
+      "charges": 3
+    },
+    {
+      "id": "redact",
+      "name_zh": "删节",
+      "name_en": "Redaction",
+      "short_zh": "抵消本次最多 4 点压力；人间自由 -2；留下审计风险",
+      "short_en": "Cancel up to 4 Pressure from this choice; Human -2; leaves audit risk",
+      "charges": 2
+    },
+    {
+      "id": "crossref",
+      "name_zh": "交叉引用",
+      "name_en": "Cross-reference",
+      "short_zh": "连接旧记录，触发本页隐藏批注并提高羁绊",
+      "short_en": "Link an old record, reveal hidden marginalia, and strengthen the bond",
+      "charges": 2
+    },
+    {
+      "id": "misfile",
+      "name_zh": "错置归档",
+      "name_en": "Misfile",
+      "short_zh": "较强回响 -3，较弱回响 +1；制造一处归档混乱",
+      "short_en": "Stronger echo -3, weaker echo +1; creates archival confusion",
+      "charges": 2
+    },
+    {
+      "id": "seal",
+      "name_zh": "永久封存",
+      "name_en": "Permanent Seal",
+      "short_zh": "取消本页延迟后果，压力 -5，但永久失去相关线索",
+      "short_en": "Cancel this page's delayed consequence and Pressure -5, but lose its clue",
+      "charges": 1
+    }
+  ],
+  "default_stamps": ["truth", "crossref", "redact"],
+  "ending_thresholds": {
+    "human_blank_lt": 25,
+    "double_echo_gte": 45,
+    "dominance_gte": 72,
+    "dominance_gap_gte": 18,
+    "ordinary_human_gte": 79,
+    "ordinary_pressure_lt": 80,
+    "ordinary_bond_gte": 5,
+    "ordinary_trust_gte": 4,
+    "ordinary_evidence_gte": 3,
+    "ordinary_echo_gap_lte": 12
+  }
+}

@@ -1,563 +1,387 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+"""Monte Carlo simulator for Appendix 7B.
 
-"""
-Delay the End - Monte Carlo Balancer
-------------------------------------
-用途：
-1) 随机模拟多局（默认 5000 局）
-2) 统计结局分布
-3) 统计 Human Rebellion 触发率（目标 5%~15%）
-4) 统计极端干预次数分布、均值
-5) 输出简易调参建议
-
-兼容事件结构（MVP v3.1）：
-{
-  "id": "event_003",
-  "title_en": "...",
-  "title_zh": "...",
-  "text_en": "...",
-  "text_zh": "...",
-  "choices": [
-    {"id":"A","label_en":"...","label_zh":"...","effect":{"heaven":5,"hell":-3,"stability":0,"pressure":0},"is_extreme":false},
-    ...
-  ],
-  "fixed_position": null,   # 或 1/6/7
-  "is_dilemma": true,
-  "tags": ["archive","human","dilemma"]
-}
+Mirrors the browser order: callbacks -> event selection -> choice -> stamp ->
+pressure growth -> ending priority.
 """
 
+from __future__ import annotations
+
+import argparse
 import json
 import random
-import argparse
-from dataclasses import dataclass
-from collections import Counter, defaultdict
-from statistics import mean
+from collections import Counter
+from copy import deepcopy
+from dataclasses import dataclass, field
 from pathlib import Path
+from typing import Any
 
-# ---------------------------
-# 默认参数（可命令行覆盖）
-# ---------------------------
-
-DEFAULT_GAME_CONFIG = {
-    "rounds": 7,
-    "pressure_growth": [3, 4, 5, 6, 8, 10, 12],
-    "initial": {
-        "heaven": 50,
-        "hell": 50,
-        "stability": 50,
-        "pressure": 0
-    },
-    "record": {
-        "truth_streak_target": 3,
-        "truth_stability_bonus": 3,
-        "polish_heaven_bonus": 2,
-        "blur_hell_bonus": 2,
-        "seal_pressure_delta": -2,
-        "seal_penalty_chance": 0.2,
-        "seal_penalty": {
-            "stability": -5,
-            "heaven": 3
-        }
-    },
-    "rebellion": {
-        "balance_diff_max": 10,
-        "stability_min": 65,
-        "consecutive_required": 3,
-        "max_extreme_choices": 1
-    },
-    "endings": {
-        "stability_collapse_lt": 20,
-        "heaven_dominance_gte": 90,
-        "hell_dominance_gte": 90,
-        "rebellion_pressure_lt": 85
-    }
-}
-
-# 记录阶段策略概率（模拟参数）
-DEFAULT_RECORD_PROBS = {
-    "truth": 0.25,   # 如实记录
-    "polish": 0.25,  # 美化记录
-    "blur": 0.25,    # 模糊记录
-    "seal": 0.25     # 封存档案
-}
-
-# 以下变量由配置在运行时注入，先占位默认值
-DEFAULT_ROUNDS = 7
-PRESSURE_RAMP = {1: 3, 2: 4, 3: 5, 4: 6, 5: 8, 6: 10, 7: 12}
-
-INITIAL_HEAVEN = 50
-INITIAL_HELL = 50
-INITIAL_STABILITY = 50
-INITIAL_PRESSURE = 0
-
-TRUTH_STREAK_TARGET = 3
-TRUTH_STREAK_BONUS = 3
-POLISH_HEAVEN_BONUS = 2
-BLUR_HELL_BONUS = 2
-SEAL_PRESSURE_DELTA = -2
-SEAL_PENALTY_PROB = 0.20
-SEAL_PENALTY_STABILITY = -5
-SEAL_PENALTY_HEAVEN = 3
-
-THRESH_STABILITY_COLLAPSE = 20
-THRESH_HEAVEN_DOM = 90
-THRESH_HELL_DOM = 90
-THRESH_REBELLION_PRESSURE = 85
-
-REBELLION_BALANCE_DIFF = 10
-REBELLION_MIN_STABILITY = 65
-REBELLION_STREAK_REQUIRED = 3
-REBELLION_MAX_EXTREME_CHOICES = 1
+ROOT = Path(__file__).resolve().parents[1]
+STATS = ("heaven", "hell", "human", "pressure")
+RELATIONS = ("bond", "memory", "trust")
+STRATEGIES = ("random", "heaven", "hell", "human", "relation")
 
 
-# ---------------------------
-# 数据结构
-# ---------------------------
+def build_story(thread: dict[str, Any], legacy: list[dict[str, Any]], config: dict[str, Any]) -> dict[str, Any]:
+    """Mirror buildStoryFromLegacy() in game.js."""
+    source_by_id = {event["id"]: event for event in legacy}
+    events: list[dict[str, Any]] = []
+    for index, event_id in enumerate(thread["sequence"]):
+        source = deepcopy(source_by_id[event_id])
+        connective = deepcopy(thread["events"][event_id])
+        round_number = index + 1
+        choices = []
+        for original in source["choices"]:
+            choice = deepcopy(original)
+            old_effect = choice["effect"]
+            effect = {
+                "heaven": old_effect.get("heaven", 0),
+                "hell": old_effect.get("hell", 0),
+                "human": old_effect.get("stability", 0),
+                "pressure": old_effect.get("pressure", 0),
+            }
+            human_choice = effect["human"] >= 3
+            heavy_echo = max(effect["heaven"], effect["hell"]) >= 8
+            choice["effect"] = effect
+            choice["relations"] = {
+                "bond": 2 if event_id == "event_010" and choice["id"] == "B" else 1 if event_id == "event_010" and choice["id"] == "C" else 0,
+                "memory": 1 if heavy_echo else 0,
+                "trust": 1 if human_choice else -1 if effect["human"] < 0 else 0,
+            }
+            choice["set_flags"] = (["chose_human"] if human_choice else []) + (["protected_pair"] if event_id == "event_010" and choice["id"] == "B" else [])
+            if effect["pressure"] >= 2 and connective.get("callback_zh") and round_number < config["rounds"]:
+                choice["delayed"] = {
+                    "id": f"{event_id}_{choice['id']}_return",
+                    "due_offset": 2,
+                    "text_zh": connective["callback_zh"],
+                    "text_en": connective["callback_en"],
+                    "effect": {"pressure": 1},
+                    "relations": {"bond": 0, "memory": 1, "trust": 0},
+                    "set_flags": [f"returned_{event_id}"],
+                }
+            choices.append(choice)
+        source.update(connective)
+        source.update({
+            "fixed_round": round_number,
+            "choices": choices,
+            "crossref": {
+                "text_zh": connective["crossref_zh"],
+                "text_en": connective["crossref_en"],
+                "effect": {"human": 1, "pressure": 1},
+                "relations": {"bond": 1, "memory": 1, "trust": 0},
+                "set_flags": [f"crossed_{event_id}"],
+            },
+        })
+        events.append(source)
+    return {"meta": thread["meta"], "events": events}
+
+
+def clamp(value: float, low: float = 0, high: float = 100) -> float:
+    return max(low, min(high, value))
+
+
+def hash_string(value: str) -> int:
+    """FNV-1a with the same uint32 overflow as game.js."""
+    result = 2166136261
+    for char in value:
+        result ^= ord(char)
+        result = (result * 16777619) & 0xFFFFFFFF
+    return result
+
 
 @dataclass
-class GameState:
-    round: int = 1
-    heaven: int = 50
-    hell: int = 50
-    stability: int = 50
-    pressure: int = 0
-
-    truth_counter: int = 0
-
-    # Rebellion tracking
-    consecutive_balance_count: int = 0
-    rebellion_flag: bool = False
-
-    # 封存惩罚延迟到“下一回合开始”更直观
-    pending_penalty: bool = False
-
-    # 统计信息
-    extreme_count: int = 0
-    history: list = None
-
-    def __post_init__(self):
-        if self.history is None:
-            self.history = []
+class RunState:
+    seed: int
+    stats: dict[str, float]
+    relationships: dict[str, float] = field(default_factory=lambda: {"bond": 0, "memory": 0, "trust": 0})
+    evidence: int = 0
+    flags: list[str] = field(default_factory=list)
+    sequence: dict[int, str] = field(default_factory=dict)
+    pending: list[dict[str, Any]] = field(default_factory=list)
+    selected_stamps: list[str] = field(default_factory=list)
+    stamp_charges: dict[str, int] = field(default_factory=dict)
+    history: list[dict[str, Any]] = field(default_factory=list)
 
 
-# ---------------------------
-# 工具函数
-# ---------------------------
+class Simulator:
+    def __init__(self, story: dict[str, Any], config: dict[str, Any]):
+        self.story = story
+        self.config = config
+        self.events = story["events"]
+        self.stamps = {stamp["id"]: stamp for stamp in config["stamps"]}
 
-def clamp(x, lo=0, hi=100):
-    return max(lo, min(hi, x))
+    def add_flags(self, state: RunState, flags: list[str] | None) -> None:
+        for flag in flags or []:
+            if flag not in state.flags:
+                state.flags.append(flag)
 
-def weighted_choice(options_with_prob):
-    # options_with_prob: [("truth", 0.25), ...]
-    r = random.random()
-    c = 0.0
-    for opt, p in options_with_prob:
-        c += p
-        if r <= c:
-            return opt
-    return options_with_prob[-1][0]
+    def apply_stats(self, state: RunState, effect: dict[str, Any] | None) -> None:
+        for key in STATS:
+            state.stats[key] = clamp(state.stats.get(key, 0) + float((effect or {}).get(key, 0)))
 
-def normalize_probs(probs_dict):
-    s = sum(probs_dict.values())
-    if s <= 0:
-        raise ValueError("record probabilities sum must be > 0")
-    return {k: v / s for k, v in probs_dict.items()}
+    def apply_relations(self, state: RunState, effect: dict[str, Any] | None) -> None:
+        for key in RELATIONS:
+            state.relationships[key] = clamp(
+                state.relationships.get(key, 0) + float((effect or {}).get(key, 0)), -10, 20
+            )
 
-def deep_merge(base, override):
-    merged = dict(base)
-    for k, v in (override or {}).items():
-        if isinstance(v, dict) and isinstance(merged.get(k), dict):
-            merged[k] = deep_merge(merged[k], v)
-        else:
-            merged[k] = v
-    return merged
+    @staticmethod
+    def act_for_round(round_number: int) -> int:
+        return 1 if round_number <= 3 else 2 if round_number <= 7 else 3
 
-def load_game_config(path):
-    default_copy = json.loads(json.dumps(DEFAULT_GAME_CONFIG))
-    config_path = Path(path)
-    if not config_path.exists():
-        print(f"[WARN] 配置文件不存在，使用默认配置: {path}")
-        return default_copy
+    def process_callbacks(self, state: RunState, round_number: int) -> None:
+        due = [item for item in state.pending if item["dueRound"] <= round_number]
+        state.pending = [item for item in state.pending if item["dueRound"] > round_number]
+        for item in due:
+            self.apply_stats(state, item.get("effect"))
+            self.apply_relations(state, item.get("relations"))
+            self.add_flags(state, item.get("set_flags"))
 
-    with open(config_path, "r", encoding="utf-8") as f:
-        raw = json.load(f)
-    if not isinstance(raw, dict):
-        raise ValueError("game-config.json 顶层必须是对象(object)")
-    return deep_merge(default_copy, raw)
+    def select_event(self, state: RunState, round_number: int) -> dict[str, Any]:
+        fixed = next((event for event in self.events if event.get("fixed_round") == round_number), None)
+        if fixed:
+            state.sequence[round_number] = fixed["id"]
+            return fixed
+        act = self.act_for_round(round_number)
+        used, flags = set(state.sequence.values()), set(state.flags)
+        pool = [e for e in self.events if e.get("pool") and e["act"] == act and e["id"] not in used]
 
-def apply_runtime_config(cfg):
-    global DEFAULT_ROUNDS, PRESSURE_RAMP
-    global INITIAL_HEAVEN, INITIAL_HELL, INITIAL_STABILITY, INITIAL_PRESSURE
-    global TRUTH_STREAK_TARGET, TRUTH_STREAK_BONUS, POLISH_HEAVEN_BONUS, BLUR_HELL_BONUS
-    global SEAL_PRESSURE_DELTA, SEAL_PENALTY_PROB, SEAL_PENALTY_STABILITY, SEAL_PENALTY_HEAVEN
-    global THRESH_STABILITY_COLLAPSE, THRESH_HEAVEN_DOM, THRESH_HELL_DOM, THRESH_REBELLION_PRESSURE
-    global REBELLION_BALANCE_DIFF, REBELLION_MIN_STABILITY, REBELLION_STREAK_REQUIRED, REBELLION_MAX_EXTREME_CHOICES
+        def eligible(event: dict[str, Any]) -> bool:
+            any_flags, all_flags = event.get("requires_any", []), event.get("requires_all", [])
+            return (not any_flags or any(flag in flags for flag in any_flags)) and all(flag in flags for flag in all_flags)
 
-    rounds = int(cfg.get("rounds", 7))
-    rounds = max(1, rounds)
-    growth = cfg.get("pressure_growth", DEFAULT_GAME_CONFIG["pressure_growth"])
-    if not isinstance(growth, list) or len(growth) == 0:
-        growth = list(DEFAULT_GAME_CONFIG["pressure_growth"])
-    growth = [int(v) for v in growth]
-    if len(growth) < rounds:
-        growth = growth + [growth[-1]] * (rounds - len(growth))
-    growth = growth[:rounds]
+        candidates = [event for event in pool if eligible(event)]
+        if not candidates:
+            candidates = [event for event in pool if not event.get("requires_any")]
+        if not candidates:
+            candidates = pool
+        index = hash_string(f"{state.seed}:{round_number}:{','.join(sorted(flags))}") % len(candidates)
+        event = candidates[index]
+        state.sequence[round_number] = event["id"]
+        return event
 
-    DEFAULT_ROUNDS = rounds
-    PRESSURE_RAMP = {idx + 1: growth[idx] for idx in range(rounds)}
+    @staticmethod
+    def choice_score(choice: dict[str, Any], strategy: str) -> float:
+        effect, rel = choice.get("effect", {}), choice.get("relations", {})
+        if strategy == "heaven":
+            return effect.get("heaven", 0) - .25 * effect.get("hell", 0) + .28 * effect.get("human", 0) - .12 * effect.get("pressure", 0)
+        if strategy == "hell":
+            return effect.get("hell", 0) - .25 * effect.get("heaven", 0) + .28 * effect.get("human", 0) - .12 * effect.get("pressure", 0)
+        if strategy == "human":
+            return 1.35 * effect.get("human", 0) - .42 * effect.get("pressure", 0) + .5 * rel.get("trust", 0) + .2 * rel.get("bond", 0)
+        if strategy == "relation":
+            return 2.8 * rel.get("bond", 0) + 1.9 * rel.get("trust", 0) + .65 * rel.get("memory", 0) + .42 * effect.get("human", 0) - .28 * effect.get("pressure", 0)
+        return 0
 
-    initial = cfg.get("initial", {})
-    INITIAL_HEAVEN = int(initial.get("heaven", 50))
-    INITIAL_HELL = int(initial.get("hell", 50))
-    INITIAL_STABILITY = int(initial.get("stability", 50))
-    INITIAL_PRESSURE = int(initial.get("pressure", 0))
+    def choose(self, state: RunState, event: dict[str, Any], strategy: str, rng: random.Random) -> dict[str, Any]:
+        if strategy == "random":
+            return rng.choice(event["choices"])
+        candidates = event["choices"]
+        if strategy in ("heaven", "hell") and state.stats["human"] <= 45:
+            safer = [choice for choice in candidates if choice.get("effect", {}).get("human", 0) >= 0]
+            if safer:
+                candidates = safer
+        ranked = sorted(candidates, key=lambda choice: self.choice_score(choice, strategy), reverse=True)
+        return rng.choice(event["choices"]) if rng.random() < .16 else ranked[0]
 
-    record = cfg.get("record", {})
-    TRUTH_STREAK_TARGET = int(record.get("truth_streak_target", 3))
-    TRUTH_STREAK_BONUS = int(record.get("truth_stability_bonus", 3))
-    POLISH_HEAVEN_BONUS = int(record.get("polish_heaven_bonus", 2))
-    BLUR_HELL_BONUS = int(record.get("blur_hell_bonus", 2))
-    SEAL_PRESSURE_DELTA = int(record.get("seal_pressure_delta", -2))
-    SEAL_PENALTY_PROB = float(record.get("seal_penalty_chance", 0.2))
-    penalty = record.get("seal_penalty", {})
-    SEAL_PENALTY_STABILITY = int(penalty.get("stability", -5))
-    SEAL_PENALTY_HEAVEN = int(penalty.get("heaven", 3))
+    def select_followup(self, event: dict[str, Any], strategy: str, rng: random.Random) -> dict[str, Any] | None:
+        followup = event.get("followup")
+        if not followup:
+            return None
+        answer_rate = .7 if strategy == "random" else .82 if strategy in ("heaven", "hell") else 1
+        if rng.random() > answer_rate:
+            return None
+        answers = followup["answers"]
+        if strategy == "random":
+            return rng.choice(answers)
+        if strategy == "relation":
+            return max(answers, key=lambda answer: 3 * answer.get("relations", {}).get("bond", 0) + 2 * answer.get("relations", {}).get("trust", 0) + answer.get("evidence", 0))
+        if strategy == "human":
+            return max(answers, key=lambda answer: 2 * answer.get("relations", {}).get("trust", 0) + answer.get("evidence", 0))
+        return rng.choice(answers)
 
-    endings = cfg.get("endings", {})
-    THRESH_STABILITY_COLLAPSE = int(endings.get("stability_collapse_lt", 20))
-    THRESH_HEAVEN_DOM = int(endings.get("heaven_dominance_gte", 90))
-    THRESH_HELL_DOM = int(endings.get("hell_dominance_gte", 90))
-    THRESH_REBELLION_PRESSURE = int(endings.get("rebellion_pressure_lt", 85))
+    def stamp_loadout(self, strategy: str, rng: random.Random) -> list[str]:
+        if strategy == "random":
+            return rng.sample(list(self.stamps), 3)
+        if strategy == "human":
+            return ["truth", "redact", "seal"]
+        if strategy == "relation":
+            return ["truth", "crossref", "redact"]
+        return ["truth", "crossref", "misfile"]
 
-    rebellion = cfg.get("rebellion", {})
-    REBELLION_BALANCE_DIFF = int(rebellion.get("balance_diff_max", 10))
-    REBELLION_MIN_STABILITY = int(rebellion.get("stability_min", 65))
-    REBELLION_STREAK_REQUIRED = int(rebellion.get("consecutive_required", 3))
-    REBELLION_MAX_EXTREME_CHOICES = int(rebellion.get("max_extreme_choices", 1))
+    def enabled_stamps(self, state: RunState, event: dict[str, Any], choice: dict[str, Any], pending_id: str | None) -> list[str]:
+        enabled = []
+        for stamp_id in state.selected_stamps:
+            if state.stamp_charges.get(stamp_id, 0) <= 0:
+                continue
+            if stamp_id == "redact" and float(choice.get("effect", {}).get("pressure", 0)) <= 0:
+                continue
+            if stamp_id == "crossref" and not event.get("crossref"):
+                continue
+            if stamp_id == "seal" and not pending_id:
+                continue
+            enabled.append(stamp_id)
+        return enabled
 
-def load_events(path):
-    with open(path, "r", encoding="utf-8") as f:
-        events = json.load(f)
-    if not isinstance(events, list):
-        raise ValueError("events.json 顶层必须是数组(list)")
-    return events
+    def select_stamp(self, state: RunState, event: dict[str, Any], choice: dict[str, Any], pending_id: str | None, strategy: str, round_number: int, rng: random.Random) -> str | None:
+        enabled = self.enabled_stamps(state, event, choice, pending_id)
+        if not enabled:
+            return None
+        if strategy == "random":
+            return rng.choice(enabled) if rng.random() < .42 else None
+        if strategy == "human":
+            if "truth" in enabled and state.evidence < 3:
+                return "truth"
+            if "redact" in enabled and (state.stats["pressure"] >= 48 or round_number >= 7):
+                return "redact"
+            if "seal" in enabled and state.stats["pressure"] >= 55:
+                return "seal"
+            return None
+        if strategy == "relation":
+            if "crossref" in enabled and state.relationships["bond"] < 5:
+                return "crossref"
+            if "truth" in enabled and state.evidence < 3:
+                return "truth"
+            if "redact" in enabled and (state.stats["pressure"] >= 56 or round_number >= 8):
+                return "redact"
+            return None
+        if "crossref" in enabled and rng.random() < .55:
+            return "crossref"
+        if "truth" in enabled and rng.random() < .28:
+            return "truth"
+        return None
 
-def validate_events(events, rounds=7):
-    # 基础校验
-    ids = set()
-    fixed_map = defaultdict(list)
-    dilemma_count = 0
-    extreme_choices_total = 0
+    def apply_stamp(self, state: RunState, stamp_id: str, event: dict[str, Any], choice: dict[str, Any], pending_id: str | None, round_number: int) -> None:
+        state.stamp_charges[stamp_id] -= 1
+        if stamp_id == "truth":
+            self.apply_stats(state, {"human": 2, "pressure": 1})
+            state.evidence += 1
+        elif stamp_id == "redact":
+            reduction = min(4, max(0, float(choice.get("effect", {}).get("pressure", 0))))
+            self.apply_stats(state, {"human": -2, "pressure": -reduction})
+            self.add_flags(state, ["audit_risk"])
+            state.pending.append({
+                "id": f"redaction_audit_{round_number}", "instanceId": f"redaction_audit:{round_number}",
+                "sourceRound": round_number, "dueRound": min(self.config["rounds"], round_number + 2),
+                "effect": {"heaven": 2, "human": -2, "pressure": 1},
+                "relations": {"bond": 0, "memory": 1, "trust": -1}, "set_flags": ["redaction_reviewed"]
+            })
+        elif stamp_id == "crossref":
+            crossref = event["crossref"]
+            self.apply_stats(state, crossref.get("effect"))
+            self.apply_relations(state, crossref.get("relations"))
+            self.add_flags(state, crossref.get("set_flags"))
+        elif stamp_id == "misfile":
+            self.apply_stats(state, {"heaven": -3, "hell": 1} if state.stats["heaven"] >= state.stats["hell"] else {"hell": -3, "heaven": 1})
+            self.add_flags(state, ["misfiled"])
+        elif stamp_id == "seal":
+            state.pending = [item for item in state.pending if item.get("instanceId") != pending_id]
+            self.apply_stats(state, {"pressure": -5})
+            self.add_flags(state, [f"sealed_{event['id']}"])
 
-    for e in events:
-        eid = e.get("id")
-        if not eid:
-            raise ValueError("发现事件缺少 id")
-        if eid in ids:
-            raise ValueError(f"事件 id 重复: {eid}")
-        ids.add(eid)
-
-        fp = e.get("fixed_position", None)
-        if fp is not None:
-            if not isinstance(fp, int) or fp < 1 or fp > rounds:
-                raise ValueError(f"{eid} 的 fixed_position 非法: {fp}")
-            fixed_map[fp].append(eid)
-
-        choices = e.get("choices", [])
-        if len(choices) != 3:
-            raise ValueError(f"{eid} 选择项不是3个（当前={len(choices)}）")
-
-        if e.get("is_dilemma", False):
-            dilemma_count += 1
-
-        for c in choices:
-            if c.get("is_extreme", False):
-                extreme_choices_total += 1
-            eff = c.get("effect", {})
-            # effect四字段可缺省，但若有须为数值
-            for k in ["heaven", "hell", "stability", "pressure"]:
-                if k in eff and not isinstance(eff[k], (int, float)):
-                    raise ValueError(f"{eid} choice {c.get('id')} effect.{k} 必须是数值")
-
-    # 固定位冲突检查（一个回合只能固定一个事件）
-    for pos, arr in fixed_map.items():
-        if len(arr) > 1:
-            raise ValueError(f"fixed_position={pos} 有多个事件：{arr}")
-
-    # 你当前设计要求 1/6/7 固定（可按需放宽）
-    for pos in [1, 6, 7]:
-        if pos not in fixed_map:
-            print(f"[WARN] 建议固定回合 {pos}，当前未发现 fixed_position={pos} 的事件。")
-
-    if dilemma_count < 3:
-        print(f"[WARN] is_dilemma=true 事件少于3个（当前={dilemma_count}）。")
-
-    if extreme_choices_total == 0:
-        print("[WARN] 没有任何 is_extreme=true 的选项，隐藏结局逻辑将失真。")
-
-def build_run_sequence(events, rounds=7):
-    """按 fixed_position 构造一局事件序列"""
-    fixed = {}
-    pool = []
-    for e in events:
-        fp = e.get("fixed_position", None)
-        if fp is None:
-            pool.append(e)
-        else:
-            fixed[fp] = e
-
-    seq = [None] * rounds
-    for i in range(1, rounds + 1):
-        if i in fixed:
-            seq[i - 1] = fixed[i]
-
-    empty_positions = [i for i in range(rounds) if seq[i] is None]
-    if len(pool) < len(empty_positions):
-        raise ValueError(
-            f"随机池事件不足：需要 {len(empty_positions)} 个，只有 {len(pool)} 个。"
+    def ending(self, state: RunState) -> str:
+        stats, rel, th = state.stats, state.relationships, self.config["ending_thresholds"]
+        if stats["human"] < th["human_blank_lt"]:
+            return "human_blank"
+        if stats["heaven"] >= th["double_echo_gte"] and stats["hell"] >= th["double_echo_gte"]:
+            return "double_invasion"
+        if stats["heaven"] >= th["dominance_gte"] and stats["heaven"] - stats["hell"] >= th["dominance_gap_gte"]:
+            return "order_rewrite"
+        if stats["hell"] >= th["dominance_gte"] and stats["hell"] - stats["heaven"] >= th["dominance_gap_gte"]:
+            return "chaos_rewrite"
+        ordinary = (
+            stats["human"] >= th["ordinary_human_gte"] and stats["pressure"] < th["ordinary_pressure_lt"]
+            and rel["bond"] >= th["ordinary_bond_gte"] and rel["trust"] >= th["ordinary_trust_gte"]
+            and state.evidence >= th["ordinary_evidence_gte"]
+            and abs(stats["heaven"] - stats["hell"]) <= th["ordinary_echo_gap_lte"]
         )
-    sampled = random.sample(pool, k=len(empty_positions))
-    for idx, e in zip(empty_positions, sampled):
-        seq[idx] = e
+        return "ordinary_miracle" if ordinary else "appendix_sealed"
 
-    return seq
+    def run(self, strategy: str, seed: int) -> tuple[str, RunState]:
+        rng = random.Random((seed << 7) ^ hash_string(strategy))
+        loadout = self.stamp_loadout(strategy, rng)
+        state = RunState(seed=seed, stats=deepcopy(self.config["initial"]), selected_stamps=loadout)
+        state.stamp_charges = {key: stamp["charges"] if key in loadout else 0 for key, stamp in self.stamps.items()}
 
-def apply_effect(s: GameState, effect: dict):
-    s.heaven = clamp(s.heaven + int(effect.get("heaven", 0)))
-    s.hell = clamp(s.hell + int(effect.get("hell", 0)))
-    s.stability = clamp(s.stability + int(effect.get("stability", 0)))
-    s.pressure = max(0, s.pressure + int(effect.get("pressure", 0)))
+        for round_number in range(1, self.config["rounds"] + 1):
+            self.process_callbacks(state, round_number)
+            event = self.select_event(state, round_number)
+            choice = self.choose(state, event, strategy, rng)
+            self.apply_stats(state, choice.get("effect"))
+            self.apply_relations(state, choice.get("relations"))
+            self.add_flags(state, choice.get("set_flags"))
+            followup_answer = self.select_followup(event, strategy, rng)
+            if followup_answer:
+                self.apply_relations(state, followup_answer.get("relations"))
+                self.add_flags(state, followup_answer.get("set_flags"))
+                state.evidence += int(followup_answer.get("evidence", 0))
+            pending_id = None
+            if choice.get("delayed"):
+                delayed = deepcopy(choice["delayed"])
+                pending_id = f"{delayed['id']}:{round_number}:{len(state.history)}"
+                delayed.update({"instanceId": pending_id, "sourceRound": round_number, "dueRound": min(self.config["rounds"], round_number + int(delayed.get("due_offset", 1)))})
+                state.pending.append(delayed)
+            stamp_id = self.select_stamp(state, event, choice, pending_id, strategy, round_number, rng)
+            if stamp_id:
+                self.apply_stamp(state, stamp_id, event, choice, pending_id, round_number)
+            self.apply_stats(state, {"pressure": self.config["pressure_growth"][round_number - 1]})
+            state.history.append({"round": round_number, "eventId": event["id"], "choiceId": choice["id"], "followupAnswerId": followup_answer.get("id") if followup_answer else None, "stampId": stamp_id})
+        return self.ending(state), state
 
-def update_rebellion_tracking(s: GameState, chosen_choice: dict):
-    # 极端干预累计
-    if chosen_choice.get("is_extreme", False):
-        s.extreme_count += 1
 
-    # 连续平衡窗口
-    balanced = (abs(s.heaven - s.hell) <= REBELLION_BALANCE_DIFF) and (s.stability >= REBELLION_MIN_STABILITY)
-    if balanced:
-        s.consecutive_balance_count += 1
-    else:
-        s.consecutive_balance_count = 0
+def validate(story: dict[str, Any], config: dict[str, Any], endings: dict[str, Any]) -> None:
+    assert len(story.get("events", [])) == 10, "Expected exactly 10 original story nodes"
+    assert len(endings.get("endings", [])) == 6, "Expected exactly 6 endings"
+    assert len(config.get("pressure_growth", [])) == config.get("rounds") == 10
+    ids: set[str] = set()
+    for event in story["events"]:
+        assert event["id"] not in ids, f"Duplicate event id: {event['id']}"
+        ids.add(event["id"])
+        assert len(event.get("choices", [])) == 3, f"{event['id']} must have three choices"
+        for choice in event["choices"]:
+            for key in ("label_zh", "label_en", "consequence_zh", "consequence_en", "effect"):
+                assert choice.get(key) is not None, f"Missing {key} in {event['id']}/{choice.get('id')}"
 
-def apply_record_phase(s: GameState, record_probs):
-    # 注意：pending_penalty 在“本回合开始”已处理，这里只决定下一回合是否罚
-    items = list(record_probs.items())
-    record_action = weighted_choice(items)
 
-    if record_action == "truth":
-        s.truth_counter += 1
-        if s.truth_counter >= TRUTH_STREAK_TARGET:
-            s.stability = clamp(s.stability + TRUTH_STREAK_BONUS)
-            s.truth_counter = 0
-
-    elif record_action == "polish":
-        s.heaven = clamp(s.heaven + POLISH_HEAVEN_BONUS)
-        s.truth_counter = 0
-
-    elif record_action == "blur":
-        s.hell = clamp(s.hell + BLUR_HELL_BONUS)
-        s.truth_counter = 0
-
-    elif record_action == "seal":
-        s.pressure = max(0, s.pressure + SEAL_PRESSURE_DELTA)
-        s.truth_counter = 0
-        # 20%概率触发下一回合惩罚
-        s.pending_penalty = (random.random() < SEAL_PENALTY_PROB)
-
-    return record_action
-
-def apply_pending_penalty_if_any(s: GameState):
-    if s.pending_penalty:
-        s.stability = clamp(s.stability + SEAL_PENALTY_STABILITY)
-        s.heaven = clamp(s.heaven + SEAL_PENALTY_HEAVEN)
-        s.pending_penalty = False
-
-def judge_ending(s: GameState):
-    # MVP判定顺序
-    if s.stability < THRESH_STABILITY_COLLAPSE:
-        return "Human Collapse"
-    if s.heaven >= THRESH_HEAVEN_DOM:
-        return "Heaven Dominance"
-    if s.hell >= THRESH_HELL_DOM:
-        return "Hell Dominance"
-    if s.rebellion_flag and s.pressure < THRESH_REBELLION_PRESSURE:
-        return "Human Rebellion"
-    return "False Peace"
-
-def run_one_game(events, rounds=7, record_probs=None):
-    if record_probs is None:
-        record_probs = DEFAULT_RECORD_PROBS
-    record_probs = normalize_probs(record_probs)
-
-    s = GameState(
-        heaven=INITIAL_HEAVEN,
-        hell=INITIAL_HELL,
-        stability=INITIAL_STABILITY,
-        pressure=INITIAL_PRESSURE
-    )
-    seq = build_run_sequence(events, rounds=rounds)
-
-    for r in range(1, rounds + 1):
-        s.round = r
-
-        # 先处理上回合封存带来的延迟惩罚
-        apply_pending_penalty_if_any(s)
-
-        ev = seq[r - 1]
-        choice = random.choice(ev["choices"])  # baseline: 随机策略
-        apply_effect(s, choice.get("effect", {}))
-        update_rebellion_tracking(s, choice)
-
-        record_action = apply_record_phase(s, record_probs)
-
-        # 回合基础压力增长
-        s.pressure += PRESSURE_RAMP.get(r, 0)
-
-        s.history.append({
-            "round": r,
-            "event_id": ev.get("id"),
-            "choice_id": choice.get("id", "?"),
-            "is_extreme": bool(choice.get("is_extreme", False)),
-            "record_action": record_action,
-            "snapshot": {
-                "heaven": s.heaven,
-                "hell": s.hell,
-                "stability": s.stability,
-                "pressure": s.pressure,
-                "rebellion_flag": s.rebellion_flag
-            }
-        })
-
-    s.rebellion_flag = (
-        s.consecutive_balance_count >= REBELLION_STREAK_REQUIRED and
-        s.extreme_count <= REBELLION_MAX_EXTREME_CHOICES
-    )
-
-    ending = judge_ending(s)
-    return ending, s
-
-def monte_carlo(events, n_runs=5000, rounds=7, seed=None, record_probs=None):
-    if seed is not None:
-        random.seed(seed)
-
-    ending_counter = Counter()
-    extreme_counts = []
-    final_stats = []
-
-    for _ in range(n_runs):
-        ending, s = run_one_game(events, rounds=rounds, record_probs=record_probs)
-        ending_counter[ending] += 1
-        extreme_counts.append(s.extreme_count)
-        final_stats.append((s.heaven, s.hell, s.stability, s.pressure, s.rebellion_flag))
-
-    # 概率化
-    ending_prob = {k: v / n_runs for k, v in ending_counter.items()}
-
-    # 极端干预分布
-    extreme_dist = Counter(extreme_counts)
-    extreme_dist_prob = {k: v / n_runs for k, v in sorted(extreme_dist.items(), key=lambda x: x[0])}
-
-    # 统计均值
-    avg_heaven = mean([x[0] for x in final_stats])
-    avg_hell = mean([x[1] for x in final_stats])
-    avg_stability = mean([x[2] for x in final_stats])
-    avg_pressure = mean([x[3] for x in final_stats])
-    rebellion_flag_rate = mean([1 if x[4] else 0 for x in final_stats])
-
-    summary = {
-        "n_runs": n_runs,
-        "ending_probabilities": ending_prob,
-        "extreme_count_distribution": extreme_dist_prob,
-        "avg_extreme_count": mean(extreme_counts) if extreme_counts else 0.0,
-        "avg_final_heaven": avg_heaven,
-        "avg_final_hell": avg_hell,
-        "avg_final_stability": avg_stability,
-        "avg_final_pressure": avg_pressure,
-        "rebellion_flag_rate_before_final_check": rebellion_flag_rate
-    }
-    return summary
-
-def print_report(summary):
-    print("\n===== Monte Carlo Report =====")
-    print(f"Runs: {summary['n_runs']}")
-    print("\n[Ending Probabilities]")
-    for ending in ["Heaven Dominance", "Hell Dominance", "Human Collapse", "Human Rebellion", "False Peace"]:
-        p = summary["ending_probabilities"].get(ending, 0.0)
-        print(f"  {ending:18s}: {p*100:6.2f}%")
-
-    print("\n[Extreme Intervention Count Distribution]")
-    for k, v in summary["extreme_count_distribution"].items():
-        print(f"  extreme={k}: {v*100:6.2f}%")
-
-    print("\n[Final State Means]")
-    print(f"  Heaven   : {summary['avg_final_heaven']:.2f}")
-    print(f"  Hell     : {summary['avg_final_hell']:.2f}")
-    print(f"  Stability: {summary['avg_final_stability']:.2f}")
-    print(f"  Pressure : {summary['avg_final_pressure']:.2f}")
-
-    print("\n[Hidden Path Indicator]")
-    print(f"  Rebellion flag rate (pre-final check): {summary['rebellion_flag_rate_before_final_check']*100:.2f}%")
-
-    # 自动建议
-    hr = summary["ending_probabilities"].get("Human Rebellion", 0.0)
-    fp = summary["ending_probabilities"].get("False Peace", 0.0)
-
-    print("\n[Tuning Suggestions]")
-    if hr < 0.05:
-        print("  - Human Rebellion 过低：可放宽阈值（如 Pressure<88）或降低平衡条件难度。")
-    elif hr > 0.15:
-        print("  - Human Rebellion 过高：可收紧阈值（如 Pressure<80）或提高极端干预诱惑。")
-    else:
-        print("  - Human Rebellion 位于目标区间（5%~15%）。")
-
-    if fp > 0.70:
-        print("  - False Peace 偏高：增加中后期极端事件波动，或提高结局分叉敏感度。")
-    elif fp < 0.25:
-        print("  - False Peace 偏低：可能首通体验过于尖锐，可微调为更常见兜底结局。")
-    else:
-        print("  - False Peace 占比合理。")
-
-def main():
-    parser = argparse.ArgumentParser(description="Monte Carlo simulator for Delay the End")
-    parser.add_argument("--events", type=str, default="data/events.json", help="Path to events.json")
-    parser.add_argument("--config", type=str, default="data/game-config.json", help="Path to game-config.json")
-    parser.add_argument("--runs", type=int, default=5000, help="Number of simulation runs")
-    parser.add_argument("--seed", type=int, default=None, help="Random seed")
-    parser.add_argument("--truth", type=float, default=0.25, help="Record prob: truth")
-    parser.add_argument("--polish", type=float, default=0.25, help="Record prob: polish")
-    parser.add_argument("--blur", type=float, default=0.25, help="Record prob: blur")
-    parser.add_argument("--seal", type=float, default=0.25, help="Record prob: seal")
-    parser.add_argument("--export", type=str, default="", help="Export summary JSON path")
+def main() -> None:
+    parser = argparse.ArgumentParser(description="Simulate Appendix 7B balance")
+    parser.add_argument("--runs", type=int, default=5000, help="Runs per strategy")
+    parser.add_argument("--seed", type=int, default=20260831)
+    parser.add_argument("--output", type=Path, default=ROOT / "data" / "balance-report-v3.json")
     args = parser.parse_args()
+    config = json.loads((ROOT / "data/game-config-v2.json").read_text(encoding="utf-8"))
+    thread = json.loads((ROOT / "data/story-thread-v3.json").read_text(encoding="utf-8"))
+    legacy = json.loads((ROOT / "data/events.json").read_text(encoding="utf-8"))
+    story = build_story(thread, legacy, config)
+    endings = json.loads((ROOT / "data/endings-v2.json").read_text(encoding="utf-8"))
+    validate(story, config, endings)
+    simulator = Simulator(story, config)
+    report: dict[str, Any] = {"runs_per_strategy": args.runs, "seed": args.seed, "strategies": {}, "reachable_endings": [], "example_seeds": {}}
+    reachable, examples = set(), {}
 
-    config = load_game_config(args.config)
-    apply_runtime_config(config)
-    events = load_events(args.events)
-    validate_events(events, rounds=DEFAULT_ROUNDS)
+    for strategy_index, strategy in enumerate(STRATEGIES):
+        counts, totals = Counter(), Counter()
+        for index in range(args.runs):
+            seed = args.seed + strategy_index * args.runs + index
+            ending_id, state = simulator.run(strategy, seed)
+            counts[ending_id] += 1
+            reachable.add(ending_id)
+            for key in STATS:
+                totals[key] += state.stats[key]
+            examples.setdefault(ending_id, {"strategy": strategy, "seed": seed, "history": state.history})
+        report["strategies"][strategy] = {
+            "endings": {key: round(value / args.runs, 4) for key, value in sorted(counts.items())},
+            "mean_final_stats": {key: round(totals[key] / args.runs, 2) for key in STATS},
+        }
+    report["reachable_endings"], report["example_seeds"] = sorted(reachable), examples
+    args.output.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    print(f"Validated 10 original nodes; {args.runs} runs × {len(STRATEGIES)} strategies")
+    for strategy in STRATEGIES:
+        outcomes = report["strategies"][strategy]["endings"]
+        print(strategy.ljust(9), " ".join(f"{key}={value:.1%}" for key, value in outcomes.items()))
+    print("Reachable:", ", ".join(report["reachable_endings"]))
+    print("Report:", args.output)
 
-    record_probs = {
-        "truth": args.truth,
-        "polish": args.polish,
-        "blur": args.blur,
-        "seal": args.seal
-    }
-
-    summary = monte_carlo(
-        events=events,
-        n_runs=args.runs,
-        rounds=DEFAULT_ROUNDS,
-        seed=args.seed,
-        record_probs=record_probs
-    )
-    print_report(summary)
-
-    if args.export:
-        with open(args.export, "w", encoding="utf-8") as f:
-            json.dump(summary, f, ensure_ascii=False, indent=2)
-        print(f"\n[Saved] summary -> {args.export}")
 
 if __name__ == "__main__":
     main()

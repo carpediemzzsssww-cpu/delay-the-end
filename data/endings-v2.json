@@ -1,0 +1,85 @@
+{
+  "endings": [
+    {
+      "id": "order_rewrite",
+      "title_zh": "秩序复写",
+      "title_en": "Order, Rewritten",
+      "subtitle_zh": "档案状态：已批准，不再接受修订",
+      "subtitle_en": "STATUS: APPROVED · NO FURTHER AMENDMENTS",
+      "text_zh": "天堂回响没有以军队返回。它以格式、时刻表和永不出错的善意回来。\n\n城市变得安静、可靠、无可指摘。每个人都在恰当的时间做恰当的事，甚至悲伤也获得预约。人类仍然可以选择，只是所有错误答案都被温和地从表格上移除。\n\n你的附录被装订成《创世勘误终版》。纸张笔直，墨迹均匀，页边再没有任何声音。",
+      "text_en": "Heaven's echo returns not as an army, but as formatting, timetables, and benevolence incapable of error.\n\nThe city becomes quiet, reliable, irreproachable. Everyone does the proper thing at the proper time; even grief requires an appointment. Humans may still choose, though every incorrect answer has been gently removed from the form.\n\nYour Appendix is rebound as the Final Errata to Creation. The pages are straight, the ink even, and the margins silent.",
+      "image": "ending-order"
+    },
+    {
+      "id": "chaos_rewrite",
+      "title_zh": "混乱复写",
+      "title_en": "Appetite, Rewritten",
+      "subtitle_zh": "档案状态：所有页码均为可选",
+      "subtitle_en": "STATUS: PAGE NUMBERS OPTIONAL",
+      "text_zh": "地狱回响回来时没有带火。它带来了永不停止的“还可以更多”。\n\n欲望挣脱了旧惩罚，却也失去了满足的能力。每扇门都能打开，每个承诺都能修改，每个人都自由地成为任何东西——直到他们发现，没有边界的选择也不会留下形状。\n\n你的附录成了畅销书。每位读者都撕走自己喜欢的一页，最后只剩封面还在宣布里面什么都有。",
+      "text_en": "Hell's echo returns without fire. It brings the endlessly renewed possibility of more.\n\nDesire escapes punishment and loses its ability to feel satisfied. Every door opens, every promise can be revised, and everyone is free to become anything—until choice without boundaries leaves no shape behind.\n\nYour Appendix becomes a bestseller. Every reader tears out a favourite page until only a cover remains, promising everything inside.",
+      "image": "ending-chaos"
+    },
+    {
+      "id": "double_invasion",
+      "title_zh": "双重入侵",
+      "title_en": "The Joint Administration",
+      "subtitle_zh": "档案状态：双方均声称拥有原件",
+      "subtitle_en": "STATUS: BOTH PARTIES CLAIM THE ORIGINAL",
+      "text_zh": "天堂与地狱同时回来，并且各自确信自己赢了。\n\n每一种欲望先要申请，每一份申请都附带诱惑；每个罪过都有正确格式，每次服从都要收取手续费。世界没有毁灭，只是进入一场永远不会闭会的联合委员会。\n\n你被任命为会议记录员。职位没有薪水、没有假期，但提供两个版本完全相反的员工手册。",
+      "text_en": "Heaven and Hell return at the same time, each convinced it won.\n\nEvery desire needs an application; every application includes a temptation. Sin receives a correct format and obedience a service fee. The world does not end. It enters a joint committee that never adjourns.\n\nYou are appointed minute-taker. The role offers no pay or leave, but includes two entirely contradictory employee manuals.",
+      "image": "ending-double"
+    },
+    {
+      "id": "human_blank",
+      "title_zh": "人间空白",
+      "title_en": "The Human Blank",
+      "subtitle_zh": "档案状态：内容无法恢复",
+      "subtitle_en": "STATUS: CONTENT UNRECOVERABLE",
+      "text_zh": "你成功阻止了任何旧阵营完整返回，却没有留下足够的人间去享受这场胜利。\n\n城市仍然运转，灯仍然亮起，人们却逐渐把选择交给推荐、流程和最响亮的声音。自由没有被夺走，只是因为太疲惫而无人使用。\n\n附录最后只剩一叠洁白的纸。它们不是被删除的；它们从未被任何人写过。",
+      "text_en": "You prevent either old faction from returning, but leave too little humanity to enjoy the victory.\n\nThe city operates, lights come on, and people gradually delegate choice to recommendations, procedures, and the loudest voice. Freedom is not taken. It simply goes unused through exhaustion.\n\nThe Appendix becomes a stack of clean pages. They were not erased. Nobody ever wrote on them.",
+      "image": "ending-blank"
+    },
+    {
+      "id": "appendix_sealed",
+      "title_zh": "附录封存",
+      "title_en": "The Appendix Remains",
+      "subtitle_zh": "档案状态：暂不构成现实",
+      "subtitle_en": "STATUS: NOT CURRENTLY REAL",
+      "text_zh": "你没有恢复旧宇宙，也没有证明它永远不会回来。你只是把附录合上，把钥匙放在一个只有后来者能找到的地方。\n\n天堂与地狱退回纸背，仍然争论谁的失败更有原则。人间继续前进，时而勇敢，时而糟糕，大多数时候只是赶着回家。\n\n世界并未获得保证。它只获得了时间，而时间向来是最像自由的东西。",
+      "text_en": "You neither restore the old universe nor prove it can never return. You close the Appendix and leave its key where only someone later might find it.\n\nHeaven and Hell retreat behind the paper, still debating whose failure had better principles. Humanity moves on—brave sometimes, dreadful sometimes, usually trying to get home.\n\nThe world receives no guarantee. Only time, the thing most closely resembling freedom.",
+      "image": "ending-sealed"
+    },
+    {
+      "id": "ordinary_miracle",
+      "title_zh": "普通的奇迹",
+      "title_en": "An Ordinary Miracle",
+      "subtitle_zh": "档案状态：不需要被称为奇迹",
+      "subtitle_en": "STATUS: NO MIRACLE DESIGNATION REQUIRED",
+      "text_zh": "你没有从天堂借来秩序，也没有向地狱购买自由。你只保存证词、允许矛盾、在该停笔时留下空白。\n\n旧回响没有被消灭。它们变成了人类故事里的两种警告：完美会忘记生命，欲望会忘记足够。档案不再裁决世界，只负责提醒它曾经做过什么。\n\n这是一个没有神迹保证的宇宙。善意因此变得更小、更难，也更值得记录。",
+      "text_en": "You borrow no order from Heaven and purchase no freedom from Hell. You preserve testimony, permit contradiction, and leave blank space when the pen should stop.\n\nThe old echoes are not destroyed. They become two warnings in human stories: perfection forgets life; appetite forgets enough. The archive no longer judges the world. It reminds the world what it has done.\n\nThis universe has no guaranteed miracles. Kindness becomes smaller, harder, and more worthy of record.",
+      "image": "ending-ordinary",
+      "secret": true
+    }
+  ],
+  "relationship_variants": {
+    "remembered": {
+      "title_zh": "他们记得",
+      "title_en": "They Remember",
+      "text_zh": "阿萨与安东尼记起了全部六千年，也记起最后一次选择。他们没有要求恢复旧身份。南唐斯的屋顶仍然漏雨，两个人依然会为谁去拿桶争论，但这次他们知道自己已经找到过彼此不止一次。",
+      "text_en": "Asa and Anthony remember all six thousand years and the final choice. They do not ask for their old identities back. The South Downs roof still leaks; they still argue over the bucket. This time, they know they have found each other more than once."
+    },
+    "ordinary": {
+      "title_zh": "他们不需要记得",
+      "title_en": "They Do Not Need to Remember",
+      "text_zh": "他们没有恢复旧名字，却在一个普通星期四再次选择同一张桌子。安东尼说这大概只是巧合。阿萨说巧合也值得预订晚餐。",
+      "text_en": "They never recover the old names, yet choose the same table again on an ordinary Thursday. Anthony calls it coincidence. Asa says coincidence still deserves a dinner reservation."
+    },
+    "apart": {
+      "title_zh": "两条未交会的线",
+      "title_en": "Two Lines That Did Not Meet",
+      "text_zh": "他们偶尔在同一条街上擦肩而过，都觉得对方似曾相识。档案知道原因，但知识不能代替一次选择。",
+      "text_en": "They occasionally pass on the same street, each finding the other familiar. The archive knows why. Knowledge cannot substitute for a choice."
+    }
+  }
+}

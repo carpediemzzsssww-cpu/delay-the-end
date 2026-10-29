@@ -1,136 +1,57 @@
-# Delay the End
+# Delay the End：附录 7B
 
-> *You cannot stop what is written. You can only delay it.*
+一款纯静态、双语的十回合叙事策略游戏。玩家扮演《生命之书》附录中的原创档案员，在被重写后的世界里决定旧天堂、旧地狱与人间自由应当如何被记录。
 
-**Play → [delay-the-end.github.io](https://carpediemzzsssww-cpu.github.io/delay-the-end/)**　｜　**Case Study → [Portfolio](https://carpediemzzsssww-cpu.github.io/Iris/)**
+## 当前版本
 
----
+- 10 回合、三幕、单局约 20–30 分钟。
+- 18 个主线节点：4 个固定锚点、14 个随机或条件节点；每局使用 10 个。
+- 四项公开刻度，三项隐藏人物关系，有限次数的 5 类档案印章。
+- 选择前只显示方向，选择后公开精确数值、叙事后果与延迟回收。
+- 6 个结局、人物关系尾声、自动保存、收藏索引与跨周目页边批注。
+- 默认中文，故事、选项、后果、系统界面与结局均维护英文版本。
+- 响应式桌面/平板/手机界面，支持键盘、减少动态与安全区。
 
-A single-player narrative strategy game about being caught between Heaven and Hell — and choosing how to record history before time runs out.
+## 运行
 
-Built solo in 7 days. Inspired by Terry Pratchett & Neil Gaiman's *Good Omens*.
-
-![Static Badge](https://img.shields.io/badge/language-EN%20%2F%20ZH-blue) ![Static Badge](https://img.shields.io/badge/platform-web-lightgrey) ![Static Badge](https://img.shields.io/badge/build-vanilla%20JS-yellow)
-
----
-
-## The Game
-
-You are **The Archivist** — a neutral keeper of records, summoned as the apocalypse approaches. For 7 rounds, you navigate between celestial and infernal demands, making two decisions each round:
-
-**1. Event Choice** — How you respond to each crisis (influences Heaven, Hell, and Stability scores)
-
-**2. Archive Phase** — How you *record* what happened:
-- `Truthful` — document events as they occurred
-- `Embellished` — favor one faction's narrative
-- `Obscured` — bury inconvenient facts
-- `Sealed` — destroy the record entirely
-
-The archive isn't just flavor. It's a second decision axis with mechanical weight.
-
----
-
-## Endings
-
-| Ending | Condition | Simulated Rate |
-|---|---|---|
-| Celestial Dominion | Heaven overwhelms | ~12% |
-| Infernal Triumph | Hell overwhelms | ~8% |
-| **False Peace** | Neither faction wins outright | **~69%** |
-| Collapse | Stability hits zero | ~3% |
-| **Human Rebellion** *(hidden)* | Consecutive balance across 5+ rounds | **~8%** |
-
-> The hidden ending requires sustained neutrality — a nearly impossible condition under escalating pressure. Most players never find it naturally.
-
----
-
-## Design Pillars
-
-**Delay, Not Victory** — There is no correct ending. The game is about navigating an unwinnable situation with grace, not escaping it.
-
-**The Archive as Agency** — Recording history *is* an action. The four archive options create a moral dimension independent of faction loyalty.
-
-**Atmosphere Over Mechanics** — Deep ink backgrounds, parchment cards, gold serif typography. The cocoa-cup motif recurs as a quiet anchor of humanity amid celestial bureaucracy.
-
----
-
-## Systems Design
-
-```
-Four numerical variables (0–100):
-  Heaven    — celestial influence
-  Hell      — infernal influence  
-  Stability — world coherence
-  Pressure  — accelerating schedule (+3 → +12 per round)
-
-10 events × 3 choices × bilingual consequence texts = 30 micro-narratives
-5 endings with distinct mechanical trigger conditions
-```
-
-Pressure escalates each round (3 → 4 → 5 → 6 → 8 → 10 → 12), creating a ticking-clock structure that forces increasingly costly decisions.
-
----
-
-## Playtesting & Iteration
-
-**18 playtesters** across 3 rounds (3 internal → 15 external)
-
-Key findings:
-- False Peace ending dominated at ~69% — confirmed by Monte Carlo simulation
-- Hidden ending had 0% natural discovery rate — required atmospheric hint system
-- Archive Phase comprehension gap — players didn't understand the mechanical difference between the four options
-- Consequence texts (the strongest writing) were invisible — feedback only showed numbers, not narrative
-
-**3-round iteration plan:**
-1. Surface consequence narrative text in feedback system ← highest leverage
-2. Visual differentiation for archive buttons (color-coded borders + tooltips)
-3. Atmospheric hints when hidden-ending conditions are being met
-
----
-
-## Validation
-
-Balance verified via **Monte Carlo simulation** — `simulate_balance.py` runs 10,000 playthroughs to test ending distribution and identify dominant strategies.
+项目不需要构建步骤。请通过静态服务器打开，避免浏览器阻止 JSON 请求：
 
 ```bash
-python simulate_balance.py
-# Output: ending distribution across 10,000 simulated runs
+python3 -m http.server 8000
 ```
 
----
+然后访问 `http://127.0.0.1:8000/`。可直接部署到 GitHub Pages。
 
-## Tech
+## 结构
 
+```text
+index.html                 页面外壳与可访问性结构
+styles.css                 “被删改的圣典”视觉系统与响应式布局
+game.js                    状态引擎、渲染、存档、收藏与测试接口
+data/story-v2.json         18 个主线事件
+data/game-config-v2.json   初始值、压力增长、印章与结局阈值
+data/endings-v2.json       6 个结局与 3 类人物尾声
+data/events.json           旧原型的 10 个可解锁残档
+data/simulate_balance.py   与浏览器一致顺序的蒙特卡洛模拟器
+assets/plates/             3 张幕间与 6 张结局版画（含移动端裁切）
+assets/fonts/              实际使用字重的自托管字体
+docs/                      规则与视觉规范
 ```
-index.html      — single-file game (~1,800 lines vanilla JS/CSS/HTML)
-data/
-  events.json       — 10 events × 3 choices × bilingual consequence texts
-  endings.json      — 5 ending conditions and narrative text
-  game-config.json  — tunable parameters (score weights, pressure curve)
-simulate_balance.py — Monte Carlo balance validator
-```
 
-**Stack:** Vanilla JS · CSS · HTML · Python (simulation only)
-**Deployment:** GitHub Pages
-
-Game parameters (pressure escalation, score weights, ending thresholds) are separated into `game-config.json` for easy tuning without touching game logic.
-
----
-
-## Run Locally
+## 校验与模拟
 
 ```bash
-git clone https://github.com/carpediemzzsssww-cpu/delay-the-end.git
-cd delay-the-end
-# Open index.html in any browser — no build step required
+node --check game.js
+python3 -m json.tool data/story-v2.json >/dev/null
+python3 data/simulate_balance.py --runs 10000
 ```
 
----
+浏览器自动化可使用：
 
-## About
+- `window.render_game_to_text()`：输出当前状态 JSON。
+- `window.advanceTime(ms)`：为自动化测试推进时间。
+- `?test=1`：固定随机种子并跳过剧透确认/印章装备页。
 
-Built by **Iris Zhou** as part of an AI-assisted solo development sprint (Feb 13–20, 2026).
+## 同人声明
 
-This project was designed to demonstrate product thinking through a complete creative artefact — narrative design, systems design, user testing, and data-driven iteration — built from scratch in one week.
-
-→ Full case study with playtesting methodology and design reflections: **[Portfolio](https://carpediemzzsssww-cpu.github.io/Iris/)**
+本项目为非商业同人作品，与原作者、制作公司、发行平台及其他权利人无关。故事使用原创档案员、原创叙事文本与原创物件/空间版画；不复用官方台词、片段、剧照或演员肖像。

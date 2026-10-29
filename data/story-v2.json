@@ -1,0 +1,934 @@
+{
+  "meta": {
+    "version": 2,
+    "rounds": 10,
+    "acts": {
+      "1": {
+        "rounds": [1, 2, 3],
+        "roman": "I",
+        "title_zh": "没有阵营的世界",
+        "title_en": "A World Without Sides",
+        "note_zh": "世界终于不再服从计划。档案却仍然服从编号。",
+        "note_en": "The world no longer obeys a Plan. The archive still obeys page numbers."
+      },
+      "2": {
+        "rounds": [4, 5, 6, 7],
+        "roman": "II",
+        "title_zh": "回响申请复职",
+        "title_en": "The Echoes Apply for Reinstatement",
+        "note_zh": "被删除的机构通常会先回来索要办公桌。",
+        "note_en": "A deleted institution usually returns by asking for its desk."
+      },
+      "3": {
+        "rounds": [8, 9, 10],
+        "roman": "III",
+        "title_zh": "创世第二稿",
+        "title_en": "A Second Draft of Creation",
+        "note_zh": "神学的末尾没有句号，只有等待签字的空白。",
+        "note_en": "Theology ends not with a full stop, but a blank awaiting signature."
+      }
+    }
+  },
+  "events": [
+    {
+      "id": "appendix_awakens",
+      "act": 1,
+      "fixed_round": 1,
+      "title_zh": "没有被删除的页",
+      "title_en": "The Page That Wasn't Deleted",
+      "text_zh": "上午九点十七分，你在一张没有桌子的桌前醒来。四周是无穷无尽的纸，最上面一页写着：\n\n“附录 7B。状态：不属于任何现存宇宙。”\n\n旧的天堂与地狱已经消失。世界归还给人类，两个曾经不太称职的永生者也获得了普通名字、普通寿命，以及在南唐斯总是漏雨的普通屋顶。可《生命之书》留下了这份副本。纸边有两道墨迹，一道蓝，一道红，都在等你承认它们曾经存在。",
+      "text_en": "At 9:17 a.m., you wake at a desk that has no desk beneath it. Paper extends in every direction. The top sheet reads:\n\n“APPENDIX 7B. STATUS: NOT ATTACHED TO ANY EXISTING UNIVERSE.”\n\nThe old Heaven and Hell are gone. The world belongs to humans, and two formerly immortal incompetents now have ordinary names, ordinary lifespans, and an ordinary leaking roof in the South Downs. Yet the Book of Life kept this copy. A blue mark and a red mark wait in the margin for you to admit they once existed.",
+      "marginalia_zh": "删除不是毁灭。删除是把责任交给下一位记录员。",
+      "marginalia_en": "Deletion is not destruction. It is responsibility reassigned.",
+      "tags": ["origin", "book_of_life", "pair", "echo"],
+      "crossref": {
+        "text_zh": "你把这页与旧档案中的“最终档案”并列。两道本不该相遇的签名在纸背重合。",
+        "text_en": "You cross-reference the page with the old Final Ledger. Two signatures that should never meet overlap on the reverse.",
+        "effect": {"human": 1, "pressure": 1},
+        "relations": {"bond": 1, "memory": 1, "trust": 0},
+        "set_flags": ["crossed_origin"]
+      },
+      "choices": [
+        {
+          "id": "name_the_truth",
+          "label_zh": "写下真相：旧世界因两个存在放弃旧名字而终结",
+          "label_en": "Write the truth: the old world ended because two beings surrendered their old names",
+          "effect": {"heaven": 2, "hell": 1, "human": 6, "pressure": 3},
+          "relations": {"bond": 1, "memory": 2, "trust": 1},
+          "set_flags": ["kept_names", "chose_human"],
+          "consequence_zh": "墨水没有干。新世界某处，阿萨与安东尼在同一夜梦见一扇从未见过、却都知道如何打开的书店门。",
+          "consequence_en": "The ink refuses to dry. Somewhere in the new world, Asa and Anthony dream on the same night of a bookshop door neither has seen and both know how to open.",
+          "delayed": {
+            "id": "shared_dream",
+            "due_offset": 2,
+            "text_zh": "第 1 回合留下的名字进入了现实：两个人醒来时都记得同一只空杯。",
+            "text_en": "The names preserved in Round 1 enter reality: both men wake remembering the same empty cup.",
+            "effect": {"human": 2, "pressure": 2},
+            "relations": {"bond": 1, "memory": 1, "trust": 0},
+            "set_flags": ["shared_cup_memory"]
+          }
+        },
+        {
+          "id": "protect_the_ordinary",
+          "label_zh": "删去所有旧名字，让他们保有普通生活",
+          "label_en": "Redact every old name and preserve their ordinary lives",
+          "effect": {"heaven": -2, "hell": -2, "human": 5, "pressure": -2},
+          "relations": {"bond": 1, "memory": -1, "trust": 2},
+          "set_flags": ["protected_pair", "chose_human"],
+          "consequence_zh": "旧名字被黑墨覆盖。南唐斯的一间屋子里，两个人为了谁该修屋顶争了二十分钟，然后一起打电话找了工人。世界安然无恙。",
+          "consequence_en": "The old names disappear beneath black ink. In a South Downs cottage, two men argue for twenty minutes about who should fix the roof, then call a builder together. The world remains intact."
+        },
+        {
+          "id": "classify_as_error",
+          "label_zh": "将宇宙重写归类为程序错误，允许旧机构申诉",
+          "label_en": "Classify the rewrite as a procedural error and permit the old institutions to appeal",
+          "effect": {"heaven": 8, "hell": 5, "human": -5, "pressure": 7},
+          "relations": {"bond": 0, "memory": 3, "trust": -1},
+          "set_flags": ["appeal_open", "fed_memory"],
+          "is_extreme": true,
+          "consequence_zh": "纸张立刻自行装订成三百四十二份副本。天堂回响要求一张正确的表格；地狱回响要求一支不会写正确答案的笔。",
+          "consequence_en": "The page binds itself into 342 copies. Heaven's echo requests the correct form. Hell's echo requests a pen incapable of correct answers."
+        }
+      ]
+    },
+    {
+      "id": "two_unclaimed_cups",
+      "act": 1,
+      "pool": true,
+      "title_zh": "两只无人认领的杯子",
+      "title_en": "Two Unclaimed Cups",
+      "text_zh": "苏豪区一家新开的咖啡馆每天关门后都会多出两只杯子。一只装着甜得近乎虔诚的热巧克力，另一只装着足以冒犯所有医学建议的六份浓缩。\n\n店主说没有人点过它们。监控只拍到两把椅子自行向彼此挪近了三厘米。",
+      "text_en": "Every night after closing, a new Soho café finds two extra cups: one holding hot chocolate sweet enough to qualify as devotion, the other six espressos strong enough to offend medical advice.\n\nNo one ordered them. The cameras show only two chairs moving three centimetres closer together.",
+      "marginalia_zh": "物件通常比人更早想起爱情。",
+      "marginalia_en": "Objects tend to remember love before people do.",
+      "tags": ["pair", "coffee", "memory", "human"],
+      "crossref": {
+        "text_zh": "你附上旧档案里关于温热可可的全部记录。杯沿浮现出两枚指纹。",
+        "text_en": "You attach every old report involving warm cocoa. Two fingerprints appear along the rims.",
+        "effect": {"human": 2, "pressure": 1},
+        "relations": {"bond": 2, "memory": 1, "trust": 0},
+        "set_flags": ["cups_crossed"]
+      },
+      "choices": [
+        {
+          "id": "deliver_them",
+          "label_zh": "把杯子分别送给阿萨和安东尼，不附任何说明",
+          "label_en": "Deliver the cups to Asa and Anthony separately, without explanation",
+          "effect": {"heaven": 0, "hell": 0, "human": 5, "pressure": 2},
+          "relations": {"bond": 2, "memory": 1, "trust": 1},
+          "set_flags": ["delivered_cups", "protected_pair"],
+          "consequence_zh": "阿萨说热巧克力太甜，却喝完了。安东尼说浓缩咖啡不够苦，也喝完了。他们各自在收据背面写下同一家餐厅的地址。",
+          "consequence_en": "Asa says the cocoa is too sweet and finishes it. Anthony says the espresso is not bitter enough and finishes it. Each writes the same restaurant address on the back of the receipt."
+        },
+        {
+          "id": "test_for_halo",
+          "label_zh": "送往天堂回响实验室，检测是否含有奇迹残留",
+          "label_en": "Send them to the Heaven Echo laboratory for miracle residue testing",
+          "effect": {"heaven": 7, "hell": -1, "human": -2, "pressure": 4},
+          "relations": {"bond": -1, "memory": 2, "trust": -1},
+          "set_flags": ["heaven_lab"],
+          "consequence_zh": "实验室证明两只杯子完全普通。随后提交了四十七页报告，解释这种普通为什么极其可疑。",
+          "consequence_en": "The laboratory proves both cups entirely ordinary, then files forty-seven pages explaining why that is profoundly suspicious."
+        },
+        {
+          "id": "let_them_sour",
+          "label_zh": "把杯子留给地狱回响，看思念会不会发酵",
+          "label_en": "Leave the cups to Hell's echo and see whether longing ferments",
+          "effect": {"heaven": -1, "hell": 7, "human": -3, "pressure": 3},
+          "relations": {"bond": 0, "memory": 2, "trust": -1},
+          "set_flags": ["hell_tasted_memory"],
+          "is_extreme": true,
+          "consequence_zh": "地狱回响尝了一口，立刻要求销毁证物。它不反对欲望，只反对欲望有耐心。",
+          "consequence_en": "Hell's echo tastes one sip and orders the evidence destroyed. It has no objection to desire, only to desire with patience."
+        }
+      ]
+    },
+    {
+      "id": "missing_bookshop",
+      "act": 1,
+      "pool": true,
+      "title_zh": "不存在的书店",
+      "title_en": "The Bookshop That Never Existed",
+      "text_zh": "伦敦城市规划系统发现沙夫茨伯里大道上少了一栋建筑。地图坚持那里应该有一家书店，税务局坚持从未收过它的税，附近居民则记得一位和善但不太擅长营业的店主。\n\n空地中央有一扇门。门后只有纸张翻动的声音。",
+      "text_en": "London's planning system discovers a missing building on Shaftesbury Avenue. Maps insist a bookshop belongs there; Revenue insists it never paid tax; neighbours remember a kind owner with no gift for commerce.\n\nA door stands in the empty lot. Behind it: pages turning.",
+      "marginalia_zh": "房地产比神学更难彻底删除。",
+      "marginalia_en": "Property is harder to erase than theology.",
+      "tags": ["bookshop", "memory", "place", "echo"],
+      "crossref": {
+        "text_zh": "你把门的尺寸与旧档案核对。误差只有一毫米——足够让一条时间线从门缝钻进来。",
+        "text_en": "You compare the door's measurements with the old archive. The discrepancy is one millimetre—enough for a timeline to slip through.",
+        "effect": {"pressure": 2},
+        "relations": {"bond": 1, "memory": 2, "trust": 0},
+        "set_flags": ["bookshop_measured"]
+      },
+      "choices": [
+        {
+          "id": "open_for_one_minute",
+          "label_zh": "允许门开启一分钟，让失去的书自行选择去留",
+          "label_en": "Open the door for one minute and let the lost books choose",
+          "effect": {"heaven": 2, "hell": 2, "human": 5, "pressure": 5},
+          "relations": {"bond": 1, "memory": 2, "trust": 1},
+          "set_flags": ["books_returned", "fed_memory"],
+          "consequence_zh": "九百本书冲进现实。八百九十九本落进图书馆，一本出现在安东尼床头，扉页上是阿萨的笔迹。",
+          "consequence_en": "Nine hundred books rush into reality. Eight hundred and ninety-nine land in libraries. One appears beside Anthony's bed, inscribed in Asa's handwriting."
+        },
+        {
+          "id": "register_as_public_gap",
+          "label_zh": "把空地登记为公共空间，允许人类决定它该成为什么",
+          "label_en": "Register the gap as public space and let humans decide what it becomes",
+          "effect": {"heaven": -2, "hell": -1, "human": 7, "pressure": 1},
+          "relations": {"bond": 1, "memory": -1, "trust": 2},
+          "set_flags": ["human_bookshop", "chose_human"],
+          "consequence_zh": "居民投票建了一间社区图书馆兼咖啡馆。名字由六岁儿童决定，因此叫“书很多”。它的营业状况比原店好得令人尴尬。",
+          "consequence_en": "Residents vote for a community library and café. A six-year-old names it BOOKS, MANY. Its commercial performance is embarrassingly superior to the original."
+        },
+        {
+          "id": "restore_exactly",
+          "label_zh": "按天堂回响提供的蓝图原样复建，一本书也不能错位",
+          "label_en": "Rebuild it exactly from Heaven's blueprint, with no book out of place",
+          "effect": {"heaven": 9, "hell": -2, "human": -4, "pressure": 5},
+          "relations": {"bond": 0, "memory": 3, "trust": -1},
+          "set_flags": ["perfect_bookshop"],
+          "is_extreme": true,
+          "consequence_zh": "书店恢复得完美无缺。阿萨站在门外，温和地说它看起来不太对。每一本书都在正确位置——这正是问题。",
+          "consequence_en": "The bookshop returns perfectly. Asa stands outside and politely says it looks wrong. Every book is in its proper place. That is precisely the problem."
+        }
+      ]
+    },
+    {
+      "id": "weather_without_author",
+      "act": 1,
+      "pool": true,
+      "title_zh": "没有作者的天气",
+      "title_en": "Weather Without an Author",
+      "text_zh": "新世界第一次出现无法归因的天气。伦敦东边下着只淋湿说谎者的雨，西边吹着会把道歉送到正确收件人耳边的风。\n\n气象局称之为低压系统。你知道那是宇宙在练习没有神谕的即兴创作。",
+      "text_en": "For the first time, the new world produces weather with no attributable author. Rain in East London wets only liars; a western wind carries apologies to their intended recipients.\n\nThe Met Office calls it a low-pressure system. You recognise a universe practising improvisation without prophecy.",
+      "marginalia_zh": "自由意志有时需要带伞。",
+      "marginalia_en": "Free will occasionally requires an umbrella.",
+      "tags": ["weather", "human", "miracle"],
+      "choices": [
+        {
+          "id": "publish_forecast",
+          "label_zh": "如实发布预报，让人类自行决定是否出门",
+          "label_en": "Publish an honest forecast and let people decide whether to go out",
+          "effect": {"heaven": 0, "hell": 0, "human": 7, "pressure": 2},
+          "relations": {"bond": 0, "memory": 0, "trust": 2},
+          "set_flags": ["honest_weather", "chose_human"],
+          "consequence_zh": "大多数人带了伞。少数人故意没带。整座城市在午餐前完成了比数千年神学更多的道歉。",
+          "consequence_en": "Most people take umbrellas. A few deliberately do not. By lunch, the city completes more apologies than several millennia of theology managed."
+        },
+        {
+          "id": "standardize_weather",
+          "label_zh": "请天堂回响把天气恢复为可预测的周二小雨",
+          "label_en": "Ask Heaven's echo to restore a predictable Tuesday drizzle",
+          "effect": {"heaven": 8, "hell": -2, "human": -3, "pressure": 3},
+          "relations": {"bond": 0, "memory": 1, "trust": -1},
+          "set_flags": ["standard_weather"],
+          "consequence_zh": "雨准时在九点开始，五点结束，每一滴大小一致。伦敦人一致认为这非常不自然。",
+          "consequence_en": "Rain begins at nine and ends at five, every drop identical. Londoners unanimously find it unnatural."
+        },
+        {
+          "id": "sell_apologies",
+          "label_zh": "让地狱回响把道歉风包装成付费订阅服务",
+          "label_en": "Let Hell's echo package the apology wind as a subscription service",
+          "effect": {"heaven": -2, "hell": 8, "human": -4, "pressure": 4},
+          "relations": {"bond": 0, "memory": 0, "trust": -1},
+          "set_flags": ["apology_market"],
+          "is_extreme": true,
+          "consequence_zh": "基础套餐只能发送“抱歉你有这种感受”。真正的道歉属于高级会员。地狱回响称季度增长令人鼓舞。",
+          "consequence_en": "The basic tier sends only “sorry you feel that way.” Genuine apologies require Premium. Hell's echo reports encouraging quarterly growth."
+        }
+      ]
+    },
+    {
+      "id": "child_draws_halo",
+      "act": 1,
+      "pool": true,
+      "title_zh": "画错位置的光环",
+      "title_en": "A Halo Drawn in the Wrong Place",
+      "text_zh": "一名八岁儿童画全家福时，给每个人都添上了光环，包括狗、送货员和窗外正在偷垃圾的狐狸。\n\n天堂回响认为这是未经授权的圣化。地狱回响认为狐狸很有发展潜力。孩子只说：“因为他们都在这里。”",
+      "text_en": "An eight-year-old draws a family portrait and gives everyone a halo: parents, dog, delivery driver, and the fox stealing rubbish outside.\n\nHeaven's echo calls it unauthorised sanctification. Hell's echo sees potential in the fox. The child says only, “Because they are all here.”",
+      "marginalia_zh": "儿童很少尊重正确的象征分配。",
+      "marginalia_en": "Children rarely respect the approved distribution of symbols.",
+      "tags": ["human", "child", "halo", "art"],
+      "choices": [
+        {
+          "id": "archive_as_theology",
+          "label_zh": "将画作归档为新世界第一份人类神学",
+          "label_en": "Archive the drawing as the first human theology of the new world",
+          "effect": {"heaven": 2, "hell": 2, "human": 8, "pressure": 4},
+          "relations": {"bond": 0, "memory": 0, "trust": 2},
+          "set_flags": ["human_theology", "chose_human"],
+          "consequence_zh": "画被装进档案。第二天，狐狸把垃圾整齐放回桶里，然后偷走了相框。神学仍有改进空间。",
+          "consequence_en": "The drawing enters the archive. Next morning the fox returns the rubbish neatly, then steals the frame. Theology remains a work in progress."
+        },
+        {
+          "id": "correct_halos",
+          "label_zh": "按旧规则纠正光环，只保留一个合格对象",
+          "label_en": "Correct the halos under the old rules and approve one qualified subject",
+          "effect": {"heaven": 8, "hell": -2, "human": -5, "pressure": 3},
+          "relations": {"bond": 0, "memory": 1, "trust": -2},
+          "set_flags": ["corrected_child"],
+          "consequence_zh": "系统选择了狗。孩子拒绝修改，说这正好证明系统根本不懂这幅画。狗显得受宠若惊。",
+          "consequence_en": "The system selects the dog. The child refuses to amend the picture, saying this proves the system never understood it. The dog looks honoured."
+        },
+        {
+          "id": "give_fox_horns",
+          "label_zh": "接受地狱回响的建议，给狐狸补上一对角",
+          "label_en": "Accept Hell's suggestion and add horns to the fox",
+          "effect": {"heaven": -2, "hell": 7, "human": -2, "pressure": 2},
+          "relations": {"bond": 0, "memory": 0, "trust": -1},
+          "set_flags": ["fox_with_horns"],
+          "consequence_zh": "孩子在角上又画了两个光环。地狱回响第一次遇见无法赢下的美术争论。",
+          "consequence_en": "The child adds two more halos above the horns. Hell's echo encounters its first unwinnable art dispute."
+        }
+      ]
+    },
+    {
+      "id": "compliance_returns",
+      "act": 2,
+      "fixed_round": 4,
+      "title_zh": "两个部门和一张桌子",
+      "title_en": "Two Departments and One Desk",
+      "text_zh": "附录里出现了一张办公桌。桌左边摆着天蓝色文件夹，标签是“恢复秩序（最终版）”；右边摆着朱红色文件夹，标签是“恢复欲望（真的最终版）”。\n\n两份申请都声称旧宇宙的失败只是管理问题。两份申请都要求你签字。桌子本身则悄悄向门口挪了半寸。",
+      "text_en": "A desk appears inside the Appendix. On its left: a blue folder labelled RESTORATION OF ORDER (FINAL). On its right: a red folder labelled RESTORATION OF APPETITE (ACTUALLY FINAL).\n\nBoth applications claim the old universe failed through poor management. Both require your signature. The desk quietly inches toward the door.",
+      "marginalia_zh": "官僚机构的第一种生命迹象是索要签字。",
+      "marginalia_en": "The first sign of bureaucratic life is a request for signature.",
+      "tags": ["bureaucracy", "heaven", "hell", "echo"],
+      "crossref": {
+        "text_zh": "旧档案证明两方曾在同一天使用同一份报销表。你把它夹进申请，双方同时否认。",
+        "text_en": "The old archive proves both sides once used the same expense form. You attach it. Both deny the evidence simultaneously.",
+        "effect": {"human": 2, "pressure": -1},
+        "relations": {"bond": 1, "memory": 0, "trust": 1},
+        "set_flags": ["shared_bureaucracy"]
+      },
+      "choices": [
+        {
+          "id": "approve_order",
+          "label_zh": "批准天堂回响的试运行：所有事物暂时回到正确位置",
+          "label_en": "Approve Heaven's trial: everything temporarily returns to its proper place",
+          "effect": {"heaven": 11, "hell": -3, "human": -6, "pressure": 6},
+          "relations": {"bond": -1, "memory": 2, "trust": -1},
+          "set_flags": ["order_trial", "fed_memory"],
+          "consequence_zh": "七分钟内，袜子找到配对，火车准时抵达，阿萨与安东尼被安排到相距最安全的两座城市。第八分钟，整个人类社会开始把东西放错位置。",
+          "consequence_en": "For seven minutes socks pair correctly, trains arrive on time, and Asa and Anthony are assigned to safely distant cities. In minute eight, humanity begins misplacing things on purpose.",
+          "delayed": {
+            "id": "order_audit",
+            "due_offset": 2,
+            "text_zh": "第 4 回合的天堂试运行留下审计：三千个“不正确的人生选择”被要求限期整改。",
+            "text_en": "Heaven's Round 4 trial produces an audit: three thousand “incorrect life choices” receive compliance deadlines.",
+            "effect": {"heaven": 5, "human": -4, "pressure": 3},
+            "relations": {"bond": 0, "memory": 1, "trust": -1},
+            "set_flags": ["audit_arrived"]
+          }
+        },
+        {
+          "id": "approve_appetite",
+          "label_zh": "批准地狱回响的试运行：所有人可立即满足一个欲望",
+          "label_en": "Approve Hell's trial: everyone may immediately satisfy one desire",
+          "effect": {"heaven": -3, "hell": 11, "human": -6, "pressure": 6},
+          "relations": {"bond": 1, "memory": 1, "trust": -1},
+          "set_flags": ["appetite_trial"],
+          "consequence_zh": "多数人选择多睡一小时。地狱回响显然期待别的结果，只好把“休息”重新归类为危险的纵欲。",
+          "consequence_en": "Most people choose an extra hour of sleep. Hell's echo expected something else and reclassifies rest as dangerous indulgence.",
+          "delayed": {
+            "id": "desire_invoice",
+            "due_offset": 2,
+            "text_zh": "第 4 回合的欲望试运行寄来账单：所有被满足的愿望开始索要第二次。",
+            "text_en": "Hell's Round 4 trial sends an invoice: every satisfied desire begins asking for a second helping.",
+            "effect": {"hell": 5, "human": -4, "pressure": 3},
+            "relations": {"bond": 0, "memory": 0, "trust": -1},
+            "set_flags": ["desire_repeated"]
+          }
+        },
+        {
+          "id": "return_both",
+          "label_zh": "把申请退回给人类，并要求附上一千万份不同意见",
+          "label_en": "Return both applications to humanity and request ten million differing opinions",
+          "effect": {"heaven": -4, "hell": -4, "human": 10, "pressure": 4},
+          "relations": {"bond": 1, "memory": -1, "trust": 2},
+          "set_flags": ["human_consultation", "chose_human"],
+          "consequence_zh": "一千万份意见在十二秒内抵达，彼此矛盾、拼写不一、充满脚注。天堂与地狱第一次共同承认：这无法管理。",
+          "consequence_en": "Ten million opinions arrive in twelve seconds: contradictory, inconsistently spelled, and heavily footnoted. Heaven and Hell agree for the first time that this cannot be managed."
+        }
+      ]
+    },
+    {
+      "id": "perfection_committee",
+      "act": 2,
+      "pool": true,
+      "title_zh": "完美生活委员会",
+      "title_en": "The Committee for Perfect Lives",
+      "text_zh": "天堂回响在人间注册了一家非营利机构，为每个人提供“经审查的最佳人生路线”。申请表只有一个问题：你是否愿意停止犯错？\n\n报名人数很多。真正读完条款的人只有一位，她在“否”旁边画了花。",
+      "text_en": "Heaven's echo registers a charity offering everyone an Approved Optimal Life Path. Its application asks one question: ARE YOU WILLING TO STOP MAKING MISTAKES?\n\nMany apply. Only one person reads the terms. She draws flowers beside NO.",
+      "marginalia_zh": "完美是一种没有退出按钮的服务。",
+      "marginalia_en": "Perfection is a service without an unsubscribe button.",
+      "tags": ["heaven", "bureaucracy", "human"],
+      "choices": [
+        {
+          "id": "fund_committee",
+          "label_zh": "批准委员会运行一个季度，收集关于完美的证据",
+          "label_en": "Fund the committee for one quarter and collect evidence about perfection",
+          "effect": {"heaven": 9, "hell": -2, "human": -5, "pressure": 5},
+          "relations": {"bond": -1, "memory": 1, "trust": 0},
+          "set_flags": ["perfect_lives"],
+          "consequence_zh": "事故下降，幸福也下降。委员会把后者归因于幸福定义不合规。",
+          "consequence_en": "Accidents decrease. Happiness does too. The committee attributes the latter to non-compliant definitions of happiness."
+        },
+        {
+          "id": "publish_rejections",
+          "label_zh": "公开所有被拒绝的“不完美人生”，让它们彼此找到同伴",
+          "label_en": "Publish every rejected imperfect life so they can find one another",
+          "effect": {"heaven": -3, "hell": 1, "human": 8, "pressure": 3},
+          "relations": {"bond": 1, "memory": 0, "trust": 2},
+          "set_flags": ["imperfect_network", "chose_human"],
+          "consequence_zh": "被拒绝者成立互助小组。第一次会议迟到四十分钟、没有议程，并且非常成功。",
+          "consequence_en": "The rejected applicants form a mutual-aid group. Its first meeting starts forty minutes late, has no agenda, and succeeds completely."
+        },
+        {
+          "id": "sell_flaws",
+          "label_zh": "把个人缺点卖给地狱回响，换取一次完美表现",
+          "label_en": "Sell personal flaws to Hell's echo in exchange for one perfect performance",
+          "effect": {"heaven": 2, "hell": 8, "human": -6, "pressure": 4},
+          "relations": {"bond": 0, "memory": 0, "trust": -2},
+          "set_flags": ["flaw_market"],
+          "is_extreme": true,
+          "consequence_zh": "人们短暂变得无可挑剔。地狱回响把收来的缺点做成畅销人格包，名字叫“真实的你”。",
+          "consequence_en": "People become briefly impeccable. Hell packages the purchased flaws into a bestselling personality bundle called THE REAL YOU."
+        }
+      ]
+    },
+    {
+      "id": "temptation_market",
+      "act": 2,
+      "pool": true,
+      "title_zh": "诱惑自由市场",
+      "title_en": "The Free Market of Temptation",
+      "text_zh": "地狱回响在坎登开了一间夜市摊位，出售“曾经被禁止、如今只是有点不明智”的东西：凌晨三点的短信、不会兑现的豪言、以及提前知道别人如何评价你的机会。\n\n摊位前排起长队。最畅销的商品却是可以安心说“不”的一次性许可证。",
+      "text_en": "Hell's echo opens a Camden night stall selling things once forbidden and now merely unwise: 3 a.m. texts, promises with no fulfilment date, and the chance to learn what others say about you.\n\nThe queue is long. Its bestseller is a single-use licence to say no without guilt.",
+      "marginalia_zh": "诱惑不一定要求你答应。它只要求你付钱。",
+      "marginalia_en": "Temptation does not require consent. Only payment.",
+      "tags": ["hell", "market", "human", "desire"],
+      "choices": [
+        {
+          "id": "license_the_market",
+          "label_zh": "给夜市发执照，让欲望像普通商品一样接受监管",
+          "label_en": "License the market and regulate desire like any ordinary product",
+          "effect": {"heaven": 3, "hell": 7, "human": 2, "pressure": 4},
+          "relations": {"bond": 0, "memory": 0, "trust": 1},
+          "set_flags": ["licensed_desire"],
+          "consequence_zh": "摊位通过卫生检查，但因没有清晰标注“永恒悔恨”的过敏原而被罚款。人类法规模糊地赢了一局。",
+          "consequence_en": "The stall passes hygiene inspection but is fined for failing to label eternal regret as an allergen. Human regulation wins, ambiguously."
+        },
+        {
+          "id": "make_no_free",
+          "label_zh": "没收所有“拒绝许可证”，宣布说“不”永久免费",
+          "label_en": "Confiscate every refusal licence and declare that saying no is free",
+          "effect": {"heaven": -2, "hell": -4, "human": 9, "pressure": 3},
+          "relations": {"bond": 1, "memory": 0, "trust": 2},
+          "set_flags": ["free_refusal", "chose_human"],
+          "consequence_zh": "队伍散了。地狱回响愤怒地指出免费拒绝破坏商业模式。旁边卖热红酒的人给你鼓掌。",
+          "consequence_en": "The queue disperses. Hell's echo protests that free refusal destroys its business model. The mulled-wine vendor applauds you."
+        },
+        {
+          "id": "buy_everything",
+          "label_zh": "代表档案馆买下全部库存，亲自测试每一种诱惑",
+          "label_en": "Buy the entire stock for the archive and personally test every temptation",
+          "effect": {"heaven": -3, "hell": 11, "human": -7, "pressure": 6},
+          "relations": {"bond": 0, "memory": 2, "trust": -2},
+          "set_flags": ["archivist_tempted", "fed_memory"],
+          "is_extreme": true,
+          "consequence_zh": "你获得了三十七个糟糕主意，其中一个非常迷人。档案从此多了一把只在凌晨三点出现的钥匙。",
+          "consequence_en": "You acquire thirty-seven bad ideas, one of them extremely charming. The archive gains a key that appears only at 3 a.m."
+        }
+      ]
+    },
+    {
+      "id": "bentley_remembers",
+      "act": 2,
+      "pool": true,
+      "title_zh": "汽车比主人记得更多",
+      "title_en": "The Car Remembers More Than Its Owner",
+      "text_zh": "一辆黑色老爷车停在安东尼家门口。车籍系统显示它从未被制造，却有九十年的违停记录。收音机只播放皇后乐队，后座放着一株对阿萨表现出明显敌意的植物。\n\n安东尼说自己不会开这种车。车门听见后自行锁上，像是受到了冒犯。",
+      "text_en": "A black vintage car appears outside Anthony's home. The registry says it was never manufactured; parking records span ninety years. The radio plays only Queen. A plant in the back seat displays clear hostility toward Asa.\n\nAnthony says he cannot drive it. The doors lock themselves in offence.",
+      "marginalia_zh": "机器没有灵魂。它们只有极长的记性。",
+      "marginalia_en": "Machines have no souls. Only extremely long memories.",
+      "tags": ["pair", "car", "memory", "object"],
+      "crossref": {
+        "text_zh": "你找到旧车的全部档案，唯独缺少所有维修账单。车灯闪了两次，表示认可。",
+        "text_en": "You find every old record of the car except its repair bills. The headlights blink twice in approval.",
+        "effect": {"human": 1, "pressure": 2},
+        "relations": {"bond": 2, "memory": 2, "trust": 1},
+        "set_flags": ["car_kept_memory"]
+      },
+      "choices": [
+        {
+          "id": "give_him_keys",
+          "label_zh": "把钥匙交给安东尼，让驾驶习惯先于记忆回来",
+          "label_en": "Give Anthony the keys and let muscle memory return first",
+          "effect": {"heaven": 0, "hell": 3, "human": 5, "pressure": 5},
+          "relations": {"bond": 2, "memory": 3, "trust": 1},
+          "set_flags": ["car_returned", "fed_memory"],
+          "consequence_zh": "他坐进驾驶座，先抱怨座椅太低，然后毫不犹豫地找到只有他知道的暗格。阿萨在门口说：“这似乎很适合你。”",
+          "consequence_en": "He sits down, complains the seat is too low, then finds a hidden compartment only he could know. Asa says from the doorway, “It rather suits you.”"
+        },
+        {
+          "id": "let_car_choose",
+          "label_zh": "不交钥匙，让汽车自己决定接下来载谁",
+          "label_en": "Withhold the keys and let the car choose its next passenger",
+          "effect": {"heaven": -1, "hell": -1, "human": 7, "pressure": 3},
+          "relations": {"bond": 2, "memory": 1, "trust": 2},
+          "set_flags": ["car_chose_pair", "protected_pair"],
+          "consequence_zh": "车先撞开档案馆侧门，再停到两人中间。它拒绝启动，直到阿萨也上车。植物勉强接受了现实。",
+          "consequence_en": "The car breaks through the archive side door, then parks between them. It refuses to start until Asa gets in too. The plant accepts this with poor grace."
+        },
+        {
+          "id": "dismantle_memory",
+          "label_zh": "拆解汽车，把记忆零件分交天堂与地狱研究",
+          "label_en": "Dismantle the car and divide its memory between Heaven and Hell for study",
+          "effect": {"heaven": 7, "hell": 7, "human": -8, "pressure": 7},
+          "relations": {"bond": -2, "memory": 4, "trust": -3},
+          "set_flags": ["car_dismantled"],
+          "is_extreme": true,
+          "consequence_zh": "第一颗螺丝被拧下时，所有零件同时鸣笛。安东尼不知道为什么，却在街角停了很久。",
+          "consequence_en": "When the first screw comes loose, every component sounds its horn. Anthony does not know why he stands at the corner for a very long time."
+        }
+      ]
+    },
+    {
+      "id": "coffee_between_graves",
+      "act": 2,
+      "pool": true,
+      "title_zh": "两座墓园之间的咖啡",
+      "title_en": "Coffee Between Two Cemeteries",
+      "text_zh": "一间只在星期四出现的咖啡馆向档案馆寄来账单，收件人是两个已经不存在的超自然部门。账单包含六千年份的浓缩咖啡和热巧克力，附言写着：“他们从来没有真正结账。”\n\n今天，阿萨与安东尼恰好分别从两端走近那家店。",
+      "text_en": "A café that appears only on Thursdays sends the archive a bill addressed to two supernatural departments that no longer exist. It covers six thousand years of espresso and cocoa. The note reads: THEY NEVER REALLY SETTLED UP.\n\nToday, Asa and Anthony approach the café from opposite ends of the street.",
+      "marginalia_zh": "有些债务只能用再次见面偿还。",
+      "marginalia_en": "Some debts can only be paid by meeting again.",
+      "tags": ["pair", "coffee", "bond", "memory"],
+      "crossref": {
+        "text_zh": "你把账单与旧世界所有“偶然共进午餐”记录相连。总额变成了无法计算。",
+        "text_en": "You cross-reference the bill with every old-world “accidental lunch.” The total becomes incalculable.",
+        "effect": {"human": 2, "pressure": 2},
+        "relations": {"bond": 2, "memory": 1, "trust": 1},
+        "set_flags": ["old_arrangement_found"]
+      },
+      "choices": [
+        {
+          "id": "reserve_one_table",
+          "label_zh": "只保留一张桌子，其他一切让他们自己决定",
+          "label_en": "Reserve one table and leave every other decision to them",
+          "effect": {"heaven": -1, "hell": -1, "human": 8, "pressure": 2},
+          "relations": {"bond": 3, "memory": 0, "trust": 2},
+          "set_flags": ["ordinary_date", "protected_pair", "chose_human"],
+          "consequence_zh": "他们坐下，先谈天气，然后谈书，最后谈到店快关门。没有奇迹发生。正因如此，这件事重要得惊人。",
+          "consequence_en": "They sit, discuss weather, then books, then everything until closing. No miracle occurs. This makes the event astonishingly important."
+        },
+        {
+          "id": "serve_old_orders",
+          "label_zh": "端上旧世界里他们最熟悉的饮品，观察记忆反应",
+          "label_en": "Serve their old-world orders and observe the memory response",
+          "effect": {"heaven": 2, "hell": 2, "human": 3, "pressure": 6},
+          "relations": {"bond": 2, "memory": 4, "trust": 0},
+          "set_flags": ["old_orders_served", "fed_memory"],
+          "consequence_zh": "安东尼尝了一口咖啡，阿萨刚好抬头。六千年在他们之间经过，然后像一位有礼貌的服务生那样退到一旁。",
+          "consequence_en": "Anthony tastes the coffee as Asa looks up. Six thousand years pass between them, then step politely aside like a waiter."
+        },
+        {
+          "id": "send_bill_to_echoes",
+          "label_zh": "把账单平分给天堂与地狱回响，并收取复职保证金",
+          "label_en": "Split the bill between both echoes and charge a reinstatement deposit",
+          "effect": {"heaven": 6, "hell": 6, "human": -3, "pressure": 5},
+          "relations": {"bond": 0, "memory": 1, "trust": 0},
+          "set_flags": ["echoes_paid_bill"],
+          "consequence_zh": "双方拒绝付款，理由是对方点得更多。咖啡馆把争执录音当作小费收下。",
+          "consequence_en": "Both refuse payment on grounds that the other ordered more. The café accepts a recording of the argument as a tip."
+        }
+      ]
+    },
+    {
+      "id": "saint_without_heaven",
+      "act": 2,
+      "pool": true,
+      "title_zh": "没有天堂的圣徒",
+      "title_en": "A Saint Without Heaven",
+      "text_zh": "一名护士在连续工作十六小时后救下七个人。没有奇迹，没有神谕，也没有来世积分。她只是知道该怎么做，并且做了。\n\n天堂回响要求追认她为圣徒。护士拒绝，理由是她明天还要上班。",
+      "text_en": "After sixteen hours on shift, a nurse saves seven people. No miracle, revelation, or afterlife points. She knew what to do and did it.\n\nHeaven's echo requests her canonisation. The nurse declines because she works tomorrow.",
+      "marginalia_zh": "善意不需要发证机关。",
+      "marginalia_en": "Decency requires no licensing authority.",
+      "tags": ["heaven", "human", "care"],
+      "choices": [
+        {
+          "id": "grant_sainthood",
+          "label_zh": "不顾本人意见追认圣徒，让善行获得正确名目",
+          "label_en": "Canonise her despite her objection so goodness receives its proper title",
+          "effect": {"heaven": 10, "hell": -2, "human": -5, "pressure": 4},
+          "relations": {"bond": 0, "memory": 1, "trust": -2},
+          "set_flags": ["new_saint"],
+          "consequence_zh": "她收到光环和一百三十封采访邀请，第二天因此迟到。天堂回响把迟到记作首次小型堕落。",
+          "consequence_en": "She receives a halo and 130 interview requests, making her late the next day. Heaven records the lateness as her first minor fall."
+        },
+        {
+          "id": "honour_refusal",
+          "label_zh": "尊重拒绝，只记录七个人仍然活着",
+          "label_en": "Respect her refusal and record only that seven people remain alive",
+          "effect": {"heaven": -3, "hell": -1, "human": 9, "pressure": 2},
+          "relations": {"bond": 0, "memory": 0, "trust": 3},
+          "set_flags": ["unnamed_goodness", "chose_human"],
+          "consequence_zh": "没有仪式。医院给她补了一天假，七个家庭送来太多饼干。这比圣徒程序有效。",
+          "consequence_en": "There is no ceremony. The hospital grants a day off; seven families send too many biscuits. This proves more effective than canonisation."
+        },
+        {
+          "id": "tempt_with_fame",
+          "label_zh": "让地狱回响提供名望，看无私是否经得住被观看",
+          "label_en": "Let Hell offer fame and test whether selflessness survives an audience",
+          "effect": {"heaven": -1, "hell": 8, "human": -4, "pressure": 4},
+          "relations": {"bond": 0, "memory": 0, "trust": -2},
+          "set_flags": ["fame_test"],
+          "is_extreme": true,
+          "consequence_zh": "她把代言收入捐给了急诊科。地狱回响要求重测，怀疑实验对象故意作弊。",
+          "consequence_en": "She donates every endorsement fee to A&E. Hell requests a retest, suspecting deliberate cheating."
+        }
+      ]
+    },
+    {
+      "id": "sin_without_hell",
+      "act": 2,
+      "pool": true,
+      "title_zh": "没有地狱的罪",
+      "title_en": "Sin Without Hell",
+      "text_zh": "地狱消失后，伦敦的犯罪率没有归零。有人仍然撒谎、偷窃、伤害别人；也有人在没人计分时道歉、归还、改变。\n\n地狱回响提交报告，声称这证明人类需要专业管理。报告末尾附有咨询费。",
+      "text_en": "Crime did not vanish with Hell. People still lie, steal, and hurt one another; others apologise, return what they took, and change while nobody keeps score.\n\nHell's echo files a report claiming humanity requires professional management. An invoice is attached.",
+      "marginalia_zh": "若没有魔鬼可怪，人类只好开始写自己的解释。",
+      "marginalia_en": "Without a devil to blame, humans must draft their own explanations.",
+      "tags": ["hell", "human", "responsibility"],
+      "choices": [
+        {
+          "id": "restore_tempters",
+          "label_zh": "允许地狱回响恢复诱惑岗位，让责任重新有明确来源",
+          "label_en": "Restore tempters so responsibility has an identifiable source again",
+          "effect": {"heaven": -2, "hell": 10, "human": -7, "pressure": 5},
+          "relations": {"bond": 0, "memory": 2, "trust": -2},
+          "set_flags": ["tempters_restored"],
+          "consequence_zh": "第一批诱惑者上岗后发现人类已经发展出更高效的方法。他们要求培训，并成立工会。",
+          "consequence_en": "The first tempters discover humans have developed more efficient methods. They request training and form a union."
+        },
+        {
+          "id": "record_responsibility",
+          "label_zh": "记录选择与后果，不替任何人发明超自然借口",
+          "label_en": "Record choices and consequences without inventing supernatural excuses",
+          "effect": {"heaven": -2, "hell": -3, "human": 9, "pressure": 2},
+          "relations": {"bond": 0, "memory": -1, "trust": 3},
+          "set_flags": ["human_responsibility", "chose_human"],
+          "consequence_zh": "档案变得更难写，因为没有任何阵营可以承担脚注。它也第一次读起来像真正发生过的生活。",
+          "consequence_en": "The archive becomes harder to write because no faction can carry the footnotes. For the first time, it reads like a life that actually happened."
+        },
+        {
+          "id": "sell_absolution",
+          "label_zh": "让天堂与地狱共同出售免责证明，所得用于修复人间",
+          "label_en": "Let Heaven and Hell jointly sell absolution and spend the proceeds repairing Earth",
+          "effect": {"heaven": 7, "hell": 7, "human": -8, "pressure": 6},
+          "relations": {"bond": 0, "memory": 1, "trust": -3},
+          "set_flags": ["absolution_market"],
+          "is_extreme": true,
+          "consequence_zh": "计划筹到巨款，也让所有富人暂时无罪。修复工程做得很好；道德工程被列入下一财年。",
+          "consequence_en": "The scheme raises a fortune and renders every rich participant temporarily innocent. The repairs go well. Morality is budgeted for next year."
+        }
+      ]
+    },
+    {
+      "id": "archive_breach",
+      "act": 3,
+      "fixed_round": 8,
+      "title_zh": "附录遭到入侵",
+      "title_en": "The Appendix Is Breached",
+      "text_zh": "凌晨，没有时间的档案馆响起火警。蓝色文字从页眉向下排列，朱红批注从页脚向上生长。它们在你的桌前相遇，并同时写下：\n\n“把索引交给我。”\n\n索引包含让旧世界完整返回的方法，也包含让它永远保持删除的方法。人间并不知道自己又一次成为某种计划的主题。",
+      "text_en": "At midnight in a place without time, the archive alarm sounds. Blue text marches down from the header; red annotations climb from the footnotes. They meet at your desk and write simultaneously:\n\nGIVE ME THE INDEX.\n\nThe index contains a method to restore the old world completely—and another to keep it deleted forever. Humanity does not know it has again become the subject of a Plan.",
+      "marginalia_zh": "所谓最终决定，通常只是有人拿走了索引。",
+      "marginalia_en": "A final decision is often just someone taking the index.",
+      "tags": ["crisis", "book_of_life", "heaven", "hell", "human"],
+      "crossref": {
+        "text_zh": "你把索引与此前每一处人类批注相连。空白处浮现出第三种笔迹。",
+        "text_en": "You cross-reference the index with every human annotation. A third handwriting appears in the blank space.",
+        "effect": {"human": 4, "pressure": 2},
+        "relations": {"bond": 1, "memory": 0, "trust": 2},
+        "set_flags": ["third_handwriting"]
+      },
+      "choices": [
+        {
+          "id": "give_order_access",
+          "label_zh": "把索引交给天堂回响，但保留一页人类异议",
+          "label_en": "Give the index to Heaven's echo, retaining one page of human dissent",
+          "effect": {"heaven": 14, "hell": -5, "human": -7, "pressure": 9},
+          "relations": {"bond": -1, "memory": 3, "trust": -2},
+          "set_flags": ["index_to_order", "fed_memory"],
+          "is_extreme": true,
+          "consequence_zh": "蓝色文字立刻为宇宙建立目录。你留下的异议页被归为“无害文学”，这让它获得了前所未有的传播范围。",
+          "consequence_en": "Blue text catalogues the universe at once. Your dissent page is classified as harmless literature, granting it unprecedented circulation."
+        },
+        {
+          "id": "give_chaos_access",
+          "label_zh": "把索引交给地狱回响，但故意打乱全部页码",
+          "label_en": "Give the index to Hell's echo after deliberately scrambling every page number",
+          "effect": {"heaven": -5, "hell": 14, "human": -7, "pressure": 9},
+          "relations": {"bond": 0, "memory": 2, "trust": -2},
+          "set_flags": ["index_to_chaos"],
+          "is_extreme": true,
+          "consequence_zh": "朱红文字欢呼着冲进索引，然后发现自己必须先读说明书。说明书在第零页，夹在结局之后。",
+          "consequence_en": "Red ink cheers as it enters the index, then discovers it must read the instructions. They are on page zero, filed after the ending."
+        },
+        {
+          "id": "let_humans_read",
+          "label_zh": "把索引复印给所有人，让秘密失去成为权力的资格",
+          "label_en": "Copy the index for everyone so the secret can no longer function as power",
+          "effect": {"heaven": -6, "hell": -6, "human": 13, "pressure": 8},
+          "relations": {"bond": 2, "memory": 1, "trust": 3},
+          "set_flags": ["index_public", "chose_human"],
+          "consequence_zh": "人类读完后没有达成共识。他们写评论、做删节版、为脚注争吵，并把宇宙最危险的秘密变成了公共讨论。这正是两方最害怕的结果。",
+          "consequence_en": "Humanity reaches no consensus. It reviews, abridges, annotates, and argues until the universe's most dangerous secret becomes public discussion. This is precisely what both echoes feared."
+        }
+      ]
+    },
+    {
+      "id": "memory_offer",
+      "act": 3,
+      "pool": true,
+      "requires_any": ["kept_names", "fed_memory", "car_kept_memory", "old_orders_served"],
+      "title_zh": "记忆的报价",
+      "title_en": "The Price Quoted for Memory",
+      "text_zh": "旧记忆终于凝成一只信封，收件人写着两个名字。打开它，他们会记起天使、恶魔、花园、火焰、书店，以及六千年没有说出口的每一句话。\n\n信封背面的小字说明：完整记忆将同时恢复旧宇宙对他们的所有权。",
+      "text_en": "Old memory condenses into an envelope addressed to two names. Opened, it would restore angel, demon, garden, fire, bookshop, and every unsaid sentence across six thousand years.\n\nThe small print warns that complete memory also restores the old universe's claim upon them.",
+      "marginalia_zh": "记起自己，不该等于重新属于谁。",
+      "marginalia_en": "Remembering oneself should not mean belonging again.",
+      "tags": ["pair", "memory", "choice", "echo"],
+      "choices": [
+        {
+          "id": "give_whole_memory",
+          "label_zh": "把完整记忆交给他们，包括代价",
+          "label_en": "Give them the whole memory, including its price",
+          "effect": {"heaven": 7, "hell": 7, "human": -3, "pressure": 9},
+          "relations": {"bond": 3, "memory": 5, "trust": 1},
+          "set_flags": ["memory_restored", "fed_memory"],
+          "consequence_zh": "他们同时读完。安东尼先笑，阿萨先哭，然后顺序交换。旧宇宙伸手来认领时，两个人一起把信封撕成了两半。",
+          "consequence_en": "They finish together. Anthony laughs first; Asa cries first; then they exchange roles. When the old universe reaches to claim them, they tear the envelope in half together."
+        },
+        {
+          "id": "give_only_choice",
+          "label_zh": "只告诉他们曾经选择过彼此，不归还身份",
+          "label_en": "Tell them only that they once chose each other; withhold the identities",
+          "effect": {"heaven": -3, "hell": -3, "human": 10, "pressure": 3},
+          "relations": {"bond": 4, "memory": 1, "trust": 3},
+          "set_flags": ["choice_remembered", "protected_pair", "chose_human"],
+          "consequence_zh": "他们不知道那六千年，却认得那个决定。阿萨问是否想再做一次。安东尼说最好先吃晚饭。",
+          "consequence_en": "They do not know the six thousand years, but recognise the decision. Asa asks whether they should make it again. Anthony suggests dinner first."
+        },
+        {
+          "id": "archive_memory",
+          "label_zh": "替他们保存记忆，直到普通人生自然走到需要答案的那天",
+          "label_en": "Keep the memory until ordinary life naturally reaches the day it needs an answer",
+          "effect": {"heaven": 0, "hell": 0, "human": 7, "pressure": -1},
+          "relations": {"bond": 2, "memory": 0, "trust": 4},
+          "set_flags": ["memory_in_trust", "protected_pair"],
+          "consequence_zh": "你把信封放进只能从里面打开的抽屉。多年后，它也许会自己出现。今晚，他们只是一起回家。",
+          "consequence_en": "You place the envelope in a drawer that opens only from within. Years from now it may appear of its own accord. Tonight, they simply go home together."
+        }
+      ]
+    },
+    {
+      "id": "ordinary_date",
+      "act": 3,
+      "pool": true,
+      "requires_any": ["protected_pair", "ordinary_date", "car_chose_pair", "delivered_cups"],
+      "title_zh": "一个极其普通的星期四",
+      "title_en": "An Extremely Ordinary Thursday",
+      "text_zh": "阿萨与安东尼邀请你共进晚餐。没有人提天堂、地狱或时间线。阿萨抱怨酒单缺乏想象力，安东尼抱怨他抱怨得太有礼貌。\n\n窗外，两种回响同时要求你离席处理紧急宇宙事务。甜点刚端上来。",
+      "text_en": "Asa and Anthony invite you to dinner. Nobody mentions Heaven, Hell, or timelines. Asa finds the wine list unimaginative; Anthony finds Asa's complaint excessively polite.\n\nOutside, both echoes demand you leave for an urgent cosmic matter. Dessert has just arrived.",
+      "marginalia_zh": "末日最无法容忍的是有人坚持吃完甜点。",
+      "marginalia_en": "Nothing insults an apocalypse like finishing dessert.",
+      "tags": ["pair", "ordinary", "bond", "human"],
+      "choices": [
+        {
+          "id": "stay_for_dessert",
+          "label_zh": "留下吃完甜点，让宇宙学等十分钟",
+          "label_en": "Stay for dessert and make cosmology wait ten minutes",
+          "effect": {"heaven": -3, "hell": -3, "human": 10, "pressure": 5},
+          "relations": {"bond": 4, "memory": 0, "trust": 4},
+          "set_flags": ["finished_dessert", "protected_pair", "chose_human"],
+          "consequence_zh": "焦糖布丁很好。宇宙没有因为迟到十分钟而毁灭，这对所有重大体系都是一次不受欢迎的实证研究。",
+          "consequence_en": "The crème brûlée is excellent. The universe survives a ten-minute delay, an unwelcome empirical result for every grand system."
+        },
+        {
+          "id": "invite_echoes_in",
+          "label_zh": "让两种回响进来坐下，要求它们先学会点餐",
+          "label_en": "Invite both echoes inside and require them to order before speaking",
+          "effect": {"heaven": 5, "hell": 5, "human": 5, "pressure": 7},
+          "relations": {"bond": 2, "memory": 2, "trust": 2},
+          "set_flags": ["echoes_at_dinner"],
+          "consequence_zh": "天堂点了白开水，地狱点了菜单上最贵的酒。两者第一次发现自己没有嘴，只好听人类聊天。",
+          "consequence_en": "Heaven orders water; Hell orders the costliest wine. Both discover they have no mouths and are forced to listen to human conversation."
+        },
+        {
+          "id": "leave_to_save_world",
+          "label_zh": "立刻离席去拯救世界，把普通生活留给以后",
+          "label_en": "Leave immediately to save the world; ordinary life can wait",
+          "effect": {"heaven": 4, "hell": 4, "human": -4, "pressure": -3},
+          "relations": {"bond": -1, "memory": 2, "trust": -2},
+          "set_flags": ["left_dinner"],
+          "consequence_zh": "你及时处理了危机。回到餐厅时椅子已收起，甜点被打包，盒子上写着：“末日之后再吃。”",
+          "consequence_en": "You resolve the crisis in time. When you return, the chairs are stacked and dessert boxed with a note: AFTER THE APOCALYPSE."
+        }
+      ]
+    },
+    {
+      "id": "dual_audit",
+      "act": 3,
+      "pool": true,
+      "requires_any": ["appeal_open", "shared_bureaucracy", "echoes_paid_bill", "absolution_market"],
+      "title_zh": "联合审计",
+      "title_en": "The Joint Audit",
+      "text_zh": "天堂与地狱回响宣布暂时合作，对你的档案进行联合审计。天堂负责检查每件事是否正确，地狱负责检查每件正确的事是否足够可疑。\n\n它们发现你多次把“人类自行决定”列为有效处理方式，要求你解释这究竟算哪一方的政策。",
+      "text_en": "Heaven and Hell's echoes announce a temporary joint audit. Heaven checks whether everything is correct; Hell checks whether every correct thing is sufficiently suspicious.\n\nThey find repeated use of HUMANITY DECIDES and demand to know which faction authorised it.",
+      "marginalia_zh": "合作有时只是两种控制共享订书机。",
+      "marginalia_en": "Cooperation is occasionally two forms of control sharing a stapler.",
+      "tags": ["heaven", "hell", "bureaucracy", "audit"],
+      "choices": [
+        {
+          "id": "declare_third_policy",
+          "label_zh": "宣布“人类自行决定”是第三种政策，并拒绝提供审批人",
+          "label_en": "Declare HUMANITY DECIDES a third policy and refuse to name an approver",
+          "effect": {"heaven": -5, "hell": -5, "human": 11, "pressure": 6},
+          "relations": {"bond": 2, "memory": 0, "trust": 3},
+          "set_flags": ["third_policy", "chose_human"],
+          "consequence_zh": "双方尝试驳回，但表格只有“天堂”与“地狱”两个复选框，没有地方填写第三种可能。你把答案写在页边。",
+          "consequence_en": "Both try to reject it, but the form has only HEAVEN and HELL checkboxes. You write the third possibility in the margin."
+        },
+        {
+          "id": "pass_both_audits",
+          "label_zh": "伪造一份同时符合双方要求的完美记录",
+          "label_en": "Forge a perfect record satisfying both audits",
+          "effect": {"heaven": 9, "hell": 9, "human": -8, "pressure": 8},
+          "relations": {"bond": 0, "memory": 1, "trust": -3},
+          "set_flags": ["perfect_forgery"],
+          "is_extreme": true,
+          "consequence_zh": "记录完美得让天堂满意，伪造得让地狱满意。只有实际发生过的人生被排除在外。",
+          "consequence_en": "The record is perfect enough for Heaven and fraudulent enough for Hell. Only the life that actually happened is excluded."
+        },
+        {
+          "id": "audit_the_auditors",
+          "label_zh": "反过来审计两种回响，要求解释旧世界为何值得恢复",
+          "label_en": "Audit the auditors and require them to justify restoring the old world",
+          "effect": {"heaven": -7, "hell": -7, "human": 7, "pressure": 2},
+          "relations": {"bond": 1, "memory": -1, "trust": 2},
+          "set_flags": ["echoes_audited"],
+          "consequence_zh": "天堂提交了目的，地狱提交了手段，没有一方提交结果。审计因此无限期暂停。",
+          "consequence_en": "Heaven submits purpose. Hell submits method. Neither submits results. The audit is suspended indefinitely."
+        }
+      ]
+    },
+    {
+      "id": "human_margins",
+      "act": 3,
+      "pool": true,
+      "title_zh": "页边开始说话",
+      "title_en": "The Margins Begin to Speak",
+      "text_zh": "你翻开附录，发现每一页边缘都写满陌生笔迹。有人纠正事实，有人画猫，有人只写“我不同意”。这些不是天堂或地狱的回响，而是读过公开索引的人类留下的批注。\n\n它们杂乱、不一致、经常拼错，却使正文第一次无法独占真相。",
+      "text_en": "Every margin in the Appendix fills with unfamiliar handwriting. Some correct facts, some draw cats, some write only I DISAGREE. These are not heavenly or infernal echoes, but notes from humans who read the public index.\n\nMessy, inconsistent, frequently misspelled—they prevent the official text from owning truth alone.",
+      "marginalia_zh": "正文称之为噪音。历史称之为证词。",
+      "marginalia_en": "The main text calls it noise. History calls it testimony.",
+      "tags": ["human", "archive", "testimony", "truth"],
+      "crossref": {
+        "text_zh": "你把互相矛盾的批注全部保留，并添加索引而非裁决。",
+        "text_en": "You preserve every contradiction and add an index instead of a verdict.",
+        "effect": {"human": 4, "pressure": 1},
+        "relations": {"bond": 0, "memory": 0, "trust": 3},
+        "set_flags": ["testimony_indexed"]
+      },
+      "choices": [
+        {
+          "id": "promote_margins",
+          "label_zh": "把页边批注提升为正文，让权威只存在于彼此校正之中",
+          "label_en": "Promote the margins into the main text so authority exists only through correction",
+          "effect": {"heaven": -6, "hell": -4, "human": 12, "pressure": 7},
+          "relations": {"bond": 1, "memory": 0, "trust": 4},
+          "set_flags": ["margins_promoted", "chose_human"],
+          "consequence_zh": "档案失去统一字体，却获得一千万名共同作者。阅读变得困难，篡改变得更难。",
+          "consequence_en": "The archive loses its single typeface and gains ten million co-authors. Reading becomes harder. Falsification becomes harder still."
+        },
+        {
+          "id": "curate_best_notes",
+          "label_zh": "选出最清晰的批注，建立一份可管理的人类版本",
+          "label_en": "Select the clearest notes and build a manageable human edition",
+          "effect": {"heaven": 5, "hell": -1, "human": 5, "pressure": 4},
+          "relations": {"bond": 0, "memory": 0, "trust": 1},
+          "set_flags": ["curated_humanity"],
+          "consequence_zh": "版本很好读，也遗漏了九百九十九万种不方便的经验。你在封面写下“暂定”。",
+          "consequence_en": "The edition reads beautifully and omits 9,990,000 inconvenient experiences. You mark the cover PROVISIONAL."
+        },
+        {
+          "id": "erase_margins",
+          "label_zh": "清除全部批注，恢复档案作为唯一可靠叙述",
+          "label_en": "Erase every annotation and restore the archive as the sole reliable account",
+          "effect": {"heaven": 11, "hell": 3, "human": -10, "pressure": 6},
+          "relations": {"bond": -1, "memory": 1, "trust": -4},
+          "set_flags": ["margins_erased"],
+          "is_extreme": true,
+          "consequence_zh": "页面恢复整洁。你却仍能看见被擦掉的凹痕，像一群拒绝离开的幽灵。",
+          "consequence_en": "The pages become clean. You can still see the erased indentations, like ghosts refusing to leave."
+        }
+      ]
+    },
+    {
+      "id": "second_draft",
+      "act": 3,
+      "fixed_round": 10,
+      "title_zh": "创世第二稿",
+      "title_en": "The Second Draft of Creation",
+      "text_zh": "附录翻到最后一页。天堂回响在页眉等待成为规则，地狱回响在脚注等待成为例外。人间所有矛盾的笔迹挤在两者之间。\n\n阿萨与安东尼站在档案馆门口。他们可能记得六千年，也可能只记得今晚一起回家；无论哪一种，他们都没有替你决定。\n\n你握住笔。旧世界问自己是否会复活。新世界问自己是否仍然自由。",
+      "text_en": "The Appendix reaches its last page. Heaven's echo waits in the header to become the rule; Hell's echo waits in the footnotes to become the exception. Every contradictory human hand crowds between them.\n\nAsa and Anthony stand at the archive door. They may remember six thousand years, or only that they are going home together tonight. Either way, they do not decide for you.\n\nYou take up the pen. The old world asks whether it will live again. The new one asks whether it remains free.",
+      "marginalia_zh": "任何声称没有选择的结局，都在替你选择。",
+      "marginalia_en": "Any ending that claims there is no choice has made one for you.",
+      "tags": ["final", "creation", "heaven", "hell", "human", "pair"],
+      "crossref": {
+        "text_zh": "你把第一页面向最后一页折叠。开端与结局之间留下可以住人的空隙。",
+        "text_en": "You fold the first page toward the last. Between beginning and ending, a space remains large enough to live in.",
+        "effect": {"human": 3, "pressure": -2},
+        "relations": {"bond": 1, "memory": 0, "trust": 2},
+        "set_flags": ["circle_unclosed"]
+      },
+      "choices": [
+        {
+          "id": "write_order",
+          "label_zh": "把秩序写进正文：世界将永远知道正确答案",
+          "label_en": "Write order into the main text: the world will always know the correct answer",
+          "effect": {"heaven": 18, "hell": -7, "human": -12, "pressure": 10},
+          "relations": {"bond": -1, "memory": 3, "trust": -3},
+          "set_flags": ["final_order"],
+          "is_extreme": true,
+          "consequence_zh": "蓝墨水排成完美的行。所有问题获得答案，所有答案获得编号，所有没有编号的人生被归入附录。",
+          "consequence_en": "Blue ink forms perfect lines. Every question receives an answer, every answer a number, and every unnumbered life is moved to an appendix."
+        },
+        {
+          "id": "write_appetite",
+          "label_zh": "把欲望写进正文：世界将永远可以要求更多",
+          "label_en": "Write appetite into the main text: the world may always demand more",
+          "effect": {"heaven": -7, "hell": 18, "human": -12, "pressure": 10},
+          "relations": {"bond": 0, "memory": 2, "trust": -3},
+          "set_flags": ["final_chaos"],
+          "is_extreme": true,
+          "consequence_zh": "朱红文字越过所有边界。没有锁再能关住欲望，也没有愿望知道何时算够。",
+          "consequence_en": "Red writing crosses every boundary. No lock can contain desire, and no wish can recognise enough."
+        },
+        {
+          "id": "leave_human_margin",
+          "label_zh": "不完成正文，把最后一页留给每一个后来的人",
+          "label_en": "Leave the main text unfinished and give the last page to everyone who comes after",
+          "effect": {"heaven": -8, "hell": -8, "human": 16, "pressure": 7},
+          "relations": {"bond": 3, "memory": 0, "trust": 5},
+          "set_flags": ["final_margin", "chose_human"],
+          "consequence_zh": "你在最后一行之后停笔。空白没有吞噬世界；它只是等待下一种笔迹。阿萨递给安东尼一支笔，安东尼说他更愿意先回家。",
+          "consequence_en": "You stop after the final line. The blank does not consume the world; it waits for another hand. Asa offers Anthony a pen. Anthony says he would rather go home first."
+        }
+      ]
+    }
+  ]
+}
